@@ -1,4 +1,4 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -160,7 +160,7 @@ body{
 <div class="signup-container">
 
     <div class="left-panel">
-        <img src="images/careeup_logo.png" alt="logo">
+        <img src="../images/careeup_logo.png" alt="logo">
 
         <h1>Join<br>CareeUP</h1>
 
@@ -177,34 +177,34 @@ body{
         <h2>회원가입</h2>
         <p>아래 정보를 입력하여 CareeUP을 시작하세요.</p>
 
-        <form>
+        <form onsubmit="return checkForm()">
 
             <div class="form-row">
                 <div class="form-group">
                     <label>이름</label>
-                    <input type="text" placeholder="이름">
+                    <input type="text" id="name" placeholder="이름">
                 </div>
             </div>
 
             <div class="form-group">
                 <label>이메일</label>
-                <input type="email" placeholder="example@careeup.com">
+                <input type="email" id="email" placeholder="example@careeup.com">
             </div>
 
             <div class="form-group">
                 <label>아이디</label>
-                <input type="text" placeholder="아이디 입력">
+                <input type="text" id="userId" placeholder="아이디 입력">
             </div>
 
             <div class="form-row">
                 <div class="form-group">
                     <label>비밀번호</label>
-                    <input type="password" placeholder="비밀번호">
+                    <input type="password" id="password" placeholder="비밀번호">
                 </div>
 
                 <div class="form-group">
                     <label>비밀번호 확인</label>
-                    <input type="password" placeholder="비밀번호 확인">
+                    <input type="password" id="passwordCheck" placeholder="비밀번호 확인">
                 </div>
             </div>
 
@@ -213,7 +213,7 @@ body{
                 <div class="form-group">
                     <label>회원 유형</label>
 
-                    <select>
+                    <select id="membershipType">
                         <option>선택하세요</option>
                         <option>재학생</option>
                         <option>졸업생</option>
@@ -225,12 +225,12 @@ body{
 
                     <div class="radio-group">
                         <label>
-                            <input type="radio" name="gender">
+                            <input type="radio" name="gender" id="male">
                             남
                         </label>
 
                         <label>
-                            <input type="radio" name="gender">
+                            <input type="radio" name="gender" id="female">
                             여
                         </label>
                     </div>
@@ -239,7 +239,7 @@ body{
 
             </div>
 
-            <button class="signup-btn">
+            <button class="signup-btn" type="submit">
                 회원가입
             </button>
 
@@ -247,12 +247,15 @@ body{
 
         <div class="login-link">
             이미 회원이신가요?
-            <a href="#">로그인</a>
+            <a href="../html/login.html">로그인</a>
         </div>
 
     </div>
 
 </div>
+
+<!-- js랑 연결 -->
+<script src="../javascript/signin.js"></script>
 
 </body>
 </html>
