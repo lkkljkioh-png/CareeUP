@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareeUP | 재학생 프로필</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="../css/Profile.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="로고">
+            <span>CareeUP</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="main.html">MAIN</a></li>
+                <li><a href="profileList.html">SEARCH</a></li>
+                <li><a href="qa.html">Q&A</a></li>
+                <li><a href="profile.html" class="active">PROFILE</a></li>
+                <li><a href="my.html">MY</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="container">
+
+        <!-- 프로필 -->
+
+        <div class="profile-card">
+
+            <div class="profile-image">
+                <i class="ti ti-user"></i>
+            </div>
+
+            <div class="profile-info">
+
+                <h2 id="name">김유민</h2>
+
+                <table>
+
+                    <tr>
+                        <th>학교</th>
+                        <td id="school">서울대학교</td>
+                    </tr>
+
+                    <tr>
+                        <th>학과</th>
+                        <td id="department">컴퓨터공학과</td>
+                    </tr>
+
+                    <tr>
+                        <th>학년</th>
+                        <td id="grade">3학년</td>
+                    </tr>
+
+                    <tr>
+                        <th>희망 직무</th>
+                        <td id="job">백엔드 개발자</td>
+                    </tr>
+
+                    <tr>
+                        <th>기술 스택</th>
+                        <td id="tech-stack">Java · Spring Boot · MySQL · AWS</td>
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </div>
+
+        <!-- 프로젝트 -->
+
+        <div class="card">
+
+            <div class="card-title">
+                <h3><i class="ti ti-code"></i>프로젝트</h3>
+
+                <button class="add-btn" onclick="addProject()">
+                    <i class="ti ti-plus"></i> 추가
+                </button>
+            </div>
+
+            <div id="project-list">
+
+                <div class="list-item">캡스톤 디자인 프로젝트</div>
+                <div class="list-item">Java 팀 프로젝트</div>
+
+            </div>
+
+        </div>
+
+        <!-- 자격증 -->
+
+        <div class="card">
+
+            <div class="card-title">
+                <h3><i class="ti ti-certificate"></i> 보유 자격증</h3>
+
+                <button class="add-btn" onclick="addCertificate()">
+                    <i class="ti ti-plus"></i> 추가
+                </button>
+            </div>
+
+            <div id="certificate-list">
+
+                <div class="list-item">SQLD</div>
+                <div class="list-item">정보처리기사</div>
+
+            </div>
+
+        </div>
+
+        <!-- 대외활동 -->
+
+        <div class="card">
+
+            <div class="card-title">
+                <h3><i class="ti ti-world"></i> 대외 활동</h3>
+
+                <button class="add-btn" onclick="addActivity()">
+                    <i class="ti ti-plus"></i> 추가
+                </button>
+            </div>
+
+            <div id="activity-list">
+
+                <div class="list-item">멋쟁이사자처럼</div>
+                <div class="list-item">SW 중심대학 프로젝트</div>
+
+            </div>
+
+        </div>
+
+        <!-- 자기소개 -->
+
+        <div class="card">
+
+            <h3><i class="ti ti-message"></i> 자기소개</h3>
+
+            <p id="introduce">
+                백엔드 개발자를 목표로 다양한 프로젝트를 진행하고 있으며,
+                클라우드와 데이터베이스 분야에 관심이 많습니다.
+            </p>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

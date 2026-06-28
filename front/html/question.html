@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareeUP | 질문 작성</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/question.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="logo">
+            <span>CareeUP</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="main.html">MAIN</a></li>
+                <li><a href="profileList.html">SEARCH</a></li>
+                <li><a href="qa.html" class="active">Q&A</a></li>
+                <li><a href="profile.html">PROFILE</a></li>
+                <li><a href="my.html">MY</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <div class="write-card">
+
+            <h2>질문 작성</h2>
+
+            <!-- 카테고리 -->
+            <label>카테고리</label>
+            <select>
+                <option>전체</option>
+                <option>진로/취업</option>
+                <option>전공 선택</option>
+                <option>학업/공부법</option>
+                <option>자격증</option>
+                <option>인턴/대외활동</option>
+                <option>면접/자소서</option>
+                <option>직무 정보</option>
+                <option>대학 생활</option>
+                <option>기타</option>
+            </select>
+
+            <!-- 제목 -->
+            <label>제목</label>
+            <input type="text" id="question-title" placeholder="질문 제목을 입력하세요">
+
+            <!-- 내용 -->
+            <label>내용</label>
+            <textarea id="question-content" placeholder="질문 내용을 자세히 작성하세요"></textarea>
+
+            <!-- 버튼 -->
+            <button class="submit-btn" onclick="addQuestion()">질문 등록</button>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>

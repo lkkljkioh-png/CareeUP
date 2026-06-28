@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareeUP | 졸업생 프로필</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="../css/Profile.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="로고">
+            <span>CareeUP</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="main.html">MAIN</a></li>
+                <li><a href="profileList.html">SEARCH</a></li>
+                <li><a href="qa.html">Q&A</a></li>
+                <li><a href="#" class="active">PROFILE</a></li>
+                <li><a href="my.html">MY</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="container">
+
+        <!-- 프로필 -->
+        <div class="profile-card">
+            <div class="profile-image"> <i class="ti ti-user"></i> </div>
+            <div class="profile-info">
+                <h2 id="name">김유민</h2>
+                <table>
+                    <tr>
+                        <th>졸업학교</th>
+                        <td id="graduate-school">서울대학교</td>
+                    </tr>
+                    <tr>
+                        <th>졸업학과</th>
+                        <td id="graduate-dept">컴퓨터공학과</td>
+                    </tr>
+                    <tr>
+                        <th>졸업년도</th>
+                        <td id="graduate-year">2025년</td>
+                    </tr>
+                    <tr>
+                        <th>회사</th>
+                        <td id="company">AWS</td>
+                    </tr>
+                    <tr>
+                        <th>직무</th>
+                        <td id="position">소프트웨어 엔지니어</td>
+                    </tr>
+                    <tr>
+                        <th>기술 스택</th>
+                        <td id="tech-stack">Java · Spring Boot · MySQL · AWS</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+            <!-- 경력 -->
+            <div class="card">
+
+                <div class="card-title">
+                    <h3><i class="ti ti-briefcase"></i> 경력</h3>
+                    <button class="add-btn" onclick="addExperience()">
+                        <i class="ti ti-plus"></i> 추가
+                    </button>
+                </div>
+
+                <div id="experience-list">
+                    <div class="list-item">2025년 AWS 입사</div>
+                    <div class="list-item">Cloud Application 개발</div>
+                    <div class="list-item">Spring Boot 기반 백엔드 개발 및 유지보수 수행</div>
+                </div>
+
+            </div>
+
+            <!-- 자격증 -->
+            <div class="card">
+
+                <div class="card-title">
+                    <h3><i class="ti ti-certificate"></i> 보유 자격증</h3>
+                    <button class="add-btn" onclick="addCertificate()">
+                        <i class="ti ti-plus"></i> 추가
+                    </button>
+                </div>
+
+                <div id="certificate-list">
+                    <div class="list-item">AWS Certified Cloud Practitioner</div>
+                    <div class="list-item">정보처리기사</div>
+                    <div class="list-item">SQLD</div>
+                    <div class="list-item">리눅스마스터 2급</div>
+                </div>
+
+            </div>
+
+            <!-- 대외활동 -->
+            <div class="card">
+
+                <div class="card-title">
+                    <h3><i class="ti ti-world"></i> 대외 활동</h3>
+                    <button class="add-btn" onclick="addActivity()">
+                        <i class="ti ti-plus"></i> 추가
+                    </button>
+                </div>
+
+                <div id="activity-list">
+                    <div class="list-item">멋쟁이사자처럼 12기</div>
+                    <div class="list-item">SW 중심대학 프로젝트 참여</div>
+                    <div class="list-item">캡스톤 디자인 우수상</div>
+                </div>
+
+            </div>
+
+            <!-- 포트폴리오 -->
+            <div class="card">
+
+                <div class="card-title">
+                    <h3><i class="ti ti-file-text"></i> 포트폴리오</h3>
+                    <button class="add-btn" onclick="addPortfolio()">
+                        <i class="ti ti-plus"></i> 추가
+                    </button>
+                </div>
+
+                <div id="portfolio-list">
+                    <div class="list-item">멋쟁이사자처럼 12기</div>
+                    <div class="list-item">SW 중심대학 프로젝트 참여</div>
+                    <div class="list-item">캡스톤 디자인 우수상</div>
+                </div>
+
+            </div>
+
+            <!-- 한마디 -->
+
+            <div class="card">
+
+                <h3 id="graduate-message"><i class="ti ti-message"></i>한마디</h3>
+
+                <p>
+                    프로젝트 경험과 Git 협업 경험을 많이 쌓는 것이 가장 중요합니다.
+                    자격증도 도움이 되지만 실제 프로젝트 경험이 취업에서 큰 경쟁력이 됩니다.
+                </p>
+
+            </div>
+
+        </div>
+
+</body>
+
+</html>

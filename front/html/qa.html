@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareeUP | Q&A</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="../css/qa.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="로고">
+            <span>CareeUP</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="main.html">MAIN</a></li>
+                <li><a href="profileList.html">SEARCH</a></li>
+                <li><a href="qa.html" class="active">Q&A</a></li>
+                <li><a href="profile.html">PROFILE</a></li>
+                <li><a href="my.html">MY</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="container">
+
+        <div class="page-title">
+            <h2>Q&A</h2>
+        </div>
+
+        <div class="top-bar">
+
+            <div class="search-box">
+                <input type="text" placeholder="질문을 검색하세요.">
+                <button>
+                    <i class="ti ti-search"></i>
+                </button>
+            </div>
+
+            <select class="category-select" onchange="filterCategory(this.value)">
+                <option value="all">전체 카테고리</option>
+                <option value="진로">진로/취업</option>
+                <option value="전공">전공 선택</option>
+                <option value="공부">학업/공부법</option>
+                <option value="자격증">자격증</option>
+                <option value="인턴">인턴/대외활동</option>
+                <option value="면접">면접/자소서</option>
+                <option value="직무">직무 정보</option>
+                <option value="기타">기타</option>
+            </select>
+
+            <button type="button" class="write-btn" onclick="window.location.href='question.html'">
+                <i class="ti ti-edit"></i>
+                질문하기
+            </button>
+
+        </div>
+
+        <div class="question-list">
+
+            <div class="question-card">
+                <h3>백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?</h3>
+                <p>김유민 | 2026-06-28 | 답변 3개</p>
+            </div>
+
+            <div class="question-card">
+                <h3>SQLD와 정보처리기사 중 무엇을 먼저 준비하는 것이 좋을까요?</h3>
+                <p>홍길동 | 2026-06-26 | 답변 5개</p>
+            </div>
+
+            <div class="question-card">
+                <h3>AWS 자격증 취득 후 취업에 도움이 될까요?</h3>
+                <p>이철수 | 2026-06-23 | 답변 2개</p>
+            </div>
+
+            <div class="question-card">
+                <h3>캡스톤 프로젝트 주제를 어떻게 정하면 좋을까요?</h3>
+                <p>박민수 | 2026-06-20 | 답변 4개</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="../js/qa.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareeUP | 졸업생 프로필</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/profileList.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="logo">
+            <span>CareeUP</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="main.html">MAIN</a></li>
+                <li><a href="profileList.html" class="active">SEARCH</a></li>
+                <li><a href="qa.html">Q&A</a></li>
+                <li><a href="#">PROFILE</a></li>
+                <li><a href="my.html">MY</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+
+        <h2 class="title">프로필 탐색</h2>
+
+        <!-- 검색 -->
+        <div class="search-box">
+
+            <input type="text" id="searchInput" placeholder="이름 / 직무 / 회사 검색">
+
+            <!-- 학교 필터 -->
+            <select id="schoolFilter">
+                <option value="">전체 학교</option>
+                <option value="서울대학교">서울대학교</option>
+                <option value="연세대학교">연세대학교</option>
+                <option value="고려대학교">고려대학교</option>
+            </select>
+
+            <!-- 학과 필터 -->
+            <select id="majorFilter">
+                <option value="">전체 학과</option>
+                <option value="컴퓨터공학">컴퓨터공학</option>
+                <option value="소프트웨어학과">소프트웨어학과</option>
+                <option value="경영학과">경영학과</option>
+            </select>
+
+            <button onclick="searchProfiles()">검색</button>
+        </div>
+
+        <!-- 리스트 -->
+        <div class="profile-card" 
+             data-name="김유민" 
+             data-company="AWS" 
+             data-school="서울대학교" 
+             data-major="컴퓨터공학"
+            onclick="goDetail(1)">
+
+            <div class="profile-left">
+                <div class="avatar"></div>
+            </div>
+
+            <div class="profile-right">
+                <h3 id="name">김유민</h3>
+                <p id="company">AWS</p>
+
+                <div class="tags">
+                    <span id="university">서울대학교</span>
+                    <span id="major">컴퓨터공학</span>
+                    <span id="graduationYear">2025</span>
+                </div>
+
+                <button class="detail-btn" onclick="onDetail()">자세히 보기</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
