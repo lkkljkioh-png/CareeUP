@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareeUP | 질문 상세</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="../css/questionDetail.css">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo">
+        <img src="../images/careeup_logo.png" alt="로고">
+        <span>CareeUP</span>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="main.html">MAIN</a></li>
+            <li><a href="profileList.html">SEARCH</a></li>
+            <li><a href="qa.html" class="active">Q&A</a></li>
+            <li><a onclick="goProfile()">PROFILE</a></li>
+            <li><a onclick="goMyPage()">MY</a></li>
+            <li><a href="login.html">LOGIN</a></li>
+        </ul>
+    </nav>
+
+</header>
+
+<div class="container">
+
+    <div class="question-card">
+
+        <div class="question-top">
+
+            <span class="category" id="category">진로/취업</span>
+
+            <span class="date" id="question-date">
+                <i class="ti ti-calendar"></i>
+                2026-06-30
+            </span>
+
+        </div>
+
+        <h2 id="question-title">
+            백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?
+        </h2>
+
+        <div class="writer" id="question-writer">
+            <i class="ti ti-user"></i>
+            김유민
+        </div>
+
+        <div class="content" id="question-content">
+            현재 Java와 SQL을 공부하고 있습니다.<br><br>
+
+            취업을 준비하면서 포트폴리오를 만들려고 하는데
+            어떤 프로젝트를 하면 도움이 될까요?
+        </div>
+
+    </div>
+
+    <div class="button-area">
+        <button class="answer-btn" onclick="window.location.href='answer.html'">
+            <i class="ti ti-message-circle"></i>
+            답변하기
+        </button>
+    </div>
+
+    <div class="answer-section">
+
+        <h3>답변</h3>
+
+        <div class="answer-card">
+
+            <div class="answer-info">
+
+                <span id="answer-writer">
+                    <i class="ti ti-user"></i>
+                    박민수
+                </span>
+
+                <span id="answer-date">2026-06-30</span>
+
+            </div>
+
+            <p id="answer-content">
+                프로젝트는 실제 서비스를 구현해보는 것이 가장 도움이 됩니다.
+                회원가입, 로그인, 게시판, 검색 기능 등을 구현해보세요.
+            </p>
+
+        </div>
+
+        <div class="answer-card">
+
+            <div class="answer-info">
+
+                <span id="answer-writer">
+                    <i class="ti ti-user"></i>
+                    이철수
+                </span>
+
+                <span id="answer-date">2026-06-30</span>
+
+            </div>
+
+            <p id="answer-content">
+                AWS나 Docker를 함께 사용하면 더욱 좋은 포트폴리오가 됩니다.
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="../javascript/common.js"></script>
+<script src="../javascript/questionDetail.js"></script>
+
+</body>
+
+</html>

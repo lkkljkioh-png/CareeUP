@@ -27,8 +27,8 @@
                 <li><a href="main.html">MAIN</a></li>
                 <li><a href="profileList.html">SEARCH</a></li>
                 <li><a href="qa.html">Q&A</a></li>
-                <li><a href="#" class="active">PROFILE</a></li>
-                <li><a href="my.html">MY</a></li>
+                <li><a onclick="goProfile()">PROFILE</a></li>
+                <li><a onclick="goMyPage()" class="active">MY</a></li>
                 <li><a href="login.html">LOGIN</a></li>
         </nav>
 
@@ -86,7 +86,7 @@
                     <div class="count" id="experience">5</div>
                 </div>
 
-                <button class="btn" onclick="location.href='graduateProfile.html'">
+                <button class="btn" onclick="goProfile()">
                     프로필 완성하러 가기
                 </button>
 
@@ -96,6 +96,8 @@
 
     </div>
 
+    <!-- JavaScript -->
+    <script src="../javascript/common.js"></script>
 </body>
 
 </html>

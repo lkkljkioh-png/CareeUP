@@ -24,8 +24,8 @@
                 <li><a href="main.html">MAIN</a></li>
                 <li><a href="profileList.html" class="active">SEARCH</a></li>
                 <li><a href="qa.html">Q&A</a></li>
-                <li><a href="#">PROFILE</a></li>
-                <li><a href="my.html">MY</a></li>
+                <li><a onclick="goProfile()">PROFILE</a></li>
+                <li><a onclick="goMyPage()">MY</a></li>
                 <li><a href="login.html">LOGIN</a></li>
             </ul>
         </nav>
@@ -60,11 +60,7 @@
         </div>
 
         <!-- 리스트 -->
-        <div class="profile-card" 
-             data-name="김유민" 
-             data-company="AWS" 
-             data-school="서울대학교" 
-             data-major="컴퓨터공학"
+        <div class="profile-card" data-name="김유민" data-company="AWS" data-school="서울대학교" data-major="컴퓨터공학"
             onclick="goDetail(1)">
 
             <div class="profile-left">
@@ -88,6 +84,9 @@
 
     </div>
 
+    <!-- JavaScript -->
+    <script src="../javascript/common.js"></script>
+    
 </body>
 
 </html>

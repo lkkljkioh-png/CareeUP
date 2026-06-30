@@ -13,80 +13,84 @@
 
 <body>
 
-<header>
-    <div class="logo">
-        <img src="../images/careeup_logo.png" alt="logo">
-        <span>CareeUP</span>
-    </div>
-
-    <nav>
-        <ul>
-            <li><a href="main.html">MAIN</a></li>
-            <li><a href="profileList.html">SEARCH</a></li>
-            <li><a href="qa.html" class="active">Q&A</a></li>
-            <li><a href="profile.html">PROFILE</a></li>
-            <li><a href="my.html">MY</a></li>
-        </ul>
-    </nav>
-</header>
-
-<div class="container">
-
-    <!-- 상단 -->
-    <div class="page-title">
-        <h2>내 질문</h2>
-        <button class="write-btn" onclick="window.location.href='question.html'">+ 질문 작성</button>
-    </div>
-
-    <!-- 요약 -->
-    <div class="summary">
-        <div class="box">
-            <span>전체 질문</span>
-            <strong>3</strong>
+    <header>
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="logo">
+            <span>CareeUP</span>
         </div>
-        <div class="box">
-            <span>답변 완료</span>
-            <strong>1</strong>
-        </div>
-        <div class="box">
-            <span>미답변</span>
-            <strong>2</strong>
-        </div>
-    </div>
 
-    <!-- 질문 리스트 -->
-    <div class="question-list">
+        <nav>
+            <ul>
+                <li><a href="main.html">MAIN</a></li>
+                <li><a href="profileList.html">SEARCH</a></li>
+                <li><a href="qa.html" class="active">Q&A</a></li>
+                <li><a onclick="goProfile()">PROFILE</a></li>
+                <li><a onclick="goMyPage()">MY</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div class="question-card">
-            <div class="q-top">
-                <span class="tag waiting">미답변</span>
-                <span class="date">2026.06.28</span>
+    <div class="container">
+
+        <!-- 상단 -->
+        <div class="page-title">
+            <h2>내 질문</h2>
+            <button class="write-btn" onclick="window.location.href='question.html'">+ 질문 작성</button>
+        </div>
+
+        <!-- 요약 -->
+        <div class="summary">
+            <div class="box">
+                <span>전체 질문</span>
+                <strong>3</strong>
             </div>
-            <h3>백엔드 포트폴리오는 어떤 걸 준비해야 하나요?</h3>
-            <p>프로젝트 경험이 부족한데 어떤 걸 중심으로 준비해야 할지 궁금합니다.</p>
+            <div class="box">
+                <span>답변 완료</span>
+                <strong>1</strong>
+            </div>
+            <div class="box">
+                <span>미답변</span>
+                <strong>2</strong>
+            </div>
         </div>
 
-        <div class="question-card">
-            <div class="q-top">
-                <span class="tag done">답변완료</span>
-                <span class="date">2026.06.20</span>
-            </div>
-            <h3>Spring Boot vs Node.js 선택 기준</h3>
-            <p>백엔드 개발을 처음 시작하는 입장에서 어떤 걸 먼저 배우는 게 좋을까요?</p>
-        </div>
+        <!-- 질문 리스트 -->
+        <div class="question-list">
 
-        <div class="question-card">
-            <div class="q-top">
-                <span class="tag waiting">미답변</span>
-                <span class="date">2026.06.18</span>
+            <div class="question-card">
+                <div class="q-top">
+                    <span class="tag waiting">미답변</span>
+                    <span class="date">2026.06.28</span>
+                </div>
+                <h3>백엔드 포트폴리오는 어떤 걸 준비해야 하나요?</h3>
+                <p>프로젝트 경험이 부족한데 어떤 걸 중심으로 준비해야 할지 궁금합니다.</p>
             </div>
-            <h3>SQLD 자격증 공부 방법</h3>
-            <p>효율적으로 SQLD 준비하는 방법이 있을까요?</p>
+
+            <div class="question-card">
+                <div class="q-top">
+                    <span class="tag done">답변완료</span>
+                    <span class="date">2026.06.20</span>
+                </div>
+                <h3>Spring Boot vs Node.js 선택 기준</h3>
+                <p>백엔드 개발을 처음 시작하는 입장에서 어떤 걸 먼저 배우는 게 좋을까요?</p>
+            </div>
+
+            <div class="question-card">
+                <div class="q-top">
+                    <span class="tag waiting">미답변</span>
+                    <span class="date">2026.06.18</span>
+                </div>
+                <h3>SQLD 자격증 공부 방법</h3>
+                <p>효율적으로 SQLD 준비하는 방법이 있을까요?</p>
+            </div>
+
         </div>
 
     </div>
 
-</div>
-
+    <!-- JavaScript -->
+    <script src="../javascript/common.js"></script>
 </body>
+
 </html>

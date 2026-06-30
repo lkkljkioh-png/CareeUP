@@ -1,4 +1,8 @@
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -33,7 +37,12 @@
       object-fit: contain;
     }
 
-    nav ul { display: flex; list-style: none; gap: 48px; }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 48px;
+    }
+
     nav a {
       text-decoration: none;
       color: #888;
@@ -41,8 +50,15 @@
       letter-spacing: 0.4px;
       transition: color 0.2s;
     }
-    nav a:hover { color: #185FA5; }
-    nav a.active { color: #111; font-weight: 500; }
+
+    nav a:hover {
+      color: #185FA5;
+    }
+
+    nav a.active {
+      color: #185FA5;
+      font-weight: 500;
+    }
 
     .container {
       display: flex;
@@ -56,7 +72,9 @@
       width: 100%;
     }
 
-    .left-section { flex: 1; }
+    .left-section {
+      flex: 1;
+    }
 
     .tag {
       display: inline-block;
@@ -79,7 +97,9 @@
       margin-bottom: 20px;
     }
 
-    .left-section h2 span { color: #185FA5; }
+    .left-section h2 span {
+      color: #185FA5;
+    }
 
     .left-section p {
       font-size: 18px;
@@ -121,8 +141,15 @@
       margin-bottom: 16px;
     }
 
-    .card.grad .card-icon { background: #E6F1FB; color: #185FA5; }
-    .card.stu .card-icon { background: #EAF3DE; color: #3B6D11; }
+    .card.grad .card-icon {
+      background: #E6F1FB;
+      color: #185FA5;
+    }
+
+    .card.stu .card-icon {
+      background: #EAF3DE;
+      color: #3B6D11;
+    }
 
     .card h3 {
       font-size: 18px;
@@ -131,7 +158,10 @@
       margin-bottom: 6px;
     }
 
-    .card p { font-size: 14px; color: #aaa; }
+    .card p {
+      font-size: 14px;
+      color: #aaa;
+    }
 
     .card-arrow {
       position: absolute;
@@ -142,4 +172,6 @@
       transition: color 0.2s;
     }
 
-    .card:hover .card-arrow { color: #185FA5; }
+    .card:hover .card-arrow {
+      color: #185FA5;
+    }

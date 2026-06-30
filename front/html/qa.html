@@ -27,8 +27,9 @@
                 <li><a href="main.html">MAIN</a></li>
                 <li><a href="profileList.html">SEARCH</a></li>
                 <li><a href="qa.html" class="active">Q&A</a></li>
-                <li><a href="profile.html">PROFILE</a></li>
-                <li><a href="my.html">MY</a></li>
+                <li><a onclick="goProfile()">PROFILE</a></li>
+                <li><a onclick="goMyPage()">MY</a></li>
+                <li><a href="login.html">LOGIN</a></li>
             </ul>
         </nav>
 
@@ -70,31 +71,37 @@
 
         <div class="question-list">
 
-            <div class="question-card">
-                <h3>백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?</h3>
-                <p>김유민 | 2026-06-28 | 답변 3개</p>
-            </div>
+            <div class="question-list">
 
-            <div class="question-card">
-                <h3>SQLD와 정보처리기사 중 무엇을 먼저 준비하는 것이 좋을까요?</h3>
-                <p>홍길동 | 2026-06-26 | 답변 5개</p>
-            </div>
+                <div class="question-card" onclick="goQuestion(1)">
+                    <h3>백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?</h3>
+                    <p>김유민 | 2026-06-28 | 답변 3개</p>
+                </div>
 
-            <div class="question-card">
-                <h3>AWS 자격증 취득 후 취업에 도움이 될까요?</h3>
-                <p>이철수 | 2026-06-23 | 답변 2개</p>
-            </div>
+                <div class="question-card" onclick="goQuestion(2)">
+                    <h3>SQLD와 정보처리기사 중 무엇을 먼저 준비하는 것이 좋을까요?</h3>
+                    <p>홍길동 | 2026-06-26 | 답변 5개</p>
+                </div>
 
-            <div class="question-card">
-                <h3>캡스톤 프로젝트 주제를 어떻게 정하면 좋을까요?</h3>
-                <p>박민수 | 2026-06-20 | 답변 4개</p>
+                <div class="question-card" onclick="goQuestion(3)">
+                    <h3>AWS 자격증 취득 후 취업에 도움이 될까요?</h3>
+                    <p>이철수 | 2026-06-23 | 답변 2개</p>
+                </div>
+
+                <div class="question-card" onclick="goQuestion(4)">
+                    <h3>캡스톤 프로젝트 주제를 어떻게 정하면 좋을까요?</h3>
+                    <p>박민수 | 2026-06-20 | 답변 4개</p>
+                </div>
+
             </div>
 
         </div>
 
     </div>
 
-    <script src="../js/qa.js"></script>
+    <!-- JavaScript -->
+    <script src="../javascript/common.js"></script>
+    <script src="../javascript/qa.js"></script>
 
 </body>
 

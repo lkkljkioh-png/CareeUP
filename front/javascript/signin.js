@@ -60,3 +60,8 @@ function checkForm() {
     
     return true;
 }
+
+// 회원 유형을 로컬 스토리지에 저장 (DB 구축 후 변경 필요)
+const membershipType = document.getElementById("membershipType").value;
+
+localStorage.setItem("membershipType", membershipType);

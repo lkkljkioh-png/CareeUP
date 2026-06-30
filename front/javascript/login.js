@@ -22,7 +22,7 @@ function checkLogin() {
     alert("로그인 성공!");
 
     // 로그인 성공 시 메인 페이지로 이동
-    location.href = "../html/main.html"; 
+    window.location.href = "../html/main.html"; 
 
     // 모든 검사 통과 (테스트 용이라 일단 return false → 나중에 수정 필요)
     return false;
