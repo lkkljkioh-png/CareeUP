@@ -38,10 +38,10 @@
         <!-- 검색 -->
         <div class="search-box">
 
-            <input type="text" id="searchInput" placeholder="이름 / 직무 / 회사 검색">
+            <input type="text" id="search-input" placeholder="이름 / 직무 / 회사 검색">
 
             <!-- 학교 필터 -->
-            <select id="schoolFilter">
+            <select id="school-filter">
                 <option value="">전체 학교</option>
                 <option value="서울대학교">서울대학교</option>
                 <option value="연세대학교">연세대학교</option>
@@ -49,7 +49,7 @@
             </select>
 
             <!-- 학과 필터 -->
-            <select id="majorFilter">
+            <select id="dept-filter">
                 <option value="">전체 학과</option>
                 <option value="컴퓨터공학">컴퓨터공학</option>
                 <option value="소프트웨어학과">소프트웨어학과</option>
@@ -60,33 +60,35 @@
         </div>
 
         <!-- 리스트 -->
-        <div class="profile-card" data-name="김유민" data-company="AWS" data-school="서울대학교" data-major="컴퓨터공학"
-            onclick="goDetail(1)">
+        <div class="profile-card">
 
             <div class="profile-left">
                 <div class="avatar"></div>
             </div>
 
             <div class="profile-right">
-                <h3 id="name">김유민</h3>
-                <p id="company">AWS</p>
 
-                <div class="tags">
-                    <span id="university">서울대학교</span>
-                    <span id="major">컴퓨터공학</span>
-                    <span id="graduationYear">2025</span>
+                <div class="profile-top">
+                    <div class="profile-info" id="graduate-info">
+                        <h3 class="name" id="graduate-name">김유민</h3>
+                        <p class="company" id="graduate-company">AWS</p>
+                    </div>
+                    <button class="detail-btn" onclick="goDetail()">자세히 보기</button>
                 </div>
 
-                <button class="detail-btn" onclick="onDetail()">자세히 보기</button>
+                <div class="tags">
+                    <span class="university" id="graduate-school">서울대학교</span>
+                    <span class="major" id="graduate-dept">컴퓨터공학</span>
+                    <span class="graduationYear" id="graduate-year">2025</span>
+                </div>
+
             </div>
 
         </div>
 
-    </div>
+        <!-- JavaScript -->
+        <script src="../javascript/common.js"></script>
 
-    <!-- JavaScript -->
-    <script src="../javascript/common.js"></script>
-    
 </body>
 
 </html>

@@ -47,18 +47,18 @@
 
             <div class="profile-info">
 
-                <h2 id="name">김유민</h2>
+                <h2 id="student-name">김유민</h2>
 
                 <table>
 
                     <tr>
                         <th>학교</th>
-                        <td id="school">서울대학교</td>
+                        <td id="student-school">서울대학교</td>
                     </tr>
 
                     <tr>
                         <th>학과</th>
-                        <td id="department">컴퓨터공학과</td>
+                        <td id="student-dept">컴퓨터공학과</td>
                     </tr>
 
                     <tr>
@@ -68,12 +68,12 @@
 
                     <tr>
                         <th>희망 직무</th>
-                        <td id="job">백엔드 개발자</td>
+                        <td id="student-desired-job">백엔드 개발자</td>
                     </tr>
 
                     <tr>
                         <th>기술 스택</th>
-                        <td id="tech-stack">Java · Spring Boot · MySQL · AWS</td>
+                        <td id="student-tech-stack">Java · Spring Boot · MySQL · AWS</td>
                     </tr>
 
                 </table>
@@ -89,7 +89,7 @@
             <div class="card-title">
                 <h3><i class="ti ti-code"></i>프로젝트</h3>
 
-                <button class="add-btn" onclick="addProject()">
+                <button class="add-btn" id="add-project-btn" onclick="addProject()">
                     <i class="ti ti-plus"></i> 추가
                 </button>
             </div>
@@ -110,7 +110,7 @@
             <div class="card-title">
                 <h3><i class="ti ti-certificate"></i> 보유 자격증</h3>
 
-                <button class="add-btn" onclick="addCertificate()">
+                <button class="add-btn" id="add-certificate-btn" onclick="addCertificate()">
                     <i class="ti ti-plus"></i> 추가
                 </button>
             </div>
@@ -131,7 +131,7 @@
             <div class="card-title">
                 <h3><i class="ti ti-world"></i> 대외 활동</h3>
 
-                <button class="add-btn" onclick="addActivity()">
+                <button class="add-btn" id="add-activity-btn" onclick="addActivity()">
                     <i class="ti ti-plus"></i> 추가
                 </button>
             </div>
@@ -149,14 +149,19 @@
 
         <div class="card">
 
-            <h3><i class="ti ti-message"></i> 자기소개</h3>
+                <div class="card-title">
+                    <h3><i class="ti ti-message"></i> 한마디</h3>
+                    <button class="add-btn" onclick="editMessage()">
+                        <i class="ti ti-edit"></i> 수정
+                    </button>
+                </div>
 
-            <p id="introduce">
-                백엔드 개발자를 목표로 다양한 프로젝트를 진행하고 있으며,
-                클라우드와 데이터베이스 분야에 관심이 많습니다.
-            </p>
+                <p id="graduate-message">
+                    학생용 한 마디
+                </p>
 
-        </div>
+            </div>
+
 
     </div>
 

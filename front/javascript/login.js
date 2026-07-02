@@ -1,6 +1,6 @@
 function checkLogin() {
 
-    const userId = document.getElementById("userId").value.trim();
+    const userId = document.getElementById("user-id").value.trim();
     const password = document.getElementById("password").value;
 
     // 빈칸 검사

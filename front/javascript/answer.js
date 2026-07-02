@@ -13,9 +13,9 @@ document.addEventListener("DOMContentLoaded", () => {
             return;
         }
 
-        // 답변 객체 생성
+        // 더미데이터 (DB구축 후 실제 구현 시 로그인한 사용자 정보로 대체)
         const answerData = {
-            writer: "홍길동", // 더미데이터 (DB구축 후 실제 구현 시 로그인한 사용자 정보로 대체)
+            writer: "홍길동", 
             content: answer,
             date: new Date().toLocaleDateString()
         };

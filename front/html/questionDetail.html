@@ -36,12 +36,17 @@
 
 <div class="container">
 
+    <!-- 질문 -->
     <div class="question-card">
 
         <div class="question-top">
 
-            <span class="category" id="category">진로/취업</span>
+            <!-- DB에서 category 값 출력 -->
+            <span class="category" id="question-category">
+                진로/취업
+            </span>
 
+            <!-- DB에서 date 값 출력 -->
             <span class="date" id="question-date">
                 <i class="ti ti-calendar"></i>
                 2026-06-30
@@ -49,71 +54,57 @@
 
         </div>
 
+        <!-- DB에서 title 출력 -->
         <h2 id="question-title">
-            백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?
+            질문 제목
         </h2>
 
+        <!-- DB에서 writer 출력 -->
         <div class="writer" id="question-writer">
             <i class="ti ti-user"></i>
-            김유민
+            작성자
         </div>
 
+        <!-- DB에서 content 출력 -->
         <div class="content" id="question-content">
-            현재 Java와 SQL을 공부하고 있습니다.<br><br>
-
-            취업을 준비하면서 포트폴리오를 만들려고 하는데
-            어떤 프로젝트를 하면 도움이 될까요?
+            질문 내용
         </div>
 
     </div>
 
     <div class="button-area">
-        <button class="answer-btn" onclick="window.location.href='answer.html'">
+        <button class="answer-btn" id="answer-btn" onclick="window.location.href='answer.html'">
             <i class="ti ti-message-circle"></i>
             답변하기
         </button>
     </div>
 
+    <!-- 답변 목록 -->
     <div class="answer-section">
 
         <h3>답변</h3>
 
-        <div class="answer-card">
+        <!-- JS가 답변 카드를 생성하는 영역 -->
+        <div id="answer-list">
 
-            <div class="answer-info">
+            <div class="answer-card">
 
-                <span id="answer-writer">
-                    <i class="ti ti-user"></i>
-                    박민수
-                </span>
+                <div class="answer-info">
+                    <span class="answer-writer">
+                        <i class="ti ti-user"></i>
+                        홍길동
+                    </span>
 
-                <span id="answer-date">2026-06-30</span>
+                    <span class="answer-date">
+                        2026-07-02
+                    </span>
+                </div>
 
-            </div>
-
-            <p id="answer-content">
-                프로젝트는 실제 서비스를 구현해보는 것이 가장 도움이 됩니다.
-                회원가입, 로그인, 게시판, 검색 기능 등을 구현해보세요.
-            </p>
-
-        </div>
-
-        <div class="answer-card">
-
-            <div class="answer-info">
-
-                <span id="answer-writer">
-                    <i class="ti ti-user"></i>
-                    이철수
-                </span>
-
-                <span id="answer-date">2026-06-30</span>
+                <p class="answer-content">
+                    답변 내용
+                </p>
 
             </div>
-
-            <p id="answer-content">
-                AWS나 Docker를 함께 사용하면 더욱 좋은 포트폴리오가 됩니다.
-            </p>
 
         </div>
 

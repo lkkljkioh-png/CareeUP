@@ -2,9 +2,9 @@ function goMyPage() {
     const role = localStorage.getItem("role");
 
     if (role === "student") {
-        location.href = "studentMy.html";
+        location.href = "../html/studentMy.html";
     } else {
-        location.href = "graduateMy.html";
+        location.href = "../html/graduateMy.html";
     }
 }
 
@@ -12,8 +12,8 @@ function goProfile() {
     const role = localStorage.getItem("role");
 
     if (role === "student") {
-        location.href = "studentProfile.html";
+        location.href = "../html/studentProfile.html";
     } else {
-        location.href = "graduateProfile.html";
+        location.href = "../html/graduateProfile.html";
     }
 }

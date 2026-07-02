@@ -24,11 +24,11 @@
 
         <nav>
             <ul>
-                <li><a href="main.html" class="active">MAIN</a></li>
+                <li><a href="main.html">MAIN</a></li>
                 <li><a href="profileList.html">SEARCH</a></li>
                 <li><a href="qa.html">Q&A</a></li>
                 <li><a onclick="goProfile()">PROFILE</a></li>
-                <li><a onclick="goMyPage()">MY</a></li>
+                <li><a onclick="goMyPage()" class="active">MY</a></li>
                 <li><a href="login.html">LOGIN</a></li>
             </ul>
         </nav>
@@ -49,9 +49,9 @@
                     </div>
 
                     <div class="profile-info">
-                        <h3 id="name">윤효서</h3>
-                        <p id="department">데이터클라우드공학과</p>
-                        <span id="grade">3학년</span>
+                        <h3 id="student-name">윤효서</h3>
+                        <p id="student-school">서울대학교</p>
+                        <span id="student-dept">데이터클라우드공학과</span>
                     </div>
 
                 </div>
@@ -68,7 +68,7 @@
                         <i class="ti ti-building"></i>
                         <span>관심 학교</span>
                     </div>
-                    <div class="count">5</div>
+                    <div class="count" id="favorite-school-count">5</div>
                 </div>
 
                 <div class="menu">
@@ -76,7 +76,7 @@
                         <i class="ti ti-school"></i>
                         <span>관심 학과</span>
                     </div>
-                    <div class="count">3</div>
+                    <div class="count" id="favorite-major-count">3</div>
                 </div>
 
                 <div class="menu">
@@ -84,7 +84,7 @@
                         <i class="ti ti-message"></i>
                         <span>내 질문</span>
                     </div>
-                    <button class="menu-btn" onclick="location.href='my-questions.html'">
+                    <button class="menu-btn" onclick="location.href='myQuestions.html'">
                         목록 보기
                     </button>
                 </div>
@@ -105,7 +105,7 @@
                         <i class="ti ti-certificate"></i>
                         <span>보유 자격증</span>
                     </div>
-                    <div class="count" id="owned-cert">4</div>
+                    <div class="count" id="certificate-count">4</div>
                 </div>
 
                 <div class="menu">
@@ -113,7 +113,7 @@
                         <i class="ti ti-world"></i>
                         <span>대외 활동</span>
                     </div>
-                    <div class="count" id="external-activities">2</div>
+                    <div class="count" id="external-activities-count">2</div>
                 </div>
 
                 <div class="menu">
@@ -121,7 +121,7 @@
                         <i class="ti ti-briefcase"></i>
                         <span>경력</span>
                     </div>
-                    <div class="count" id="experience">0</div>
+                    <div class="count" id="experience-count">0</div>
                 </div>
 
                 <button class="btn" onclick="window.location.href='studentProfile.html'">

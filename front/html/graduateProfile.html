@@ -41,7 +41,7 @@
         <div class="profile-card">
             <div class="profile-image"> <i class="ti ti-user"></i> </div>
             <div class="profile-info">
-                <h2 id="name">윤효서</h2>
+                <h2 id="graduate-name">윤효서</h2>
                 <table>
                     <tr>
                         <th>졸업학교</th>
@@ -57,15 +57,15 @@
                     </tr>
                     <tr>
                         <th>회사</th>
-                        <td id="company">AWS</td>
+                        <td id="graduate-company">AWS</td>
                     </tr>
                     <tr>
                         <th>직무</th>
-                        <td id="position">소프트웨어 엔지니어</td>
+                        <td id="graduate-position">소프트웨어 엔지니어</td>
                     </tr>
                     <tr>
                         <th>기술 스택</th>
-                        <td id="tech-stack">Java · Spring Boot · MySQL · AWS</td>
+                        <td id="graduate-tech-stack">Java · Spring Boot · MySQL · AWS</td>
                     </tr>
                 </table>
             </div>
@@ -117,7 +117,7 @@
                     </button>
                 </div>
 
-                <div id="activity-list">
+                <div id="external-activities-list">
                     <div class="list-item">멋쟁이사자처럼 12기</div>
                     <div class="list-item">SW 중심대학 프로젝트 참여</div>
                     <div class="list-item">캡스톤 디자인 우수상</div>
@@ -147,9 +147,14 @@
 
             <div class="card">
 
-                <h3 id="graduate-message"><i class="ti ti-message"></i>한마디</h3>
+                <div class="card-title">
+                    <h3><i class="ti ti-message"></i> 한마디</h3>
+                    <button class="add-btn" onclick="editMessage()">
+                        <i class="ti ti-edit"></i> 수정
+                    </button>
+                </div>
 
-                <p>
+                <p id="graduate-message">
                     프로젝트 경험과 Git 협업 경험을 많이 쌓는 것이 가장 중요합니다.
                     자격증도 도움이 되지만 실제 프로젝트 경험이 취업에서 큰 경쟁력이 됩니다.
                 </p>

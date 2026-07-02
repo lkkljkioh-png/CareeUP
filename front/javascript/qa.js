@@ -30,3 +30,23 @@ function goQuestion(id) {
 
     location.href = "../html/questionDetail.html";
 }
+
+// 카테고리 필터링 기능
+document.getElementById("category-select").addEventListener("change", (e) => {
+    filterCategory(e.target.value);
+});
+
+// 질문 검색 기능
+document.getElementById("search-btn").addEventListener("click", searchQuestion);
+
+// 질문 검색 기능 (Enter 키 입력 시에도 검색)
+document.getElementById("question-search").addEventListener("keyup", (e) => {
+    if (e.key === "Enter") {
+        searchQuestion();
+    }
+});
+
+// 질문 작성 버튼 클릭 시 이동
+document.getElementById("question-upload-btn").addEventListener("click", () => {
+    location.href = "../html/question.html";
+});
