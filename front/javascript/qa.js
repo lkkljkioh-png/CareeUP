@@ -20,33 +20,151 @@ const questions = [
     }
 ];
 
-// 질문 상세 페이지로 이동 시 선택된 질문 정보를 localStorage에 저장 (DB 구축 후 변경 필요)
+// 질문 목록 불러오기
+let questions = JSON.parse(localStorage.getItem("questions")) || [];
 
+document.addEventListener("DOMContentLoaded", () => {
+
+    drawQuestions(questions);
+
+    // 카테고리 필터
+    document.getElementById("category-select").addEventListener("change", (e) => {
+        filterCategory(e.target.value);
+    });
+
+    // 검색 버튼
+    document.getElementById("search-btn").addEventListener("click", searchQuestion);
+
+    // Enter 검색
+    document.getElementById("question-search").addEventListener("keyup", (e) => {
+
+        if (e.key === "Enter") {
+            searchQuestion();
+        }
+
+    });
+
+    // 질문 작성
+    document.getElementById("question-upload-btn").addEventListener("click", () => {
+
+        location.href = "../html/question.html";
+
+    });
+
+});
+
+// 질문 목록 출력
+function drawQuestions(list) {
+
+    const questionList = document.getElementById("question-list");
+
+    questionList.innerHTML = "";
+
+    if (list.length === 0) {
+
+        questionList.innerHTML =
+            `<div class="no-question">등록된 질문이 없습니다.</div>`;
+
+        return;
+
+    }
+
+    list.forEach(question => {
+
+        questionList.innerHTML += `
+
+        <div class="question-card" onclick="goQuestion(${question.id})">
+
+            <div class="question-top">
+
+                <span class="category">
+                    ${question.category}
+                </span>
+
+                <span class="date">
+                    ${question.date}
+                </span>
+
+            </div>
+
+            <h3>
+                ${question.title}
+            </h3>
+
+            <p>
+                ${question.content}
+            </p>
+
+            <div class="question-bottom">
+
+                <span>
+                    ${question.writer}
+                </span>
+
+            </div>
+
+        </div>
+
+        `;
+
+    });
+
+}
+
+// 질문 상세
 function goQuestion(id) {
 
     const question = questions.find(q => q.id === id);
 
-    localStorage.setItem("selectedQuestion", JSON.stringify(question));
+    localStorage.setItem(
+        "selectedQuestion",
+        JSON.stringify(question)
+    );
 
     location.href = "../html/questionDetail.html";
+
 }
 
-// 카테고리 필터링 기능
-document.getElementById("category-select").addEventListener("change", (e) => {
-    filterCategory(e.target.value);
-});
+// 검색
+function searchQuestion() {
 
-// 질문 검색 기능
-document.getElementById("search-btn").addEventListener("click", searchQuestion);
+    const keyword =
+        document.getElementById("question-search")
+        .value
+        .trim()
+        .toLowerCase();
 
-// 질문 검색 기능 (Enter 키 입력 시에도 검색)
-document.getElementById("question-search").addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-        searchQuestion();
+    const result = questions.filter(question =>
+
+        question.title.toLowerCase().includes(keyword) ||
+
+        question.content.toLowerCase().includes(keyword) ||
+
+        question.writer.toLowerCase().includes(keyword)
+
+    );
+
+    drawQuestions(result);
+
+}
+
+// 카테고리 필터
+function filterCategory(category) {
+
+    if (category === "전체") {
+
+        drawQuestions(questions);
+
+        return;
+
     }
-});
 
-// 질문 작성 버튼 클릭 시 이동
-document.getElementById("question-upload-btn").addEventListener("click", () => {
-    location.href = "../html/question.html";
-});
+    const result = questions.filter(question =>
+
+        question.category === category
+
+    );
+
+    drawQuestions(result);
+
+}

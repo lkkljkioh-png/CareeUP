@@ -1,38 +1,74 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const submitBtn = document.querySelector(".submit");
-    const textarea = document.querySelector("textarea");
+    // 선택한 질문 가져오기
+    const question = JSON.parse(localStorage.getItem("selectedQuestion"));
 
-    submitBtn.addEventListener("click", () => {
+    if (!question) {
+        alert("질문 정보를 찾을 수 없습니다.");
+        location.href = "../html/qa.html";
+        return;
+    }
 
-        const answer = textarea.value.trim();
-
-        if (answer === "") {
-            alert("답변을 입력해주세요.");
-            textarea.focus();
-            return;
-        }
-
-        // 더미데이터 (DB구축 후 실제 구현 시 로그인한 사용자 정보로 대체)
-        const answerData = {
-            writer: "홍길동", 
-            content: answer,
-            date: new Date().toLocaleDateString()
-        };
-
-        // 기존 답변 불러오기
-        const answers = JSON.parse(localStorage.getItem("answers")) || [];
-
-        // 새 답변 추가
-        answers.push(answerData);
-
-        // 저장
-        localStorage.setItem("answers", JSON.stringify(answers));
-
-        alert("답변이 등록되었습니다.");
-
-        // 페이지 이동
-        location.href = "../html/questionDetail.html";
-    });
+    // 질문 정보 출력
+    document.getElementById("question-title").innerText = question.title;
+    document.getElementById("question-writer").innerText = question.writer;
+    document.getElementById("question-date").innerText = question.date;
+    document.getElementById("question-content").innerText = question.content;
 
 });
+
+// 답변 등록
+function submitAnswer() {
+
+    const content = document.getElementById("answer-content").value.trim();
+
+    if (content === "") {
+        alert("답변을 입력해주세요.");
+        return;
+    }
+
+    // 로그인한 사용자
+    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
+
+    if (!loginUser) {
+        alert("로그인 후 이용해주세요.");
+        location.href = "../html/login.html";
+        return;
+    }
+
+    // (선택) 졸업생만 답변 가능
+    if (loginUser.membershipType !== "졸업생") {
+        alert("졸업생만 답변을 작성할 수 있습니다.");
+        return;
+    }
+
+    // 현재 질문
+    const question = JSON.parse(localStorage.getItem("selectedQuestion"));
+
+    // 답변 목록
+    const answers = JSON.parse(localStorage.getItem("answers")) || [];
+
+    // 답변 생성
+    const answer = {
+
+        id: Date.now(),
+
+        questionId: question.id,
+
+        writer: loginUser.name,
+
+        date: new Date().toLocaleDateString("ko-KR"),
+
+        content: content
+
+    };
+
+    answers.push(answer);
+
+    localStorage.setItem("answers", JSON.stringify(answers));
+
+    alert("답변이 등록되었습니다.");
+
+    location.href = "../html/questionDetail.html";
+
+}

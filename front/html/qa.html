@@ -71,29 +71,25 @@
 
         <div class="question-list">
 
-            <div class="question-list">
+            <!-- 더미데이터 생성 해서 예시 화면 출력 (Question(id)로 수정 필요) -->
+            <div class="question-card" onclick="goQuestion(1)">
+                <h3>백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?</h3>
+                <p>김유민 | 2026-06-28 | 답변 3개</p>
+            </div>
 
-                <!-- 더미데이터 생성 해서 예시 화면 출력 (Question(id)로 수정 필요) -->
-                <div class="question-card" onclick="goQuestion(1)">
-                    <h3>백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?</h3>
-                    <p>김유민 | 2026-06-28 | 답변 3개</p>
-                </div>
+            <!-- JS가 질문 목록을 생성하는 영역 -->
+            <div class="question-list" id="question-list">
 
-                <!-- JS가 질문 목록을 생성하는 영역 -->
-                <div class="question-list" id="question-list">
+                <div class="question-card">
 
-                    <div class="question-card">
+                    <h3 class="question-title" id="question-title">질문 제목</h3>
 
-                        <h3 class="question-title" id="question-title">질문 제목</h3>
-
-                        <div class="question-info">
-                            <span class="writer" id="question-writer">홍길동</span>
-                            <span class="divider">|</span>
-                            <span class="date" id="question-date">2026-07-02</span>
-                            <span class="divider">|</span>
-                            <span class="answer-count" id="question-answer-count">답변 3개</span>
-                        </div>
-
+                    <div class="question-info">
+                        <span class="writer" id="question-writer">홍길동</span>
+                        <span class="divider">|</span>
+                        <span class="date" id="question-date">2026-07-02</span>
+                        <span class="divider">|</span>
+                        <span class="answer-count" id="question-answer-count">답변 3개</span>
                     </div>
 
                 </div>
