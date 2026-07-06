@@ -29,7 +29,9 @@
                 <li><a href="qa.html">Q&A</a></li>
                 <li><a onclick="goProfile()" class="active">PROFILE</a></li>
                 <li><a onclick="goMyPage()">MY</a></li>
-                <li><a href="login.html">LOGIN</a></li>
+                <li>
+                    <a href="#" id="login-menu">LOGIN</a>
+                </li>
             </ul>
         </nav>
 
@@ -149,18 +151,18 @@
 
         <div class="card">
 
-                <div class="card-title">
-                    <h3><i class="ti ti-message"></i> 한마디</h3>
-                    <button class="add-btn" onclick="window.location.href='profileMessageEdit.html'">
-                        <i class="ti ti-edit"></i> 수정
-                    </button>
-                </div>
-
-                <p id="graduate-message">
-                    학생용 한 마디
-                </p>
-
+            <div class="card-title">
+                <h3><i class="ti ti-message"></i> 한마디</h3>
+                <button class="add-btn" onclick="window.location.href='profileMessageEdit.html'">
+                    <i class="ti ti-edit"></i> 수정
+                </button>
             </div>
+
+            <p id="graduate-message">
+                학생용 한 마디
+            </p>
+
+        </div>
 
 
     </div>

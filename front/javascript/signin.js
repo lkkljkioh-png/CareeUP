@@ -55,6 +55,14 @@ function checkForm() {
     const users =
         JSON.parse(localStorage.getItem("users")) || [];
 
+    const existUser = users.find(user => user.userId === userId);
+
+    if (existUser) {
+        alert("이미 사용 중인 아이디입니다.");
+        return false;
+    }
+
+    // 나중에 사용될 정보도 한 번에 저장 (한마디, 보유 자격증 등)
     users.push({
 
         userId,
@@ -62,7 +70,21 @@ function checkForm() {
         email,
         name,
         membershipType: membershipType.value,
-        gender: male.checked ? "남" : "여"
+        gender: male.checked ? "남" : "여",
+
+        school: "",
+        dept: "",
+        year: "",
+        company: "",
+        position: "",
+        techStack: "",
+
+        message: "",
+
+        experiences: [],
+        certificates: [],
+        activities: [],
+        portfolios: []
 
     });
 
@@ -73,5 +95,7 @@ function checkForm() {
 
     alert("회원가입이 완료되었습니다.");
 
-    return true;
+    location.href = "../html/login.html";
+
+    return false;
 }

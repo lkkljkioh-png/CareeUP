@@ -19,11 +19,30 @@ function checkLogin() {
         return false;
     }
 
-    alert("로그인 성공!");
+    // 회원 목록 가져오기
+    const users = JSON.parse(localStorage.getItem("users")) || [];
 
-    // 로그인 성공 시 메인 페이지로 이동
-    window.location.href = "../html/main.html"; 
+    // 아이디와 비밀번호가 일치하는 회원 찾기
+    const user = users.find(u =>
+        u.userId === userId &&
+        u.password === password
+    );
 
-    // 모든 검사 통과 (테스트 용이라 일단 return false → 나중에 수정 필요)
+    if (!user) {
+        alert("아이디 또는 비밀번호가 올바르지 않습니다.");
+        return false;
+    }
+
+    // 로그인한 회원 저장
+    localStorage.setItem(
+        "loginUser",
+        JSON.stringify(user)
+    );
+
+    alert(user.name + "님, 환영합니다!");
+
+    // 메인 페이지 이동
+    location.href = "../html/main.html";
+
     return false;
 }
