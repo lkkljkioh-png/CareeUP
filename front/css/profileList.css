@@ -12,40 +12,52 @@ body {
 
 /* ===== header ===== */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 24px 80px;
-    background: #fff;
-    border-bottom: 1px solid #e8e8e6;
-}
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 24px 80px;
+      background: #fff;
+      border-bottom: 1px solid #e8e8e6;
+    }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.3px;
+      color: #111;
+    }
 
-.logo img {
-    width: 38px;
-}
+    .logo img {
+      width: 38px;
+      height: 38px;
+      object-fit: contain;
+    }
 
-nav ul {
-    display: flex;
-    list-style: none;
-    gap: 35px;
-}
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 48px;
+    }
 
-nav a {
-    text-decoration: none;
-    color: #777;
-}
+    nav a {
+      text-decoration: none;
+      color: #888;
+      font-size: 15px;
+      letter-spacing: 0.4px;
+      transition: color 0.2s;
+    }
 
-nav a.active,
-nav a:hover {
-    color: #185FA5;
-    font-weight: 600;
-}
+    nav a:hover {
+      color: #185FA5;
+    }
+
+    nav a.active {
+      color: #185FA5;
+      font-weight: 500;
+    }
 
 /* ===== container ===== */
 .container {
@@ -148,7 +160,6 @@ nav a:hover {
 }
 
 .tags span {
-    font-size: 12px;
     background: #f2f6ff;
     color: #185FA5;
     padding: 4px 8px;
