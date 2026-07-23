@@ -16,7 +16,10 @@ count();
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
 
     Optional<UserEntity> findByEmail(String email);
-    // userRepository.findByEmail("abc@test.com");
+
+    Optional<UserEntity> findByUserId(String userId);
 
     boolean existsByEmail(String email);
+
+    boolean existsByUserId(String userId);
 }

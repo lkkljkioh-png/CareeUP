@@ -17,10 +17,11 @@ public class CorsConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         // 프론트 주소 허용
-        config.setAllowedOrigins(List.of(
-                "http://localhost:5500",
-                "http://127.0.0.1:5500"
-        ));
+        // config.setAllowedOrigins(List.of(
+        //         "http://localhost:5500",
+        //         "http://127.0.0.1:5500"
+        // ));
+        config.setAllowedOriginPatterns(List.of("*"));
 
         // HTTP 메서드 허용
         config.setAllowedMethods(List.of(

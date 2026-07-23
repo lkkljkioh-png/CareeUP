@@ -15,53 +15,49 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/users")
 public class UserController {
 
-    private final UserService userService;
+        private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
+        public UserController(UserService userService) {
+                this.userService = userService;
+        }
 
-    // 회원가입
-    @PostMapping("/signup")
-    public ApiResponse<SignupResponse> signup(
-            @Valid @RequestBody SignupRequest request
-    ) {
+        // 회원가입
+        @PostMapping("/signup")
+        public ApiResponse<SignupResponse> signup(
+                        @Valid @RequestBody SignupRequest request) {
 
-        SignupResponse response = userService.register(request);
+                System.out.println("===== 회원가입 API 호출 =====");
 
-        return new ApiResponse<>(
-                true,
-                "회원가입이 완료되었습니다.",
-                response
-        );
-    }
+                SignupResponse response = userService.register(request);
 
-    // 로그인
-    @PostMapping("/login")
-    public ApiResponse<LoginResponse> login(
-            @Valid @RequestBody LoginRequest request
-    ) {
+                return new ApiResponse<>(
+                                true,
+                                "회원가입이 완료되었습니다.",
+                                response);
+        }
 
-        LoginResponse response = userService.login(request);
+        // 로그인
+        @PostMapping("/login")
+        public ApiResponse<LoginResponse> login(
+                        @Valid @RequestBody LoginRequest request) {
 
-        return new ApiResponse<>(
-                true,
-                "로그인에 성공했습니다.",
-                response
-        );
-    }
+                LoginResponse response = userService.login(request);
 
-    // 내 정보 조회
-    @GetMapping("/me")
-    public ApiResponse<UserResponse> me(Authentication authentication) {
+                return new ApiResponse<>(
+                                true,
+                                "로그인에 성공했습니다.",
+                                response);
+        }
 
-        UserResponse response =
-                userService.getMyInfo(authentication.getName());
+        // 내 정보 조회
+        @GetMapping("/me")
+        public ApiResponse<UserResponse> me(Authentication authentication) {
 
-        return new ApiResponse<>(
-                true,
-                "조회 성공",
-                response
-        );
-    }
+                UserResponse response = userService.getMyInfo(authentication.getName());
+
+                return new ApiResponse<>(
+                                true,
+                                "조회 성공",
+                                response);
+        }
 }

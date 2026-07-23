@@ -15,8 +15,8 @@ public class UserService {
     private final JwtProvider jwtProvider;
 
     public UserService(UserRepository userRepository,
-                       PasswordEncoder passwordEncoder,
-                       JwtProvider jwtProvider) {
+            PasswordEncoder passwordEncoder,
+            JwtProvider jwtProvider) {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
@@ -29,27 +29,31 @@ public class UserService {
             throw new IllegalArgumentException("이미 사용 중인 이메일입니다.");
         }
 
+        if (userRepository.existsByUserId(request.getUserId())) {
+            throw new IllegalArgumentException("이미 사용 중인 아이디입니다.");
+        }
+
         UserEntity user = new UserEntity();
 
+        user.setUserId(request.getUserId());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setName(request.getName());
+        user.setMembershipType(request.getMembershipType());
+        user.setGender(request.getGender());
 
         UserEntity savedUser = userRepository.save(user);
 
         return new SignupResponse(
                 savedUser.getId(),
                 savedUser.getEmail(),
-                savedUser.getName()
-        );
+                savedUser.getName());
     }
 
     public LoginResponse login(LoginRequest request) {
 
-        UserEntity user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() ->
-                        new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다.")
-                );
+        UserEntity user = userRepository.findByUserId(request.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
             throw new IllegalArgumentException("이메일 또는 비밀번호가 올바르지 않습니다.");
@@ -59,22 +63,18 @@ public class UserService {
         return new LoginResponse(
                 token,
                 user.getEmail(),
-                user.getName()
-        );
+                user.getName());
     }
 
     public UserResponse getMyInfo(String email) {
 
         UserEntity user = userRepository.findByEmail(email)
-                .orElseThrow(() ->
-                        new IllegalArgumentException("사용자를 찾을 수 없습니다.")
-                );
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
         return new UserResponse(
                 user.getId(),
                 user.getEmail(),
-                user.getName()
-        );
+                user.getName());
     }
 
 }

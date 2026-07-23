@@ -1,6 +1,5 @@
 package com.example.backend.dto;
 
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,9 +8,8 @@ import lombok.Setter;
 @Setter
 public class LoginRequest {
 
-    @Email
     @NotBlank
-    private String email;
+    private String userId;
 
     @NotBlank
     private String password;

@@ -12,16 +12,23 @@ import lombok.Setter;
 @NoArgsConstructor
 public class UserEntity {
 
-    @Id                                                             // 기본 키(PK), 회원 번호, 자동 증가
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)                        // 반드시 입력, 중복 가입 불가
+    @Column(nullable = false, unique = true)
     private String email;
+
+    @Column(nullable = false, unique = true)
+    private String userId;
 
     @Column(nullable = false)
     private String password;
 
     @Column(nullable = false)
     private String name;
+
+    private String membershipType;
+
+    private String gender;
 }

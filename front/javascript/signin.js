@@ -1,4 +1,4 @@
-function checkForm() {
+async function checkForm() {
 
     // 입력값 가져오기
     const userId = document.getElementById("user-id").value.trim();
@@ -10,7 +10,9 @@ function checkForm() {
     const male = document.getElementById("male");
     const female = document.getElementById("female");
 
-    // -------- 기존 검사 코드 그대로 --------
+    console.log("checkForm 실행");
+
+    // ===== 입력 검사 =====
 
     if (userId === "" || password === "" || passwordCheck === "" || email === "" || name === "") {
         alert("모든 항목을 입력해주세요.");
@@ -51,27 +53,58 @@ function checkForm() {
         return false;
     }
 
-    // 회원 정보 저장
-    const users =
-        JSON.parse(localStorage.getItem("users")) || [];
+    // ===== Spring Boot 회원가입 =====
 
-    users.push({
+    try {
 
-        userId,
-        password,
-        email,
-        name,
-        membershipType: membershipType.value,
-        gender: male.checked ? "남" : "여"
+        console.log("fetch 시작");
 
-    });
+        const response = await fetch("http://localhost:8080/api/users/signup", {
 
-    localStorage.setItem(
-        "users",
-        JSON.stringify(users)
-    );
+            method: "POST",
 
-    alert("회원가입이 완료되었습니다.");
+            headers: {
+                "Content-Type": "application/json"
+            },
 
-    return true;
+            body: JSON.stringify({
+                email: email,
+                password: password,
+                name: name
+            })
+
+        });
+
+        console.log("응답 받음");
+        console.log(response);
+
+        let result = null;
+
+        const text = await response.text();
+
+        if (text) {
+            result = JSON.parse(text);
+        }
+
+        console.log("응답 데이터", result);
+
+        if (result.success) {
+
+            alert(result.message);
+
+            window.location.href = "../html/login.html";
+
+        } else {
+
+            alert(result.message);
+
+        }
+
+    } catch (e) {
+        console.error(e);
+        console.error(e.message);
+        alert("서버와 연결할 수 없습니다.");
+    }
+
+    return false;
 }

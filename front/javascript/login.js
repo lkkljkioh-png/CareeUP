@@ -1,4 +1,4 @@
-function checkLogin() {
+async function checkLogin() {
 
     const userId = document.getElementById("user-id").value.trim();
     const password = document.getElementById("password").value;
@@ -19,11 +19,42 @@ function checkLogin() {
         return false;
     }
 
-    alert("로그인 성공!");
+    try {
 
-    // 로그인 성공 시 메인 페이지로 이동
-    window.location.href = "../html/main.html"; 
+        const response = await fetch("http://localhost:8080/api/users/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                userId: userId,
+                password: password
+            })
+        });
 
-    // 모든 검사 통과 (테스트 용이라 일단 return false → 나중에 수정 필요)
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+
+            // JWT 저장
+            localStorage.setItem("token", result.data.token);
+
+            // 사용자 정보 저장(필요하면)
+            localStorage.setItem("userId", userId);
+            localStorage.setItem("name", result.data.name);
+
+            alert("로그인 성공!");
+
+            window.location.href = "../html/main.html";
+
+        } else {
+            alert(result.message);
+        }
+
+    } catch (e) {
+        console.error(e);
+        alert("서버에 연결할 수 없습니다.");
+    }
+
     return false;
 }
