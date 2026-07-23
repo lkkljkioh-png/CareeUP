@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CareeUP | Q&A</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+    <link rel="stylesheet" href="../css/qa.css">
+
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="로고" onclick="window.location.href='main.html'">
+            <span onclick="window.location.href='main.html'">CareeUP</span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="main.html">MAIN</a></li>
+                <li><a href="profileList.html">SEARCH</a></li>
+                <li><a href="qa.html" class="active">Q&A</a></li>
+                <li><a onclick="goProfile()">PROFILE</a></li>
+                <li><a onclick="goMyPage()">MY</a></li>
+                <li><a href="login.html">LOGIN</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <div class="container">
+
+        <div class="page-title">
+            <h2>Q&A</h2>
+        </div>
+
+        <div class="top-bar">
+
+            <div class="search-box">
+                <input type="text" id="question-search" placeholder="질문을 검색하세요.">
+                <button id="search-btn">
+                    <i class="ti ti-search"></i>
+                </button>
+            </div>
+
+            <select class="category-select" id="category-select">
+                <option value="all">전체 카테고리</option>
+                <option value="진로">진로/취업</option>
+                <option value="전공">전공 선택</option>
+                <option value="공부">학업/공부법</option>
+                <option value="자격증">자격증</option>
+                <option value="인턴">인턴/대외활동</option>
+                <option value="면접">면접/자소서</option>
+                <option value="직무">직무 정보</option>
+                <option value="기타">기타</option>
+            </select>
+
+            <button type="button" class="write-btn" id="question-upload-btn" onclick="window.location.href='question.html'">
+                <i class="ti ti-edit"></i>
+                질문하기
+            </button>
+
+        </div>
+
+        <div class="question-list">
+
+            <!-- 더미데이터 생성 해서 예시 화면 출력 (Question(id)로 수정 필요) -->
+            <div class="question-card" onclick="goQuestion(1)">
+                <h3>백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?</h3>
+                <p>김유민 | 2026-06-28 | 답변 3개</p>
+            </div>
+
+            <!-- JS가 질문 목록을 생성하는 영역 -->
+            <div class="question-list" id="question-list">
+
+                <div class="question-card">
+
+                    <h3 class="question-title" id="question-title">질문 제목</h3>
+
+                    <div class="question-info">
+                        <span class="writer" id="question-writer">홍길동</span>
+                        <span class="divider">|</span>
+                        <span class="date" id="question-date">2026-07-02</span>
+                        <span class="divider">|</span>
+                        <span class="answer-count" id="question-answer-count">답변 3개</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    </div>
+
+    <!-- JavaScript -->
+    <script src="../javascript/common.js"></script>
+    <script src="../javascript/qa.js"></script>
+
+</body>
+
+</html>

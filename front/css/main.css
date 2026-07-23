@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CareeUP</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -43,7 +37,12 @@
       object-fit: contain;
     }
 
-    nav ul { display: flex; list-style: none; gap: 48px; }
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 48px;
+    }
+
     nav a {
       text-decoration: none;
       color: #888;
@@ -51,8 +50,15 @@
       letter-spacing: 0.4px;
       transition: color 0.2s;
     }
-    nav a:hover { color: #185FA5; }
-    nav a.active { color: #111; font-weight: 500; }
+
+    nav a:hover {
+      color: #185FA5;
+    }
+
+    nav a.active {
+      color: #185FA5;
+      font-weight: 500;
+    }
 
     .container {
       display: flex;
@@ -66,7 +72,9 @@
       width: 100%;
     }
 
-    .left-section { flex: 1; }
+    .left-section {
+      flex: 1;
+    }
 
     .tag {
       display: inline-block;
@@ -89,7 +97,9 @@
       margin-bottom: 20px;
     }
 
-    .left-section h2 span { color: #185FA5; }
+    .left-section h2 span {
+      color: #185FA5;
+    }
 
     .left-section p {
       font-size: 18px;
@@ -131,8 +141,15 @@
       margin-bottom: 16px;
     }
 
-    .card.grad .card-icon { background: #E6F1FB; color: #185FA5; }
-    .card.stu .card-icon { background: #EAF3DE; color: #3B6D11; }
+    .card.grad .card-icon {
+      background: #E6F1FB;
+      color: #185FA5;
+    }
+
+    .card.stu .card-icon {
+      background: #EAF3DE;
+      color: #3B6D11;
+    }
 
     .card h3 {
       font-size: 18px;
@@ -141,7 +158,10 @@
       margin-bottom: 6px;
     }
 
-    .card p { font-size: 14px; color: #aaa; }
+    .card p {
+      font-size: 14px;
+      color: #aaa;
+    }
 
     .card-arrow {
       position: absolute;
@@ -152,51 +172,6 @@
       transition: color 0.2s;
     }
 
-    .card:hover .card-arrow { color: #185FA5; }
-  </style>
-</head>
-<body>
-
-<header>
-  <div class="logo">
-    <img src="images/careeup_logo.png" alt="CareeUP 로고">
-    <span>CareeUP</span>
-  </div>
-  <nav>
-    <ul>
-      <li><a href="#" class="active">MAIN</a></li>
-      <li><a href="#">PROFILE</a></li>
-      <li><a href="#">Q&A</a></li>
-      <li><a href="#">MY</a></li>
-      <li><a href="#">LOGIN</a></li>
-    </ul>
-  </nav>
-</header>
-
-<div class="container">
-
-  <div class="left-section">
-    <span class="tag">CAREER NETWORK</span>
-    <h2>Connect<br>your <span>career</span><br>journey.</h2>
-    <p>선배와 후배를 잇는 커리어 네트워크.<br>경험을 나누고, 함께 성장하세요.</p>
-  </div>
-
-  <div class="right-section">
-    <div class="card grad">
-      <i class="ti ti-arrow-up-right card-arrow"></i>
-      <div class="card-icon"><i class="ti ti-award"></i></div>
-      <h3>졸업생으로 시작하기</h3>
-      <p>나의 경험으로 후배를 이끌어주세요</p>
-    </div>
-    <div class="card stu">
-      <i class="ti ti-arrow-up-right card-arrow"></i>
-      <div class="card-icon"><i class="ti ti-school"></i></div>
-      <h3>재학생으로 시작하기</h3>
-      <p>선배들의 커리어 인사이트를 만나보세요</p>
-    </div>
-  </div>
-
-</div>
-
-</body>
-</html>
+    .card:hover .card-arrow {
+      color: #185FA5;
+    }

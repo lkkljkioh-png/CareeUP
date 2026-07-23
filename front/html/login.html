@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CareeUP | Login</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/login-signin.css">  
+
+</head>
+
+<body>
+
+<div class="login-container">
+
+    <div class="left-panel">
+        <h1>Welcome</h1>
+        <p>
+            CareeUP에 로그인하고<br>
+            선배와 후배를 연결하는<br>
+            커리어 네트워크를 시작하세요.
+        </p>
+    </div>
+
+    <div class="right-panel">
+
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="로고">
+            <h2>CareeUP</h2>
+        </div>
+
+        <form onsubmit="return checkLogin()">
+            <div class="input-group">
+                <label>아이디</label>
+                <input type="text" id="user-id" placeholder="아이디를 입력하세요">
+            </div>
+
+            <div class="input-group">
+                <label>비밀번호</label>
+                <input type="password" id="password" placeholder="비밀번호를 입력하세요">
+            </div>
+
+            <button class="login-btn" type="submit">로그인</button>
+        </form>
+
+        <div class="links">
+            <a href="../html/signin.html">회원가입</a>
+            <a href="../html/findPassword.html">비밀번호 찾기</a>
+        </div>
+
+    </div>
+
+</div>
+
+<!-- js랑 연결 -->
+<script src="../javascript/login.js"></script>
+
+</body>
+</html>
+

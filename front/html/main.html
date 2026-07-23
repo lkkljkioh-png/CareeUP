@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareeUP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <img src="../images/careeup_logo.png" alt="CareeUP 로고" onclick="window.location.href='main.html'">
+      <span onclick="window.location.href='main.html'">CareeUP</span>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="main.html" class="active">MAIN</a></li>
+        <li><a href="profileList.html">SEARCH</a></li>
+        <li><a href="qa.html">Q&A</a></li>
+        <li><a onclick="goProfile()">PROFILE</a></li>
+        <li><a onclick="goMyPage()">MY</a></li>
+        <li><a href="login.html">LOGIN</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="container">
+
+    <div class="left-section">
+      <span class="tag">CAREER NETWORK</span>
+      <h2>Connect<br>your <span>career</span><br>journey.</h2>
+      <p>선배와 후배를 잇는 커리어 네트워크.<br>경험을 나누고, 함께 성장하세요.</p>
+    </div>
+
+    <div class="right-section">
+      <div onclick="window.location.href='graduateProfile.html'" class="card grad">
+        <i class="ti ti-arrow-up-right card-arrow"></i>
+        <div class="card-icon"><i class="ti ti-award"></i></div>
+        <h3>졸업생으로 시작하기</h3>
+        <p>나의 경험으로 후배를 이끌어주세요</p>
+      </div>
+      <div onclick="window.location.href='studentProfile.html'" class="card stu">
+        <i class="ti ti-arrow-up-right card-arrow"></i>
+        <div class="card-icon"><i class="ti ti-school"></i></div>
+        <h3>재학생으로 시작하기</h3>
+        <p>선배들의 커리어 인사이트를 만나보세요</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript -->
+  <script src="../javascript/common.js"></script>
+
+</body>
+
+</html>
