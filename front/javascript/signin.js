@@ -1,4 +1,10 @@
-async function checkForm() {
+console.log("signin.js 로드됨");
+
+async function checkForm(event) {
+
+    event.preventDefault();
+
+    console.log("checkForm 실행");
 
     // 입력값 가져오기
     const userId = document.getElementById("user-id").value.trim();
@@ -9,8 +15,6 @@ async function checkForm() {
     const membershipType = document.getElementById("membership-type");
     const male = document.getElementById("male");
     const female = document.getElementById("female");
-
-    console.log("checkForm 실행");
 
     // ===== 입력 검사 =====
 
@@ -112,3 +116,5 @@ async function checkForm() {
 
     return false;
 }
+
+document.getElementById("signup-form").addEventListener("submit", checkForm);

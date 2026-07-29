@@ -1,1 +1,1 @@
-const API_BASE_URL = "https://upgraded-barnacle-pjxgw6wp766q2r4gv-8080.app.github.dev";
+const API_BASE_URL = "http://localhost:8080";
