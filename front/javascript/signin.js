@@ -58,22 +58,25 @@ async function checkForm() {
     try {
 
         console.log("fetch 시작");
+        console.log("API 주소:", API_BASE_URL);
 
-        const response = await fetch("http://localhost:8080/api/users/signup", {
-
-            method: "POST",
-
-            headers: {
-                "Content-Type": "application/json"
-            },
-
-            body: JSON.stringify({
-                email: email,
-                password: password,
-                name: name
-            })
-
-        });
+        const response = await fetch(
+            `${API_BASE_URL}/api/users/signup`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    email: email,
+                    password: password,
+                    name: name,
+                    membershipType: membershipType.value,
+                    gender: male.checked ? "male" : "female"
+                })
+            }
+        );
 
         console.log("응답 받음");
         console.log(response);
@@ -88,16 +91,17 @@ async function checkForm() {
 
         console.log("응답 데이터", result);
 
-        if (result.success) {
+        if (response.ok && result && result.success) {
 
-            alert(result.message);
+            alert("회원가입이 완료되었습니다.");
 
             window.location.href = "../html/login.html";
 
         } else {
 
-            alert(result.message);
-
+            alert(
+                result?.message || "회원가입에 실패했습니다."
+            );
         }
 
     } catch (e) {

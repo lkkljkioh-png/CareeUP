@@ -21,16 +21,19 @@ async function checkLogin() {
 
     try {
 
-        const response = await fetch("http://localhost:8080/api/users/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                userId: userId,
-                password: password
-            })
-        });
+        const response = await fetch(
+            `${API_BASE_URL}/api/users/login`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    userId: userId,
+                    password: password
+                })
+            }
+        );
 
         const result = await response.json();
 
@@ -42,6 +45,10 @@ async function checkLogin() {
             // 사용자 정보 저장(필요하면)
             localStorage.setItem("userId", userId);
             localStorage.setItem("name", result.data.name);
+            localStorage.setItem("email", result.data.email);
+
+            // 회원 유형 저장
+            localStorage.setItem("membershipType", result.data.membershipType);
 
             alert("로그인 성공!");
 
