@@ -56,7 +56,7 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다.");  // 이메일 또는 비밀번호로 되어 있어 문구 수정
+            throw new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."); // 이메일 또는 비밀번호로 되어 있어 문구 수정
         }
         String token = jwtProvider.createToken(user.getEmail());
 
@@ -79,4 +79,27 @@ public class UserService {
                 user.getMembershipType());
     }
 
+    // 이메일 & 아이디 확인
+    public boolean checkUser(String userId, String email) {
+
+        return userRepository.findByUserIdAndEmail(userId, email).isPresent();
+
+    }
+
+    // 비밀번호 재설정
+    public void resetPassword(ResetPasswordRequest request) {
+
+        UserEntity user = userRepository
+                .findByUserIdAndEmail(request.getUserId(), request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
+
+        // 기존 비밀번호와 같은지 확인
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("기존에 사용하던 비밀번호는 사용할 수 없습니다.");
+        }
+
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        userRepository.save(user);
+    }
 }

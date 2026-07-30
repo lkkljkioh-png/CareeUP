@@ -1,8 +1,10 @@
 package com.example.backend.controller;
 
 import com.example.backend.dto.ApiResponse;
+import com.example.backend.dto.EmailRequest;
 import com.example.backend.dto.LoginRequest;
 import com.example.backend.dto.LoginResponse;
+import com.example.backend.dto.ResetPasswordRequest;
 import com.example.backend.dto.SignupRequest;
 import com.example.backend.dto.SignupResponse;
 import com.example.backend.dto.UserResponse;
@@ -59,5 +61,31 @@ public class UserController {
                                 true,
                                 "조회 성공",
                                 response);
+        }
+
+        // 이메일 존재 확인
+        @PostMapping("/check-user")
+        public ApiResponse<Boolean> checkUser(@RequestBody EmailRequest request) {
+
+                boolean exists = userService.checkUser(
+                                request.getUserId(),
+                                request.getEmail());
+
+                return new ApiResponse<>(
+                                true,
+                                exists ? "확인되었습니다." : "일치하는 회원이 없습니다.",
+                                exists);
+        }
+
+        // 비밀번호 변경
+        @PutMapping("/reset-password")
+        public ApiResponse<Void> resetPassword(@RequestBody ResetPasswordRequest request) {
+
+                userService.resetPassword(request);
+
+                return new ApiResponse<>(
+                                true,
+                                "비밀번호가 변경되었습니다.",
+                                null);
         }
 }
