@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id BIGINT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL,
+    gender VARCHAR(255) DEFAULT NULL,
+    membership_type VARCHAR(255) DEFAULT NULL,
+    name VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    user_id VARCHAR(255) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY (email),
+    UNIQUE KEY (user_id)
+);

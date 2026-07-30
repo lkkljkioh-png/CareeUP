@@ -46,6 +46,7 @@ public class UserService {
 
         return new SignupResponse(
                 savedUser.getId(),
+                savedUser.getUserId(),
                 savedUser.getEmail(),
                 savedUser.getName());
     }
@@ -56,7 +57,7 @@ public class UserService {
                 .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다.");  // 이메일 또는 비밀번호로 되어 있어 문구 수정
+            throw new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."); // 이메일 또는 비밀번호로 되어 있어 문구 수정
         }
         String token = jwtProvider.createToken(user.getEmail());
 
@@ -74,6 +75,7 @@ public class UserService {
 
         return new UserResponse(
                 user.getId(),
+                user.getUserId(),
                 user.getEmail(),
                 user.getName(),
                 user.getMembershipType());

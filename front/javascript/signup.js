@@ -1,4 +1,4 @@
-console.log("signin.js 로드됨");
+console.log("signup.js 로드됨");
 
 async function checkForm(event) {
 
