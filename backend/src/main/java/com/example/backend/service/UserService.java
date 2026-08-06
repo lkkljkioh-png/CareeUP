@@ -80,7 +80,13 @@ public class UserService {
                 user.getId(),
                 user.getEmail(),
                 user.getName(),
-                user.getMembershipType());
+                user.getMembershipType(),
+                user.getSchool(),
+                user.getDepartment(),
+                user.getGrade(),
+                user.getDesiredJob(),
+                user.getTechStack(),
+                user.getMessage());
     }
 
     // 아이디 & 이메일 확인
@@ -113,6 +119,38 @@ public class UserService {
 
         // 새 비밀번호 암호화 후 저장
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        userRepository.save(user);
+    }
+
+    public void updateProfile(String email, ProfileUpdateRequest request) {
+
+        UserEntity user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        if (request.getSchool() != null) {
+            user.setSchool(request.getSchool());
+        }
+
+        if (request.getDepartment() != null) {
+            user.setDepartment(request.getDepartment());
+        }
+
+        if (request.getGrade() != null) {
+            user.setGrade(request.getGrade());
+        }
+
+        if (request.getDesiredJob() != null) {
+            user.setDesiredJob(request.getDesiredJob());
+        }
+
+        if (request.getTechStack() != null) {
+            user.setTechStack(request.getTechStack());
+        }
+
+        if (request.getMessage() != null) {
+            user.setMessage(request.getMessage());
+        }
 
         userRepository.save(user);
     }

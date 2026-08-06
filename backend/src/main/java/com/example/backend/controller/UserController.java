@@ -4,6 +4,7 @@ import com.example.backend.dto.ApiResponse;
 import com.example.backend.dto.EmailRequest;
 import com.example.backend.dto.LoginRequest;
 import com.example.backend.dto.LoginResponse;
+import com.example.backend.dto.ProfileUpdateRequest;
 import com.example.backend.dto.ResetPasswordRequest;
 import com.example.backend.dto.SignupRequest;
 import com.example.backend.dto.SignupResponse;
@@ -86,6 +87,20 @@ public class UserController {
                 return new ApiResponse<>(
                                 true,
                                 "비밀번호가 변경되었습니다.",
+                                null);
+        }
+
+        // 프로필 업데이트
+        @PutMapping("/profile")
+        public ApiResponse<Void> updateProfile(
+                        Authentication authentication,
+                        @RequestBody ProfileUpdateRequest request) {
+
+                userService.updateProfile(authentication.getName(), request);
+
+                return new ApiResponse<>(
+                                true,
+                                "프로필이 수정되었습니다.",
                                 null);
         }
 }
