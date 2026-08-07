@@ -1,8 +1,8 @@
 const API = "http://localhost:8080/api/users";
 
-window.addEventListener("DOMContentLoaded", loadMyInfo);
+window.addEventListener("DOMContentLoaded", loadProfile);
 
-async function loadMyInfo() {
+async function loadProfile() {
 
     const token = localStorage.getItem("token");
 
@@ -15,21 +15,26 @@ async function loadMyInfo() {
     try {
 
         const response = await fetch(API + "/me", {
-
             method: "GET",
-
             headers: {
                 "Authorization": "Bearer " + token
             }
-
         });
 
         const result = await response.json();
 
+        console.log(result);
+
         if (result.success) {
 
             document.getElementById("graduate-name").textContent =
-                result.data.name;
+                result.data.name ?? "";
+
+            document.getElementById("graduate-company").textContent =
+                result.data.company ?? "회사 정보 없음";
+
+            document.getElementById("graduate-position").textContent =
+                result.data.position ?? "직무 정보 없음";
 
         } else {
 
@@ -37,11 +42,9 @@ async function loadMyInfo() {
 
         }
 
-    } catch (error) {
+    } catch(error) {
 
         console.error(error);
-        alert("서버와 연결할 수 없습니다.");
 
     }
-
 }

@@ -1,19 +1,31 @@
 window.onload = function () {
 
-    const savedMessage = localStorage.getItem("graduateMessage");
+    fetch("http://localhost:8080/api/users/me", {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
 
-    if (result.success) {
+        console.log(result);
 
-        document.getElementById("graduate-name").textContent =
-            result.data.name;
+        if (result.success) {
 
-        document.getElementById("graduate-message").textContent =
-            result.data.message ?? "";
+            document.getElementById("graduate-name").textContent =
+                result.data.name ?? "";
 
-    } else {
+            document.getElementById("graduate-message").textContent =
+                result.data.message ?? "";
 
-        alert(result.message);
+        } else {
+            alert(result.message);
+        }
 
-    }
+    })
+    .catch(error => {
+        console.error(error);
+    });
 
 };
