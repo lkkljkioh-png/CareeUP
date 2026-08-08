@@ -14,6 +14,9 @@ public class UserResponse {
     private String school;
     private String department;
     private String grade;
+    private String graduationYear;
+    private String company;
+    private String position;
     private String desiredJob;
     private String techStack;
     private String message;

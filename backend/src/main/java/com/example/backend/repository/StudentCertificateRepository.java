@@ -1,0 +1,12 @@
+package com.example.backend.repository;
+
+import com.example.backend.entity.StudentCertificateEntity;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface StudentCertificateRepository
+        extends JpaRepository<StudentCertificateEntity, Long> {
+
+    List<StudentCertificateEntity> findByUserId(Long userId);
+}

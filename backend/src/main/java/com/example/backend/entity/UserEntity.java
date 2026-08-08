@@ -37,6 +37,15 @@ public class UserEntity {
     @Column(name = "grade")
     private String grade;
 
+    @Column(name = "graduation_year")
+    private String graduationYear;
+
+    @Column(name = "company")
+    private String company;
+
+    @Column(name = "position")
+    private String position;
+
     @Column(name = "desired_job")
     private String desiredJob;
 

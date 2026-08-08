@@ -28,7 +28,7 @@ async function loadProfile() {
         if (result.success) {
 
             document.getElementById("graduate-name").textContent =
-                result.data.name ?? "";
+                result.data.name ?? "사용자";
 
             document.getElementById("graduate-company").textContent =
                 result.data.company ?? "회사 정보 없음";

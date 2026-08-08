@@ -70,101 +70,76 @@
                 </table>
             </div>
         </div>
-            <!-- 경력 -->
-            <div class="card">
+        <!-- 경력 -->
+        <div class="card">
 
-                <div class="card-title">
-                    <h3><i class="ti ti-briefcase"></i> 경력</h3>
-                    <button class="add-btn" onclick="addExperience()">
-                        <i class="ti ti-plus"></i> 추가
-                    </button>
-                </div>
-
-                <div id="experience-list">
-                    <div class="list-item">2025년 AWS 입사</div>
-                    <div class="list-item">Cloud Application 개발</div>
-                    <div class="list-item">Spring Boot 기반 백엔드 개발 및 유지보수 수행</div>
-                </div>
-
+            <div class="card-title">
+                <h3><i class="ti ti-briefcase"></i> 경력</h3>
+                <!-- 경력 -->
+                <button class="add-btn" onclick="location.href='graduateExperienceAdd.html'">
+                    <i class="ti ti-plus"></i> 추가
+                </button>
             </div>
 
-            <!-- 자격증 -->
-            <div class="card">
-
-                <div class="card-title">
-                    <h3><i class="ti ti-certificate"></i> 보유 자격증</h3>
-                    <button class="add-btn" onclick="addCertificate()">
-                        <i class="ti ti-plus"></i> 추가
-                    </button>
-                </div>
-
-                <div id="certificate-list">
-                    <div class="list-item">AWS Certified Cloud Practitioner</div>
-                    <div class="list-item">정보처리기사</div>
-                    <div class="list-item">SQLD</div>
-                    <div class="list-item">리눅스마스터 2급</div>
-                </div>
-
-            </div>
-
-            <!-- 대외활동 -->
-            <div class="card">
-
-                <div class="card-title">
-                    <h3><i class="ti ti-world"></i> 대외 활동</h3>
-                    <button class="add-btn" onclick="addActivity()">
-                        <i class="ti ti-plus"></i> 추가
-                    </button>
-                </div>
-
-                <div id="external-activities-list">
-                    <div class="list-item">멋쟁이사자처럼 12기</div>
-                    <div class="list-item">SW 중심대학 프로젝트 참여</div>
-                    <div class="list-item">캡스톤 디자인 우수상</div>
-                </div>
-
-            </div>
-
-            <!-- 포트폴리오 -->
-            <div class="card">
-
-                <div class="card-title">
-                    <h3><i class="ti ti-file-text"></i> 포트폴리오</h3>
-                    <button class="add-btn" onclick="addPortfolio()">
-                        <i class="ti ti-plus"></i> 추가
-                    </button>
-                </div>
-
-                <div id="portfolio-list">
-                    <div class="list-item">멋쟁이사자처럼 12기</div>
-                    <div class="list-item">SW 중심대학 프로젝트 참여</div>
-                    <div class="list-item">캡스톤 디자인 우수상</div>
-                </div>
-
-            </div>
-
-            <!-- 한마디 -->
-
-            <div class="card">
-
-                <div class="card-title">
-                    <h3><i class="ti ti-message"></i> 한마디</h3>
-                    <button class="add-btn" onclick="window.location.href='profileMessageEdit.html'">
-                        <i class="ti ti-edit"></i> 수정
-                    </button>
-                </div>
-
-                <p id="graduate-message">
-                    
-                </p>
-
+            <div id="experience-list">
             </div>
 
         </div>
 
+        <!-- 자격증 -->
+        <div class="card">
+
+            <div class="card-title">
+                <h3><i class="ti ti-certificate"></i> 보유 자격증</h3>
+                <button class="add-btn" onclick="location.href='graduateCertificateAdd.html'">
+                    <i class="ti ti-plus"></i> 추가
+                </button>
+            </div>
+
+            <div id="certificate-list">
+            </div>
+
+        </div>
+
+        <!-- 대외활동 -->
+        <div class="card">
+
+            <div class="card-title">
+                <h3><i class="ti ti-world"></i> 대외 활동</h3>
+                <button class="add-btn" onclick="location.href='graduateActivityAdd.html'">
+                    <i class="ti ti-plus"></i> 추가
+                </button>
+            </div>
+
+            <div id="external-activities-list">
+            </div>
+
+        </div>
+
+        <!-- 한마디 -->
+
+        <div class="card">
+
+            <div class="card-title">
+                <h3><i class="ti ti-message"></i> 한마디</h3>
+                <button class="add-btn" onclick="window.location.href='profileMessageEdit.html'">
+                    <i class="ti ti-edit"></i> 수정
+                </button>
+            </div>
+
+            <p id="graduate-message">
+
+            </p>
+
+        </div>
+
+    </div>
+
     <!-- JavaScript -->
     <script src="../javascript/common.js"></script>
     <script src="../javascript/profileMessage.js"></script>
+    <script src="../javascript/graduateProfile.js"></script>
+
 </body>
 
 </html>

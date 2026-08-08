@@ -84,6 +84,9 @@ public class UserService {
                 user.getSchool(),
                 user.getDepartment(),
                 user.getGrade(),
+                user.getGraduationYear(),
+                user.getCompany(),
+                user.getPosition(),
                 user.getDesiredJob(),
                 user.getTechStack(),
                 user.getMessage());
