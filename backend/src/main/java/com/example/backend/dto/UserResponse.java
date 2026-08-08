@@ -7,13 +7,15 @@ import lombok.Getter;
 @AllArgsConstructor
 public class UserResponse {
 
-    private Long id;          // 내부 PK
-
-    private String userId;    // 로그인 아이디
-
+    private Long id;
     private String email;
-
     private String name;
-
     private String membershipType;
+    private String school;
+    private String department;
+    private String grade;
+    private String desiredJob;
+    private String techStack;
+    private String message;
+
 }

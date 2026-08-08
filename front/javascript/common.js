@@ -1,5 +1,5 @@
 function goMyPage() {
-    const role = localStorage.getItem("role");
+    const role = localStorage.getItem("membershipType");
 
     if (role === "student") {
         location.href = "../html/studentMy.html";
@@ -9,7 +9,7 @@ function goMyPage() {
 }
 
 function goProfile() {
-    const role = localStorage.getItem("role");
+    const role = localStorage.getItem("membershipType");
 
     if (role === "student") {
         location.href = "../html/studentProfile.html";
@@ -17,3 +17,4 @@ function goProfile() {
         location.href = "../html/graduateProfile.html";
     }
 }
+

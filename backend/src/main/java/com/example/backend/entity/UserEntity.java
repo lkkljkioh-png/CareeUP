@@ -28,7 +28,24 @@ public class UserEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "membership_type", length = 20)
+    @Column(name = "school")
+    private String school;
+
+    @Column(name = "department")
+    private String department;
+
+    @Column(name = "grade")
+    private String grade;
+
+    @Column(name = "desired_job")
+    private String desiredJob;
+
+    @Column(name = "tech_stack")
+    private String techStack;
+
+    @Column(name = "message")
+    private String message;
+
     private String membershipType;
 
     @Column(length = 10)

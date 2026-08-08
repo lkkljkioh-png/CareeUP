@@ -23,6 +23,7 @@ public class UserService {
         this.jwtProvider = jwtProvider;
     }
 
+    // 회원가입
     public SignupResponse register(SignupRequest request) {
 
         if (userRepository.existsByEmail(request.getEmail())) {
@@ -51,14 +52,16 @@ public class UserService {
                 savedUser.getName());
     }
 
+    // 로그인
     public LoginResponse login(LoginRequest request) {
 
         UserEntity user = userRepository.findByUserId(request.getUserId())
                 .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."));
 
         if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."); // 이메일 또는 비밀번호로 되어 있어 문구 수정
+            throw new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다.");
         }
+
         String token = jwtProvider.createToken(user.getEmail());
 
         return new LoginResponse(
@@ -68,6 +71,7 @@ public class UserService {
                 user.getMembershipType());
     }
 
+    // 내 정보 조회
     public UserResponse getMyInfo(String email) {
 
         UserEntity user = userRepository.findByEmail(email)
@@ -78,7 +82,78 @@ public class UserService {
                 user.getUserId(),
                 user.getEmail(),
                 user.getName(),
-                user.getMembershipType());
+                user.getMembershipType(),
+                user.getSchool(),
+                user.getDepartment(),
+                user.getGrade(),
+                user.getDesiredJob(),
+                user.getTechStack(),
+                user.getMessage());
     }
 
+    // 아이디 & 이메일 확인
+    public boolean checkUser(String userId, String email) {
+
+        return userRepository.findByUserIdAndEmail(userId, email).isPresent();
+
+    }
+
+    // 비밀번호 재설정
+    public void resetPassword(ResetPasswordRequest request) {
+
+        // 입력값 검사
+        if (request.getPassword() == null || request.getPassword().isBlank()) {
+            throw new IllegalArgumentException("새 비밀번호를 입력해주세요.");
+        }
+
+        if (request.getPassword().length() < 8) {
+            throw new IllegalArgumentException("비밀번호는 8자 이상이어야 합니다.");
+        }
+
+        UserEntity user = userRepository
+                .findByUserIdAndEmail(request.getUserId(), request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
+
+        // 기존 비밀번호와 동일한지 확인
+        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("기존에 사용하던 비밀번호는 사용할 수 없습니다.");
+        }
+
+        // 새 비밀번호 암호화 후 저장
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        userRepository.save(user);
+    }
+
+    public void updateProfile(String email, ProfileUpdateRequest request) {
+
+        UserEntity user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        if (request.getSchool() != null) {
+            user.setSchool(request.getSchool());
+        }
+
+        if (request.getDepartment() != null) {
+            user.setDepartment(request.getDepartment());
+        }
+
+        if (request.getGrade() != null) {
+            user.setGrade(request.getGrade());
+        }
+
+        if (request.getDesiredJob() != null) {
+            user.setDesiredJob(request.getDesiredJob());
+        }
+
+        if (request.getTechStack() != null) {
+            user.setTechStack(request.getTechStack());
+        }
+
+        if (request.getMessage() != null) {
+            user.setMessage(request.getMessage());
+        }
+
+        userRepository.save(user);
+    }
 }

@@ -1,10 +1,31 @@
-// 한마디 불러오기 (DB 연결 후 localStorage 대신 DB에서 불러오도록 변경 필요)
 window.onload = function () {
 
-    const savedMessage = localStorage.getItem("graduateMessage");
+    fetch("http://localhost:8080/api/users/me", {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    })
+    .then(response => response.json())
+    .then(result => {
 
-    if (savedMessage) {
-        document.getElementById("graduate-message").innerText = savedMessage;
-    }
+        console.log(result);
+
+        if (result.success) {
+
+            document.getElementById("graduate-name").textContent =
+                result.data.name ?? "";
+
+            document.getElementById("graduate-message").textContent =
+                result.data.message ?? "";
+
+        } else {
+            alert(result.message);
+        }
+
+    })
+    .catch(error => {
+        console.error(error);
+    });
 
 };
