@@ -19,7 +19,7 @@ public class UserEntity {
     @Column(nullable = false, unique = true)
     private String email;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "user_id", nullable = false, unique = true)
     private String userId;
 
     @Column(nullable = false)
@@ -48,5 +48,6 @@ public class UserEntity {
 
     private String membershipType;
 
+    @Column(length = 10)
     private String gender;
 }

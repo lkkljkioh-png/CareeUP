@@ -47,6 +47,7 @@ public class UserService {
 
         return new SignupResponse(
                 savedUser.getId(),
+                savedUser.getUserId(),
                 savedUser.getEmail(),
                 savedUser.getName());
     }
@@ -78,6 +79,7 @@ public class UserService {
 
         return new UserResponse(
                 user.getId(),
+                user.getUserId(),
                 user.getEmail(),
                 user.getName(),
                 user.getMembershipType(),
