@@ -39,16 +39,18 @@ public class SecurityConfig {
 
                                 .authorizeHttpRequests(auth -> auth
 
-                                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
+                                                // 기존 회원가입 / 로그인
                                                 .requestMatchers(
-                                                                "/api/users/signup",
                                                                 "/api/users/login",
+                                                                "/api/users/signup",
                                                                 "/api/users/check-user",
-                                                                "/api/users/reset-password"
-                                                        )
+                                                                "/api/users/reset-password")
                                                 .permitAll()
 
+                                                // Q&A 조회는 누구나 가능
+                                                .requestMatchers(HttpMethod.GET, "/api/questions/**").permitAll()
+
+                                                // 나머지는 로그인 필요
                                                 .anyRequest().authenticated())
 
                                 .addFilterBefore(
