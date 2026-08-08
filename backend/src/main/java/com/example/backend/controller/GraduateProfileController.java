@@ -28,19 +28,15 @@ public class GraduateProfileController {
     public ApiResponse<Map<String, Object>> getGraduateProfile(
             Authentication authentication) {
 
-        UserEntity user =
-                graduateProfileService.getUser(authentication.getName());
+        UserEntity user = graduateProfileService.getUser(authentication.getName());
 
         Long userId = user.getId();
 
-        List<GraduateExperienceEntity> experiences =
-                graduateProfileService.getExperiences(userId);
+        List<GraduateExperienceEntity> experiences = graduateProfileService.getExperiences(userId);
 
-        List<GraduateCertificateEntity> certificates =
-                graduateProfileService.getCertificates(userId);
+        List<GraduateCertificateEntity> certificates = graduateProfileService.getCertificates(userId);
 
-        List<GraduateActivityEntity> activities =
-                graduateProfileService.getActivities(userId);
+        List<GraduateActivityEntity> activities = graduateProfileService.getActivities(userId);
 
         Map<String, Object> data = new HashMap<>();
 
@@ -51,7 +47,116 @@ public class GraduateProfileController {
         return new ApiResponse<>(
                 true,
                 "졸업생 프로필 조회 성공",
-                data
-        );
+                data);
+    }
+
+    // 추가 API
+    @PostMapping("/experiences")
+    public ApiResponse<Void> addExperience(
+            Authentication authentication,
+            @RequestBody Map<String, String> request) {
+
+        UserEntity user = graduateProfileService.getUser(authentication.getName());
+
+        String experienceName = request.get("experienceName");
+
+        graduateProfileService.addExperience(
+                user.getId(),
+                experienceName);
+
+        return new ApiResponse<>(
+                true,
+                "경력이 추가되었습니다.",
+                null);
+    }
+
+    @PostMapping("/certificates")
+    public ApiResponse<Void> addCertificate(
+            Authentication authentication,
+            @RequestBody Map<String, String> request) {
+
+        UserEntity user = graduateProfileService.getUser(authentication.getName());
+
+        String certificateName = request.get("certificateName");
+
+        graduateProfileService.addCertificate(
+                user.getId(),
+                certificateName);
+
+        return new ApiResponse<>(
+                true,
+                "자격증이 추가되었습니다.",
+                null);
+    }
+
+    @PostMapping("/activities")
+    public ApiResponse<Void> addActivity(
+            Authentication authentication,
+            @RequestBody Map<String, String> request) {
+
+        UserEntity user = graduateProfileService.getUser(authentication.getName());
+
+        String activityName = request.get("activityName");
+
+        graduateProfileService.addActivity(
+                user.getId(),
+                activityName);
+
+        return new ApiResponse<>(
+                true,
+                "대외활동이 추가되었습니다.",
+                null);
+    }
+
+    // 삭제 API
+    @DeleteMapping("/experiences/{experienceId}")
+    public ApiResponse<Void> deleteExperience(
+            Authentication authentication,
+            @PathVariable("experienceId") Long experienceId) {
+
+        UserEntity user = graduateProfileService.getUser(authentication.getName());
+
+        graduateProfileService.deleteExperience(
+                user.getId(),
+                experienceId);
+
+        return new ApiResponse<>(
+                true,
+                "경력이 삭제되었습니다.",
+                null);
+    }
+
+    @DeleteMapping("/certificates/{certificateId}")
+    public ApiResponse<Void> deleteCertificate(
+            Authentication authentication,
+            @PathVariable("certificateId") Long certificateId) {
+
+        UserEntity user = graduateProfileService.getUser(authentication.getName());
+
+        graduateProfileService.deleteCertificate(
+                user.getId(),
+                certificateId);
+
+        return new ApiResponse<>(
+                true,
+                "자격증이 삭제되었습니다.",
+                null);
+    }
+
+    @DeleteMapping("/activities/{activityId}")
+    public ApiResponse<Void> deleteActivity(
+            Authentication authentication,
+            @PathVariable("activityId") Long activityId) {
+
+        UserEntity user = graduateProfileService.getUser(authentication.getName());
+
+        graduateProfileService.deleteActivity(
+                user.getId(),
+                activityId);
+
+        return new ApiResponse<>(
+                true,
+                "대외활동이 삭제되었습니다.",
+                null);
     }
 }
