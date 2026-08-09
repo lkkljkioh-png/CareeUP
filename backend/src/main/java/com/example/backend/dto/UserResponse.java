@@ -11,14 +11,17 @@ public class UserResponse {
     private String email;
     private String name;
     private String membershipType;
+    private String gender;
+
     private String school;
     private String department;
     private String grade;
+
     private String graduationYear;
     private String company;
     private String position;
+
     private String desiredJob;
     private String techStack;
     private String message;
-
 }

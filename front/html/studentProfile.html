@@ -29,7 +29,7 @@
                 <li><a href="qa.html">Q&A</a></li>
                 <li><a onclick="goProfile()" class="active">PROFILE</a></li>
                 <li><a onclick="goMyPage()">MY</a></li>
-                <li><a href="login.html">LOGIN</a></li>
+                <li><a href="login.html" id="login-menu">LOGIN</a></li>
             </ul>
         </nav>
 
@@ -47,7 +47,14 @@
 
             <div class="profile-info">
 
-                <h2 id="student-name"></h2>
+                <div class="profile-header">
+                    <h2 id="student-name"></h2>
+
+                    <button class="profile-edit-btn" onclick="location.href='profileEdit.html'">
+                        <i class="ti ti-edit"></i>
+                        프로필 수정
+                    </button>
+                </div>
 
                 <table>
 

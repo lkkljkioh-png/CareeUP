@@ -92,15 +92,17 @@ public class UserController {
 
         // 프로필 업데이트
         @PutMapping("/profile")
-        public ApiResponse<Void> updateProfile(
+        public ApiResponse<UserResponse> updateProfile(
                         Authentication authentication,
                         @RequestBody ProfileUpdateRequest request) {
 
-                userService.updateProfile(authentication.getName(), request);
+                String email = authentication.getName();
+
+                UserResponse response = userService.updateProfile(email, request);
 
                 return new ApiResponse<>(
                                 true,
                                 "프로필이 수정되었습니다.",
-                                null);
+                                response);
         }
 }

@@ -236,3 +236,48 @@ nav .active {
 .delete-btn i {
     font-size: 17px;
 }
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.profile-header h2 {
+    margin: 0;
+}
+
+.profile-edit-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 9px 15px;
+
+    border: 1px solid #185FA5;
+    border-radius: 8px;
+
+    background-color: #ffffff;
+    color: #185FA5;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.profile-edit-btn i {
+    font-size: 16px;
+}
+
+.profile-edit-btn:hover {
+    background-color: #185FA5;
+    color: #ffffff;
+}
+
+.profile-edit-btn:active {
+    transform: scale(0.97);
+}

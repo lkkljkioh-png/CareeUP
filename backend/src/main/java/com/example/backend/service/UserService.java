@@ -81,6 +81,7 @@ public class UserService {
                 user.getEmail(),
                 user.getName(),
                 user.getMembershipType(),
+                user.getGender(),
                 user.getSchool(),
                 user.getDepartment(),
                 user.getGrade(),
@@ -126,7 +127,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void updateProfile(String email, ProfileUpdateRequest request) {
+    public UserResponse updateProfile(String email, ProfileUpdateRequest request) {
 
         UserEntity user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
@@ -143,6 +144,18 @@ public class UserService {
             user.setGrade(request.getGrade());
         }
 
+        if (request.getGraduationYear() != null) {
+            user.setGraduationYear(request.getGraduationYear());
+        }
+
+        if (request.getCompany() != null) {
+            user.setCompany(request.getCompany());
+        }
+
+        if (request.getPosition() != null) {
+            user.setPosition(request.getPosition());
+        }
+
         if (request.getDesiredJob() != null) {
             user.setDesiredJob(request.getDesiredJob());
         }
@@ -155,6 +168,22 @@ public class UserService {
             user.setMessage(request.getMessage());
         }
 
-        userRepository.save(user);
+        UserEntity savedUser = userRepository.save(user);
+
+        return new UserResponse(
+                savedUser.getId(),
+                savedUser.getEmail(),
+                savedUser.getName(),
+                savedUser.getMembershipType(),
+                savedUser.getGender(),
+                savedUser.getSchool(),
+                savedUser.getDepartment(),
+                savedUser.getGrade(),
+                savedUser.getGraduationYear(),
+                savedUser.getCompany(),
+                savedUser.getPosition(),
+                savedUser.getDesiredJob(),
+                savedUser.getTechStack(),
+                savedUser.getMessage());
     }
 }

@@ -7,16 +7,21 @@ import lombok.Setter;
 @Setter
 public class ProfileUpdateRequest {
 
-    // 수정 전용 (이름, 아이디 등 기본 정보 입력X)
-    private String school;
+    // 수정 전용 (아이디, 이름 등 기본 정보X)
 
+    private String school;
     private String department;
 
+    // 재학생
     private String grade;
-
     private String desiredJob;
 
-    private String techStack;
+    // 졸업생
+    private String graduationYear;
+    private String company;
+    private String position;
 
+    // 공통
+    private String techStack;
     private String message;
 }
