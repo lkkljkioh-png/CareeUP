@@ -39,24 +39,58 @@
     </div>
 
     <div class="right-section">
-      <div onclick="window.location.href='graduateProfile.html'" class="card grad">
-        <i class="ti ti-arrow-up-right card-arrow"></i>
-        <div class="card-icon"><i class="ti ti-award"></i></div>
-        <h3>졸업생으로 시작하기</h3>
-        <p>나의 경험으로 후배를 이끌어주세요</p>
+
+      <div class="start-card">
+
+        <div class="start-icon">
+          <i class="ti ti-route"></i>
+        </div>
+
+        <span class="start-label">START YOUR JOURNEY</span>
+
+        <h3>당신의 커리어를<br>CareeUP과 함께하세요.</h3>
+
+        <p class="start-description">
+          재학생은 선배들의 경험을 탐색하고,<br>
+          졸업생은 자신의 커리어를 공유할 수 있어요.
+        </p>
+
+        <div class="feature-list">
+
+          <a href="profileList.html" class="feature">
+            <i class="ti ti-search"></i>
+            <span>졸업생 커리어 탐색</span>
+            <i class="ti ti-chevron-right feature-arrow"></i>
+          </a>
+
+          <a href="qa.html" class="feature">
+            <i class="ti ti-message-circle-question"></i>
+            <span>선후배 Q&A</span>
+            <i class="ti ti-chevron-right feature-arrow"></i>
+          </a>
+
+          <a href="#" class="feature" onclick="goProfile(); return false;">
+            <i class="ti ti-user-check"></i>
+            <span>나만의 프로필 관리</span>
+            <i class="ti ti-chevron-right feature-arrow"></i>
+          </a>
+
+        </div>
+
+        <button type="button" id="start-button" class="start-button" onclick="startCareeUP()">
+          CareeUP 시작하기
+          <i class="ti ti-arrow-right"></i>
+        </button>
+
       </div>
-      <div onclick="window.location.href='studentProfile.html'" class="card stu">
-        <i class="ti ti-arrow-up-right card-arrow"></i>
-        <div class="card-icon"><i class="ti ti-school"></i></div>
-        <h3>재학생으로 시작하기</h3>
-        <p>선배들의 커리어 인사이트를 만나보세요</p>
-      </div>
+
     </div>
 
   </div>
 
   <!-- JavaScript -->
   <script src="../javascript/common.js"></script>
+  <script src="../javascript/main.js"></script>
 
 </body>
 

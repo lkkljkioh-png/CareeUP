@@ -29,7 +29,7 @@
                 <li><a href="qa.html">Q&A</a></li>
                 <li><a onclick="goProfile()">PROFILE</a></li>
                 <li><a onclick="goMyPage()" class="active">MY</a></li>
-               <li><a href="login.html" id="login-menu">LOGIN</a></li>
+                <li><a href="login.html" id="login-menu">LOGIN</a></li>
             </ul>
         </nav>
 
@@ -102,10 +102,18 @@
 
                 <div class="menu">
                     <div class="menu-left">
+                        <i class="ti ti-folder"></i>
+                        <span>프로젝트</span>
+                    </div>
+                    <div class="count" id="project-count">0</div>
+                </div>
+
+                <div class="menu">
+                    <div class="menu-left">
                         <i class="ti ti-certificate"></i>
                         <span>보유 자격증</span>
                     </div>
-                    <div class="count" id="certificate-count">4</div>
+                    <div class="count" id="certificate-count">0</div>
                 </div>
 
                 <div class="menu">
@@ -113,16 +121,9 @@
                         <i class="ti ti-world"></i>
                         <span>대외 활동</span>
                     </div>
-                    <div class="count" id="external-activities-count">2</div>
+                    <div class="count" id="external-activities-count">0</div>
                 </div>
 
-                <div class="menu">
-                    <div class="menu-left">
-                        <i class="ti ti-briefcase"></i>
-                        <span>경력</span>
-                    </div>
-                    <div class="count" id="experience-count">0</div>
-                </div>
 
                 <button class="btn" onclick="window.location.href='studentProfile.html'">
                     프로필 완성하러 가기

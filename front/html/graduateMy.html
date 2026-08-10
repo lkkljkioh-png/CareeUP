@@ -30,6 +30,7 @@
                 <li><a onclick="goProfile()">PROFILE</a></li>
                 <li><a onclick="goMyPage()" class="active">MY</a></li>
                 <li><a href="login.html" id="login-menu">LOGIN</a></li>
+            </ul>
         </nav>
 
     </header>
@@ -64,10 +65,18 @@
 
                 <div class="menu">
                     <div class="menu-left">
+                        <i class="ti ti-briefcase"></i>
+                        <span>경력</span>
+                    </div>
+                    <div class="count" id="experience-count">0</div>
+                </div>
+
+                <div class="menu">
+                    <div class="menu-left">
                         <i class="ti ti-certificate"></i>
                         <span>보유 자격증</span>
                     </div>
-                    <div class="count" id="certificate-count">4</div>
+                    <div class="count" id="certificate-count">0</div>
                 </div>
 
                 <div class="menu">
@@ -75,15 +84,7 @@
                         <i class="ti ti-world"></i>
                         <span>대외 활동</span>
                     </div>
-                    <div class="count" id="external-activities-count">2</div>
-                </div>
-
-                <div class="menu">
-                    <div class="menu-left">
-                        <i class="ti ti-briefcase"></i>
-                        <span>경력</span>
-                    </div>
-                    <div class="count" id="experience-count">5</div>
+                    <div class="count" id="external-activities-count">0</div>
                 </div>
 
                 <button class="btn" onclick="goProfile()">

@@ -108,70 +108,195 @@
     }
 
     .right-section {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
       width: 500px;
       flex-shrink: 0;
     }
 
-    .card {
+    .start-card {
+      position: relative;
+      overflow: hidden;
       background: #fff;
       border: 1px solid #e8e8e6;
-      border-radius: 16px;
-      padding: 28px 30px;
-      cursor: pointer;
-      transition: border-color 0.2s, transform 0.2s;
+      border-radius: 22px;
+      padding: 42px;
+      box-shadow: 0 18px 45px rgba(24, 95, 165, 0.08);
+    }
+
+    .start-card::before {
+      content: "";
+      position: absolute;
+      top: -90px;
+      right: -90px;
+      width: 220px;
+      height: 220px;
+      background: #E6F1FB;
+      border-radius: 50%;
+    }
+
+    .start-icon {
       position: relative;
-    }
-
-    .card:hover {
-      border-color: #185FA5;
-      transform: translateY(-3px);
-    }
-
-    .card-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
+      z-index: 1;
+      width: 56px;
+      height: 56px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      margin-bottom: 16px;
-    }
-
-    .card.grad .card-icon {
       background: #E6F1FB;
       color: #185FA5;
+      border-radius: 15px;
+      font-size: 28px;
+      margin-bottom: 24px;
     }
 
-    .card.stu .card-icon {
-      background: #EAF3DE;
-      color: #3B6D11;
-    }
-
-    .card h3 {
-      font-size: 18px;
-      font-weight: 500;
-      color: #111;
-      margin-bottom: 6px;
-    }
-
-    .card p {
-      font-size: 14px;
-      color: #aaa;
-    }
-
-    .card-arrow {
-      position: absolute;
-      top: 26px;
-      right: 26px;
-      font-size: 22px;
-      color: #ccc;
-      transition: color 0.2s;
-    }
-
-    .card:hover .card-arrow {
+    .start-label {
+      display: block;
       color: #185FA5;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      margin-bottom: 12px;
+    }
+
+    .start-card h3 {
+      color: #111;
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.45;
+      letter-spacing: -0.7px;
+      margin-bottom: 14px;
+    }
+
+    .start-description {
+      color: #888;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .feature-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      padding: 22px 0;
+      margin-bottom: 26px;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      margin: 0 -8px;
+      color: #555;
+      font-size: 14px;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .feature:hover {
+      color: #185FA5;
+      background: #f6f9fc;
+    }
+
+    .feature>i:first-child {
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: #f1f6fb;
+      color: #185FA5;
+      border-radius: 8px;
+      font-size: 17px;
+    }
+
+    .feature-arrow {
+      margin-left: auto;
+      color: #bbb;
+      font-size: 17px;
+      transition: color 0.2s, transform 0.2s;
+    }
+
+    .feature:hover .feature-arrow {
+      color: #185FA5;
+      transform: translateX(3px);
+    }
+
+    .start-button {
+      width: 100%;
+      height: 54px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: none;
+      border-radius: 12px;
+      background: #185FA5;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+
+    .start-button:hover {
+      background: #124d88;
+      transform: translateY(-2px);
+    }
+
+    .start-button i {
+      font-size: 19px;
+      transition: transform 0.2s;
+    }
+
+    .start-button:hover i {
+      transform: translateX(4px);
+    }
+
+    @media (max-width: 1000px) {
+      header {
+        padding: 20px 30px;
+      }
+
+      nav ul {
+        gap: 22px;
+      }
+
+      .container {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 60px 30px;
+        gap: 50px;
+      }
+
+      .left-section h2 {
+        font-size: 64px;
+      }
+
+      .right-section {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 650px) {
+      nav {
+        display: none;
+      }
+
+      .container {
+        padding: 40px 20px;
+      }
+
+      .left-section h2 {
+        font-size: 48px;
+      }
+
+      .start-card {
+        padding: 30px 24px;
+      }
     }
