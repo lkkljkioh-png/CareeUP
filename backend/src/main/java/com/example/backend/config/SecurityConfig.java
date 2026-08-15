@@ -39,15 +39,24 @@ public class SecurityConfig {
 
                                 .authorizeHttpRequests(auth -> auth
 
-                                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                                                .requestMatchers(
+                                                                "/api/users/login",
+                                                                "/api/users/signup",
+                                                                "/api/users/check-user",
+                                                                "/api/users/reset-password")
+                                                .permitAll()
+
+                                                .requestMatchers(HttpMethod.GET, "/api/users/me").authenticated()
 
                                                 .requestMatchers(
-                                                                "/api/users/signup",
-                                                                "/api/users/login",
-                                                                "/api/users/check-user",
-                                                                "/api/users/reset-password"
-                                                        )
-                                                .permitAll()
+                                                                HttpMethod.GET,
+                                                                "/api/users/graduates/**")
+                                                .authenticated()
+
+                                                .requestMatchers(
+                                                                HttpMethod.PUT,
+                                                                "/api/users/profile")
+                                                .authenticated()
 
                                                 .anyRequest().authenticated())
 

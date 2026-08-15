@@ -108,4 +108,17 @@ public class GraduateProfileService {
 
         return activityRepository.findByUserId(userId);
     }
+
+    // 특정 졸업생인지 확인
+    public UserEntity getGraduateById(Long userId) {
+
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+        if (!"graduate".equals(user.getMembershipType())) {
+            throw new IllegalArgumentException("졸업생이 아닙니다.");
+        }
+
+        return user;
+    }
 }

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareeUP | 졸업생 프로필</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="../css/graduateDetail.css">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+            <img src="../images/careeup_logo.png" alt="logo" onclick="window.location.href='main.html'">
+            <span onclick="window.location.href='main.html'">
+                CareeUP
+            </span>
+        </div>
+
+        <nav>
+            <ul>
+                <li><a href="main.html">MAIN</a></li>
+                <li><a href="profileList.html" class="active">SEARCH</a></li>
+                <li><a href="qa.html">Q&A</a></li>
+                <li><a onclick="goProfile()">PROFILE</a></li>
+                <li><a onclick="goMyPage()">MY</a></li>
+                <li><a href="login.html" id="login-menu">LOGIN</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+
+    <main class="container">
+
+        <section class="profile-card">
+
+            <!-- 상단 프로필 -->
+            <div class="profile-header">
+
+                <div class="avatar"></div>
+
+                <div class="profile-title">
+
+                    <h1 id="graduate-name">
+                        이름
+                    </h1>
+
+                    <p id="graduate-job" class="job">
+                        회사 · 직무
+                    </p>
+
+                    <p id="graduate-message" class="message">
+                        등록된 한마디가 없습니다.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <!-- 기본 정보 -->
+            <div class="profile-section">
+
+                <h2>기본 정보</h2>
+
+                <div class="info-grid">
+
+                    <div class="info-item">
+                        <span class="label">학교</span>
+                        <span id="graduate-school" class="value">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="label">학과</span>
+                        <span id="graduate-department" class="value">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="label">졸업년도</span>
+                        <span id="graduate-year" class="value">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="label">회사</span>
+                        <span id="graduate-company" class="value">-</span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="label">직무</span>
+                        <span id="graduate-position" class="value">-</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+
+            <!-- 기술 스택 -->
+            <div class="profile-section">
+
+                <h2>기술 스택</h2>
+
+                <div class="skill-list" id="graduate-tech-stack">
+                </div>
+
+            </div>
+
+            <div class="divider"></div>
+
+            <!-- 자격증 -->
+            <div class="profile-section">
+
+                <h2>자격증</h2>
+
+                <div id="graduate-certificates" class="spec-list">
+                </div>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+            <!-- 경력 -->
+            <div class="profile-section">
+
+                <h2>경력</h2>
+
+                <div id="graduate-experiences" class="spec-list">
+                </div>
+
+            </div>
+
+
+            <div class="divider"></div>
+
+            <!-- 대외활동 -->
+            <div class="profile-section">
+
+                <h2>대외활동</h2>
+
+                <div id="graduate-activities" class="spec-list">
+                </div>
+
+            </div>
+
+        </section>
+
+
+    </main>
+
+
+    <script src="../javascript/graduateDetail.js"></script>
+    <script src="../javascript/common.js"></script>
+
+</body>
+
+</html>

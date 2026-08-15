@@ -2,6 +2,7 @@ package com.example.backend.controller;
 
 import com.example.backend.dto.ApiResponse;
 import com.example.backend.dto.EmailRequest;
+import com.example.backend.dto.GraduateSearchResponse;
 import com.example.backend.dto.LoginRequest;
 import com.example.backend.dto.LoginResponse;
 import com.example.backend.dto.ProfileUpdateRequest;
@@ -13,6 +14,8 @@ import com.example.backend.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/users")
@@ -104,5 +107,32 @@ public class UserController {
                                 true,
                                 "프로필이 수정되었습니다.",
                                 response);
+        }
+
+        // 졸업생 프로필 전체 조회 + 검색
+        @GetMapping("/graduates")
+        public ApiResponse<List<GraduateSearchResponse>> searchGraduates(
+                        @RequestParam(required = false) String keyword) {
+
+                List<GraduateSearchResponse> graduates = userService.searchGraduates(keyword);
+
+                return new ApiResponse<>(
+                                true,
+                                "졸업생 조회 성공",
+                                graduates);
+        }
+
+        // 졸업생 한 명 특정 조회
+        // 졸업생 상세 조회
+        @GetMapping("/graduates/{id}")
+        public ApiResponse<GraduateSearchResponse> getGraduateById(
+                        @PathVariable Long id) {
+
+                GraduateSearchResponse graduate = userService.getGraduateById(id);
+
+                return new ApiResponse<>(
+                                true,
+                                "졸업생 상세 조회 성공",
+                                graduate);
         }
 }

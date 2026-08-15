@@ -7,6 +7,8 @@ import com.example.backend.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserService {
 
@@ -185,5 +187,55 @@ public class UserService {
                 savedUser.getDesiredJob(),
                 savedUser.getTechStack(),
                 savedUser.getMessage());
+    }
+
+    // 졸업생 프로필 검색
+    public List<GraduateSearchResponse> searchGraduates(String keyword) {
+
+        List<UserEntity> graduates;
+
+        if (keyword == null || keyword.trim().isEmpty()) {
+
+            graduates = userRepository.findByMembershipType("graduate");
+
+        } else {
+
+            graduates = userRepository.searchGraduates(keyword.trim());
+        }
+
+        return graduates.stream()
+                .map(user -> new GraduateSearchResponse(
+                        user.getId(),
+                        user.getName(),
+                        user.getSchool(),
+                        user.getDepartment(),
+                        user.getGraduationYear(),
+                        user.getCompany(),
+                        user.getPosition(),
+                        user.getTechStack(),
+                        user.getMessage()))
+                .toList();
+    }
+
+    // 졸업생 상세 프로필 조회
+    public GraduateSearchResponse getGraduateById(Long id) {
+
+        UserEntity user = userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("졸업생을 찾을 수 없습니다."));
+
+        if (!"graduate".equals(user.getMembershipType())) {
+            throw new IllegalArgumentException("졸업생 프로필이 아닙니다.");
+        }
+
+        return new GraduateSearchResponse(
+                user.getId(),
+                user.getName(),
+                user.getSchool(),
+                user.getDepartment(),
+                user.getGraduationYear(),
+                user.getCompany(),
+                user.getPosition(),
+                user.getTechStack(),
+                user.getMessage());
     }
 }
