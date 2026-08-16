@@ -15,6 +15,7 @@ public class UserResponse {
 
     private String school;
     private String department;
+    private String majorCategory;
     private String grade;
 
     private String graduationYear;

@@ -11,6 +11,7 @@ public class ProfileUpdateRequest {
 
     private String school;
     private String department;
+    private String majorCategory;
 
     // 재학생
     private String grade;

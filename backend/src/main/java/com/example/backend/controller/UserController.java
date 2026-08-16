@@ -109,12 +109,16 @@ public class UserController {
                                 response);
         }
 
-        // 졸업생 프로필 전체 조회 + 검색
+        // 졸업생 전체 조회 및 검색
         @GetMapping("/graduates")
         public ApiResponse<List<GraduateSearchResponse>> searchGraduates(
-                        @RequestParam(required = false) String keyword) {
+                        @RequestParam(name = "keyword", required = false) String keyword,
 
-                List<GraduateSearchResponse> graduates = userService.searchGraduates(keyword);
+                        @RequestParam(name = "majorCategory", required = false) String majorCategory) {
+
+                List<GraduateSearchResponse> graduates = userService.searchGraduates(
+                                keyword,
+                                majorCategory);
 
                 return new ApiResponse<>(
                                 true,
@@ -122,11 +126,10 @@ public class UserController {
                                 graduates);
         }
 
-        // 졸업생 한 명 특정 조회
         // 졸업생 상세 조회
         @GetMapping("/graduates/{id}")
         public ApiResponse<GraduateSearchResponse> getGraduateById(
-                        @PathVariable Long id) {
+                        @PathVariable("id") Long id) {
 
                 GraduateSearchResponse graduate = userService.getGraduateById(id);
 

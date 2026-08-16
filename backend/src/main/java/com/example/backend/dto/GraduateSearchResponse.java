@@ -11,6 +11,7 @@ public class GraduateSearchResponse {
     private String name;
     private String school;
     private String department;
+    private String majorCategory;
     private String graduationYear;
     private String company;
     private String position;

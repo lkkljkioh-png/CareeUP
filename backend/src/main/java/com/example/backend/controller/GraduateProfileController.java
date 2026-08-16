@@ -53,9 +53,8 @@ public class GraduateProfileController {
         // 특정 졸업생 스펙 조회
         @GetMapping("/{userId}")
         public ApiResponse<Map<String, Object>> getGraduateProfileById(
-                        @PathVariable Long userId) {
+                        @PathVariable("userId") Long userId) {
 
-                // 해당 ID가 실제 졸업생인지 확인
                 graduateProfileService.getGraduateById(userId);
 
                 List<GraduateExperienceEntity> experiences = graduateProfileService.getExperiences(userId);

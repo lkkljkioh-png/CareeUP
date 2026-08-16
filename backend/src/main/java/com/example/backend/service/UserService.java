@@ -16,7 +16,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
-    public UserService(UserRepository userRepository,
+    public UserService(
+            UserRepository userRepository,
             PasswordEncoder passwordEncoder,
             JwtProvider jwtProvider) {
 
@@ -56,11 +57,17 @@ public class UserService {
     // 로그인
     public LoginResponse login(LoginRequest request) {
 
-        UserEntity user = userRepository.findByUserId(request.getUserId())
-                .orElseThrow(() -> new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다."));
+        UserEntity user = userRepository
+                .findByUserId(request.getUserId())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "아이디 또는 비밀번호가 올바르지 않습니다."));
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("아이디 또는 비밀번호가 올바르지 않습니다.");
+        if (!passwordEncoder.matches(
+                request.getPassword(),
+                user.getPassword())) {
+
+            throw new IllegalArgumentException(
+                    "아이디 또는 비밀번호가 올바르지 않습니다.");
         }
 
         String token = jwtProvider.createToken(user.getEmail());
@@ -75,8 +82,10 @@ public class UserService {
     // 내 정보 조회
     public UserResponse getMyInfo(String email) {
 
-        UserEntity user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+        UserEntity user = userRepository
+                .findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "사용자를 찾을 수 없습니다."));
 
         return new UserResponse(
                 user.getId(),
@@ -86,6 +95,7 @@ public class UserService {
                 user.getGender(),
                 user.getSchool(),
                 user.getDepartment(),
+                user.getMajorCategory(),
                 user.getGrade(),
                 user.getGraduationYear(),
                 user.getCompany(),
@@ -95,44 +105,63 @@ public class UserService {
                 user.getMessage());
     }
 
-    // 아이디 & 이메일 확인
+    // 아이디와 이메일 확인
+
     public boolean checkUser(String userId, String email) {
 
-        return userRepository.findByUserIdAndEmail(userId, email).isPresent();
-
+        return userRepository
+                .findByUserIdAndEmail(userId, email)
+                .isPresent();
     }
 
     // 비밀번호 재설정
+
     public void resetPassword(ResetPasswordRequest request) {
 
-        // 입력값 검사
-        if (request.getPassword() == null || request.getPassword().isBlank()) {
-            throw new IllegalArgumentException("새 비밀번호를 입력해주세요.");
+        if (request.getPassword() == null
+                || request.getPassword().isBlank()) {
+
+            throw new IllegalArgumentException(
+                    "새 비밀번호를 입력해주세요.");
         }
 
         if (request.getPassword().length() < 8) {
-            throw new IllegalArgumentException("비밀번호는 8자 이상이어야 합니다.");
+            throw new IllegalArgumentException(
+                    "비밀번호는 8자 이상이어야 합니다.");
         }
 
         UserEntity user = userRepository
-                .findByUserIdAndEmail(request.getUserId(), request.getEmail())
-                .orElseThrow(() -> new IllegalArgumentException("회원 정보를 찾을 수 없습니다."));
+                .findByUserIdAndEmail(
+                        request.getUserId(),
+                        request.getEmail())
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "회원 정보를 찾을 수 없습니다."));
 
         // 기존 비밀번호와 동일한지 확인
-        if (passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("기존에 사용하던 비밀번호는 사용할 수 없습니다.");
+        if (passwordEncoder.matches(
+                request.getPassword(),
+                user.getPassword())) {
+
+            throw new IllegalArgumentException(
+                    "기존에 사용하던 비밀번호는 사용할 수 없습니다.");
         }
 
-        // 새 비밀번호 암호화 후 저장
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        user.setPassword(
+                passwordEncoder.encode(request.getPassword()));
 
         userRepository.save(user);
     }
 
-    public UserResponse updateProfile(String email, ProfileUpdateRequest request) {
+    // 프로필 수정
 
-        UserEntity user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+    public UserResponse updateProfile(
+            String email,
+            ProfileUpdateRequest request) {
+
+        UserEntity user = userRepository
+                .findByEmail(email)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "사용자를 찾을 수 없습니다."));
 
         if (request.getSchool() != null) {
             user.setSchool(request.getSchool());
@@ -140,6 +169,11 @@ public class UserService {
 
         if (request.getDepartment() != null) {
             user.setDepartment(request.getDepartment());
+        }
+
+        // 계열 저장
+        if (request.getMajorCategory() != null) {
+            user.setMajorCategory(request.getMajorCategory());
         }
 
         if (request.getGrade() != null) {
@@ -180,6 +214,7 @@ public class UserService {
                 savedUser.getGender(),
                 savedUser.getSchool(),
                 savedUser.getDepartment(),
+                savedUser.getMajorCategory(),
                 savedUser.getGrade(),
                 savedUser.getGraduationYear(),
                 savedUser.getCompany(),
@@ -189,19 +224,23 @@ public class UserService {
                 savedUser.getMessage());
     }
 
-    // 졸업생 프로필 검색
-    public List<GraduateSearchResponse> searchGraduates(String keyword) {
+    // 졸업생 검색 + 계열 필터
 
-        List<UserEntity> graduates;
+    public List<GraduateSearchResponse> searchGraduates(
+            String keyword,
+            String majorCategory) {
 
-        if (keyword == null || keyword.trim().isEmpty()) {
+        String normalizedKeyword = keyword == null || keyword.isBlank()
+                ? null
+                : keyword.trim();
 
-            graduates = userRepository.findByMembershipType("graduate");
+        String normalizedMajorCategory = majorCategory == null || majorCategory.isBlank()
+                ? null
+                : majorCategory.trim();
 
-        } else {
-
-            graduates = userRepository.searchGraduates(keyword.trim());
-        }
+        List<UserEntity> graduates = userRepository.searchGraduates(
+                normalizedKeyword,
+                normalizedMajorCategory);
 
         return graduates.stream()
                 .map(user -> new GraduateSearchResponse(
@@ -209,6 +248,7 @@ public class UserService {
                         user.getName(),
                         user.getSchool(),
                         user.getDepartment(),
+                        user.getMajorCategory(),
                         user.getGraduationYear(),
                         user.getCompany(),
                         user.getPosition(),
@@ -218,13 +258,17 @@ public class UserService {
     }
 
     // 졸업생 상세 프로필 조회
+
     public GraduateSearchResponse getGraduateById(Long id) {
 
-        UserEntity user = userRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("졸업생을 찾을 수 없습니다."));
+        UserEntity user = userRepository
+                .findById(id)
+                .orElseThrow(() -> new IllegalArgumentException(
+                        "졸업생을 찾을 수 없습니다."));
 
         if (!"graduate".equals(user.getMembershipType())) {
-            throw new IllegalArgumentException("졸업생 프로필이 아닙니다.");
+            throw new IllegalArgumentException(
+                    "졸업생 프로필이 아닙니다.");
         }
 
         return new GraduateSearchResponse(
@@ -232,6 +276,7 @@ public class UserService {
                 user.getName(),
                 user.getSchool(),
                 user.getDepartment(),
+                user.getMajorCategory(),
                 user.getGraduationYear(),
                 user.getCompany(),
                 user.getPosition(),

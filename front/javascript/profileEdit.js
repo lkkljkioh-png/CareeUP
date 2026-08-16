@@ -15,9 +15,12 @@ async function loadProfile() {
         return;
     }
 
-    // 재학생 / 졸업생 입력창 구분
-    const studentFields = document.getElementById("student-fields");
-    const graduateFields = document.getElementById("graduate-fields");
+    // 재학생과 졸업생 입력창 구분
+    const studentFields =
+        document.getElementById("student-fields");
+
+    const graduateFields =
+        document.getElementById("graduate-fields");
 
     if (role === "student") {
         studentFields.style.display = "block";
@@ -54,6 +57,9 @@ async function loadProfile() {
         document.getElementById("department").value =
             user.department || "";
 
+        document.getElementById("majorCategory").value =
+            user.majorCategory || "";
+
         document.getElementById("techStack").value =
             user.techStack || "";
 
@@ -84,16 +90,31 @@ async function loadProfile() {
     }
 }
 
-
 async function saveProfile() {
 
     const token = localStorage.getItem("token");
     const role = localStorage.getItem("membershipType");
 
+    const majorCategory =
+        document.getElementById("majorCategory").value;
+
+    if (!majorCategory) {
+        alert("계열을 선택해주세요.");
+        return;
+    }
+
     const data = {
-        school: document.getElementById("school").value.trim(),
-        department: document.getElementById("department").value.trim(),
-        techStack: document.getElementById("techStack").value.trim()
+        school:
+            document.getElementById("school").value.trim(),
+
+        department:
+            document.getElementById("department").value.trim(),
+
+        majorCategory:
+            majorCategory,
+
+        techStack:
+            document.getElementById("techStack").value.trim()
     };
 
     if (role === "student") {
@@ -117,16 +138,15 @@ async function saveProfile() {
     }
 
     console.log("저장 데이터:", data);
+
     try {
 
         const response = await fetch(API + "/profile", {
             method: "PUT",
-
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token
             },
-
             body: JSON.stringify(data)
         });
 
@@ -138,7 +158,6 @@ async function saveProfile() {
         }
 
         alert("프로필이 수정되었습니다.");
-
         goProfile();
 
     } catch (error) {

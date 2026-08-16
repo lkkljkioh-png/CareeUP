@@ -34,6 +34,9 @@ public class UserEntity {
     @Column(name = "department")
     private String department;
 
+    @Column(name = "major_category")
+    private String majorCategory;
+
     @Column(name = "grade")
     private String grade;
 
