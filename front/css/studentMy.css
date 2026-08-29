@@ -209,3 +209,121 @@ nav a.active {
 .menu-btn:active {
     transform: scale(0.96);
 }
+
+.favorite-graduate-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    padding: 18px 0 6px;
+}
+
+.favorite-graduate-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+
+    padding: 17px 18px;
+
+    border: 1px solid #e8e8e6;
+    border-radius: 12px;
+
+    background: #f8f8f6;
+}
+
+.favorite-graduate-info {
+    min-width: 0;
+}
+
+.favorite-graduate-info strong {
+    display: block;
+
+    margin-bottom: 6px;
+
+    font-size: 16px;
+    color: #111;
+}
+
+.favorite-graduate-info p {
+    margin-bottom: 5px;
+
+    font-size: 14px;
+    color: #555;
+}
+
+.favorite-graduate-info span,
+.favorite-empty {
+    font-size: 13px;
+    color: #888;
+}
+
+.favorite-empty {
+    padding: 8px 0;
+}
+
+.favorite-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    flex-shrink: 0;
+}
+
+.favorite-detail-btn,
+.favorite-remove-btn {
+    padding: 9px 12px;
+
+    border-radius: 8px;
+
+    font-size: 13px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.favorite-detail-btn {
+    border: none;
+
+    background: #185FA5;
+    color: #fff;
+}
+
+.favorite-detail-btn:hover {
+    background: #114b84;
+}
+
+.favorite-remove-btn {
+    border: 1px solid #d8d8d5;
+
+    background: #fff;
+    color: #666;
+}
+
+.favorite-remove-btn:hover {
+    border-color: #b8b8b5;
+    color: #222;
+}
+
+.favorite-remove-btn:disabled {
+    cursor: wait;
+    opacity: 0.6;
+}
+
+@media (max-width: 768px) {
+
+    .favorite-graduate-item {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .favorite-actions {
+        width: 100%;
+    }
+
+    .favorite-detail-btn,
+    .favorite-remove-btn {
+        flex: 1;
+    }
+}

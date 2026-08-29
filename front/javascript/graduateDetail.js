@@ -1,9 +1,13 @@
 const API = "http://localhost:8080/api/users";
 const GRADUATE_PROFILE_API = "http://localhost:8080/api/graduate-profile";
+const BOOKMARK_API = "http://localhost:8080/api/bookmarks/graduates";
+
+let isFavoriteGraduate = false;
 
 window.addEventListener("DOMContentLoaded", () => {
     loadGraduateDetail();
     loadGraduateSpecs();
+    initializeFavoriteButton();
 });
 
 // 졸업생 기본 정보 조회
@@ -335,4 +339,208 @@ function renderActivities(activities) {
 
         container.appendChild(item);
     });
+}
+
+// 관심 졸업생 버튼 초기화
+function initializeFavoriteButton() {
+
+    const button =
+        document.getElementById("favorite-button");
+
+    const token =
+        localStorage.getItem("token");
+
+    const membershipType =
+        localStorage.getItem("membershipType");
+
+    console.log("즐겨찾기 버튼:", button);
+    console.log("회원 유형:", membershipType);
+    console.log("토큰 존재:", Boolean(token));
+
+    if (!button) {
+        console.error("favorite-button을 찾을 수 없습니다.");
+        return;
+    }
+
+    if (!token) {
+        button.style.display = "none";
+        return;
+    }
+
+    if (membershipType !== "student") {
+        button.style.display = "none";
+        return;
+    }
+
+    button.style.display = "inline-flex";
+
+    // 클릭 이벤트 연결
+    button.onclick = toggleFavoriteGraduate;
+
+    loadFavoriteStatus();
+}
+
+// 현재 졸업생 ID 가져오기
+function getFavoriteGraduateId() {
+
+    const params =
+        new URLSearchParams(
+            window.location.search
+        );
+
+    return params.get("id");
+}
+
+// 관심 등록 여부 조회
+async function loadFavoriteStatus() {
+
+    const token =
+        localStorage.getItem("token");
+
+    const graduateId =
+        getFavoriteGraduateId();
+
+    if (!graduateId) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(
+            `${BOOKMARK_API}/${graduateId}/status`,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization":
+                        "Bearer " + token
+                }
+            }
+        );
+
+        const result =
+            await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.message
+                || "관심 등록 여부 조회 실패"
+            );
+        }
+
+        isFavoriteGraduate =
+            result.data === true;
+
+        renderFavoriteButton();
+
+    } catch (error) {
+
+        console.error(
+            "관심 등록 여부 조회 오류:",
+            error
+        );
+    }
+}
+
+// 관심 졸업생 등록 또는 해제
+async function toggleFavoriteGraduate() {
+
+    const token =
+        localStorage.getItem("token");
+
+    const graduateId =
+        getFavoriteGraduateId();
+
+    const button =
+        document.getElementById(
+            "favorite-button"
+        );
+
+    if (!graduateId || !button) {
+        return;
+    }
+
+    button.disabled = true;
+
+    try {
+
+        const response = await fetch(
+            `${BOOKMARK_API}/${graduateId}`,
+            {
+                method:
+                    isFavoriteGraduate
+                        ? "DELETE"
+                        : "POST",
+
+                headers: {
+                    "Authorization":
+                        "Bearer " + token
+                }
+            }
+        );
+
+        const result =
+            await response.json();
+
+        if (!response.ok || !result.success) {
+            throw new Error(
+                result.message
+                || "관심 등록 처리 실패"
+            );
+        }
+
+        isFavoriteGraduate =
+            !isFavoriteGraduate;
+
+        renderFavoriteButton();
+
+    } catch (error) {
+
+        console.error(
+            "관심 졸업생 처리 오류:",
+            error
+        );
+
+        alert(error.message);
+
+    } finally {
+
+        button.disabled = false;
+    }
+}
+
+// 버튼 모양 변경
+function renderFavoriteButton() {
+
+    const button =
+        document.getElementById(
+            "favorite-button"
+        );
+
+    if (!button) {
+        return;
+    }
+
+    button.classList.toggle(
+        "active",
+        isFavoriteGraduate
+    );
+
+    button.setAttribute(
+        "aria-pressed",
+        String(isFavoriteGraduate)
+    );
+
+    button
+        .querySelector(".favorite-icon")
+        .textContent =
+        isFavoriteGraduate
+            ? "♥"
+            : "♡";
+
+    button
+        .querySelector(".favorite-text")
+        .textContent =
+        isFavoriteGraduate
+            ? "관심 등록됨"
+            : "관심 등록";
 }

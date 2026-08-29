@@ -58,6 +58,9 @@ public class SecurityConfig {
                                                                 "/api/users/profile")
                                                 .authenticated()
 
+                                                .requestMatchers("/api/bookmarks/**")
+                                                .authenticated()
+
                                                 .anyRequest().authenticated())
 
                                 .addFilterBefore(
