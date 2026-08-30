@@ -4,19 +4,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CareeUP | MY</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link rel="stylesheet" href="../css/graduateMy.css">
 
+    <link rel="stylesheet" href="../css/graduateMy.css">
 </head>
 
 <body>
 
     <header>
-
         <div class="logo">
             <img src="../images/careeup_logo.png" alt="로고" onclick="window.location.href='main.html'">
             <span onclick="window.location.href='main.html'">CareeUP</span>
@@ -32,14 +32,12 @@
                 <li><a href="login.html" id="login-menu">LOGIN</a></li>
             </ul>
         </nav>
-
     </header>
 
-    <div class="container">
+    <main class="container">
 
         <div class="right-section">
 
-            <!-- 프로필 -->
             <div class="profile-card">
 
                 <div class="profile-top">
@@ -58,33 +56,95 @@
 
             </div>
 
-            <!-- 나의 활동 -->
+            <div class="stats-card">
+
+                <div class="section-title">
+                    <div>
+                        <h4>내 프로필 관심 현황</h4>
+                        <p>후배들이 내 프로필에 얼마나 관심을 보이고 있는지 확인해보세요.</p>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            <i class="ti ti-eye"></i>
+                        </div>
+
+                        <div class="stat-content">
+                            <span>프로필 조회</span>
+                            <strong id="profile-view-count">0</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            <i class="ti ti-star"></i>
+                        </div>
+
+                        <div class="stat-content">
+                            <span>즐겨찾기</span>
+                            <strong id="bookmark-count">0</strong>
+                        </div>
+
+                    </div>
+
+                    <div class="stat-item">
+
+                        <div class="stat-icon">
+                            <i class="ti ti-calendar-stats"></i>
+                        </div>
+
+                        <div class="stat-content">
+                            <span>최근 7일 조회</span>
+                            <strong id="weekly-view-count">0</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
             <div class="menu-card">
 
                 <h4>나의 활동</h4>
 
                 <div class="menu">
+
                     <div class="menu-left">
                         <i class="ti ti-briefcase"></i>
                         <span>경력</span>
                     </div>
+
                     <div class="count" id="experience-count">0</div>
+
                 </div>
 
                 <div class="menu">
+
                     <div class="menu-left">
                         <i class="ti ti-certificate"></i>
                         <span>보유 자격증</span>
                     </div>
+
                     <div class="count" id="certificate-count">0</div>
+
                 </div>
 
                 <div class="menu">
+
                     <div class="menu-left">
                         <i class="ti ti-world"></i>
                         <span>대외 활동</span>
                     </div>
+
                     <div class="count" id="external-activities-count">0</div>
+
                 </div>
 
                 <button class="btn" onclick="goProfile()">
@@ -95,11 +155,11 @@
 
         </div>
 
-    </div>
+    </main>
 
-    <!-- JavaScript -->
     <script src="../javascript/common.js"></script>
     <script src="../javascript/graduateMy.js"></script>
+
 </body>
 
 </html>

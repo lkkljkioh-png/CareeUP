@@ -12,8 +12,6 @@ body {
     flex-direction: column;
 }
 
-/* ================= Header ================= */
-
 header {
     display: flex;
     justify-content: space-between;
@@ -29,11 +27,13 @@ header {
     gap: 12px;
     font-size: 22px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .logo img {
     width: 38px;
     height: 38px;
+    object-fit: contain;
 }
 
 nav ul {
@@ -46,7 +46,8 @@ nav a {
     text-decoration: none;
     color: #888;
     font-size: 15px;
-    transition: .2s;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 nav a:hover {
@@ -57,8 +58,6 @@ nav a.active {
     color: #185FA5;
     font-weight: 500;
 }
-
-/* ================= Main ================= */
 
 .container {
     flex: 1;
@@ -73,10 +72,8 @@ nav a.active {
     max-width: 900px;
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 24px;
 }
-
-/* ================= Profile ================= */
 
 .profile-card {
     background: #fff;
@@ -99,6 +96,7 @@ nav a.active {
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-shrink: 0;
     font-size: 42px;
     color: #185FA5;
 }
@@ -106,11 +104,12 @@ nav a.active {
 .profile-info h3 {
     font-size: 28px;
     margin-bottom: 8px;
+    color: #111;
 }
 
 .profile-info p {
     font-size: 17px;
-    color: #666;
+    color: #555;
     margin-bottom: 5px;
 }
 
@@ -119,7 +118,77 @@ nav a.active {
     font-size: 15px;
 }
 
-/* ================= Card ================= */
+.stats-card {
+    background: #fff;
+    border: 1px solid #e8e8e6;
+    border-radius: 16px;
+    padding: 32px 40px 36px;
+}
+
+.section-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.section-title h4 {
+    font-size: 20px;
+    color: #111;
+    margin-bottom: 7px;
+}
+
+.section-title p {
+    font-size: 14px;
+    color: #888;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-height: 105px;
+    padding: 22px;
+    background: #f8fafc;
+    border: 1px solid #edf0f2;
+    border-radius: 12px;
+}
+
+.stat-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    background: #E6F1FB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    color: #185FA5;
+    font-size: 22px;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stat-content span {
+    font-size: 14px;
+    color: #777;
+}
+
+.stat-content strong {
+    font-size: 26px;
+    font-weight: 600;
+    color: #185FA5;
+}
 
 .menu-card {
     background: #fff;
@@ -159,12 +228,15 @@ nav a.active {
 }
 
 .count {
+    min-width: 38px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #f0f6fc;
     color: #185FA5;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
+    text-align: center;
 }
-
-/* ================= Button ================= */
 
 .btn {
     margin-top: 25px;
@@ -175,10 +247,36 @@ nav a.active {
     background: #185FA5;
     color: #fff;
     font-size: 16px;
+    font-weight: 500;
     cursor: pointer;
-    transition: .2s;
+    transition: 0.2s;
 }
 
 .btn:hover {
     background: #114b84;
+}
+
+@media (max-width: 800px) {
+
+    header {
+        padding: 20px 30px;
+    }
+
+    nav ul {
+        gap: 20px;
+    }
+
+    .container {
+        padding: 40px 25px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-card,
+    .stats-card,
+    .menu-card {
+        padding: 28px;
+    }
 }

@@ -1,15 +1,19 @@
 package com.example.backend.service;
 
+import com.example.backend.dto.GraduateProfileStatsResponse;
 import com.example.backend.entity.GraduateActivityEntity;
 import com.example.backend.entity.GraduateCertificateEntity;
 import com.example.backend.entity.GraduateExperienceEntity;
 import com.example.backend.entity.UserEntity;
 import com.example.backend.repository.GraduateActivityRepository;
+import com.example.backend.repository.GraduateBookmarkRepository;
 import com.example.backend.repository.GraduateCertificateRepository;
 import com.example.backend.repository.GraduateExperienceRepository;
+import com.example.backend.repository.GraduateProfileViewRepository;
 import com.example.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,17 +23,23 @@ public class GraduateProfileService {
     private final GraduateExperienceRepository experienceRepository;
     private final GraduateCertificateRepository certificateRepository;
     private final GraduateActivityRepository activityRepository;
+    private final GraduateProfileViewRepository graduateProfileViewRepository;
+    private final GraduateBookmarkRepository graduateBookmarkRepository;
 
     public GraduateProfileService(
             UserRepository userRepository,
             GraduateExperienceRepository experienceRepository,
             GraduateCertificateRepository certificateRepository,
-            GraduateActivityRepository activityRepository) {
+            GraduateActivityRepository activityRepository,
+            GraduateProfileViewRepository graduateProfileViewRepository,
+            GraduateBookmarkRepository graduateBookmarkRepository) {
 
         this.userRepository = userRepository;
         this.experienceRepository = experienceRepository;
         this.certificateRepository = certificateRepository;
         this.activityRepository = activityRepository;
+        this.graduateProfileViewRepository = graduateProfileViewRepository;
+        this.graduateBookmarkRepository = graduateBookmarkRepository;
     }
 
     // 추가
@@ -120,5 +130,25 @@ public class GraduateProfileService {
         }
 
         return user;
+    }
+
+    // 프로필 통계 조회
+    public GraduateProfileStatsResponse getStats(Long userId) {
+
+        long viewCount = graduateProfileViewRepository.countByGraduateId(userId);
+
+        long bookmarkCount = graduateBookmarkRepository.countByGraduateId(userId);
+
+        LocalDateTime sevenDaysAgo = LocalDateTime.now().minusDays(7);
+
+        long weeklyViewCount = graduateProfileViewRepository
+                .countByGraduateIdAndViewedAtAfter(
+                        userId,
+                        sevenDaysAgo);
+
+        return new GraduateProfileStatsResponse(
+                viewCount,
+                bookmarkCount,
+                weeklyViewCount);
     }
 }

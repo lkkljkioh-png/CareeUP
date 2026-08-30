@@ -10,8 +10,11 @@ import com.example.backend.dto.ResetPasswordRequest;
 import com.example.backend.dto.SignupRequest;
 import com.example.backend.dto.SignupResponse;
 import com.example.backend.dto.UserResponse;
+import com.example.backend.service.GraduateProfileViewService;
 import com.example.backend.service.UserService;
+
 import jakarta.validation.Valid;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,9 +25,14 @@ import java.util.List;
 public class UserController {
 
         private final UserService userService;
+        private final GraduateProfileViewService graduateProfileViewService;
 
-        public UserController(UserService userService) {
+        public UserController(
+                        UserService userService,
+                        GraduateProfileViewService graduateProfileViewService) {
+
                 this.userService = userService;
+                this.graduateProfileViewService = graduateProfileViewService;
         }
 
         // 회원가입
@@ -57,7 +65,8 @@ public class UserController {
 
         // 내 정보 조회
         @GetMapping("/me")
-        public ApiResponse<UserResponse> me(Authentication authentication) {
+        public ApiResponse<UserResponse> me(
+                        Authentication authentication) {
 
                 UserResponse response = userService.getMyInfo(authentication.getName());
 
@@ -69,7 +78,8 @@ public class UserController {
 
         // 이메일 존재 확인
         @PostMapping("/check-user")
-        public ApiResponse<Boolean> checkUser(@RequestBody EmailRequest request) {
+        public ApiResponse<Boolean> checkUser(
+                        @RequestBody EmailRequest request) {
 
                 boolean exists = userService.checkUser(
                                 request.getUserId(),
@@ -77,13 +87,16 @@ public class UserController {
 
                 return new ApiResponse<>(
                                 true,
-                                exists ? "확인되었습니다." : "일치하는 회원이 없습니다.",
+                                exists
+                                                ? "확인되었습니다."
+                                                : "일치하는 회원이 없습니다.",
                                 exists);
         }
 
         // 비밀번호 변경
         @PutMapping("/reset-password")
-        public ApiResponse<Void> resetPassword(@RequestBody ResetPasswordRequest request) {
+        public ApiResponse<Void> resetPassword(
+                        @RequestBody ResetPasswordRequest request) {
 
                 userService.resetPassword(request);
 
@@ -113,7 +126,6 @@ public class UserController {
         @GetMapping("/graduates")
         public ApiResponse<List<GraduateSearchResponse>> searchGraduates(
                         @RequestParam(name = "keyword", required = false) String keyword,
-
                         @RequestParam(name = "majorCategory", required = false) String majorCategory) {
 
                 List<GraduateSearchResponse> graduates = userService.searchGraduates(
@@ -129,9 +141,17 @@ public class UserController {
         // 졸업생 상세 조회
         @GetMapping("/graduates/{id}")
         public ApiResponse<GraduateSearchResponse> getGraduateById(
-                        @PathVariable("id") Long id) {
+                        @PathVariable("id") Long id,
+                        Authentication authentication) {
 
                 GraduateSearchResponse graduate = userService.getGraduateById(id);
+
+                UserResponse viewer = userService.getMyInfo(
+                                authentication.getName());
+
+                graduateProfileViewService.addView(
+                                id,
+                                viewer.getId());
 
                 return new ApiResponse<>(
                                 true,

@@ -7,16 +7,18 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GraduateBookmarkRepository
-        extends JpaRepository<GraduateBookmarkEntity, Long> {
+                extends JpaRepository<GraduateBookmarkEntity, Long> {
 
-    List<GraduateBookmarkEntity> findByStudentIdOrderByIdDesc(
-            Long studentId);
+        List<GraduateBookmarkEntity> findByStudentIdOrderByIdDesc(
+                        Long studentId);
 
-    Optional<GraduateBookmarkEntity> findByStudentIdAndGraduateId(
-            Long studentId,
-            Long graduateId);
+        Optional<GraduateBookmarkEntity> findByStudentIdAndGraduateId(
+                        Long studentId,
+                        Long graduateId);
 
-    boolean existsByStudentIdAndGraduateId(
-            Long studentId,
-            Long graduateId);
+        boolean existsByStudentIdAndGraduateId(
+                        Long studentId,
+                        Long graduateId);
+
+        long countByGraduateId(Long graduateId);
 }

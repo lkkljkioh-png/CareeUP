@@ -8,6 +8,7 @@ import com.example.backend.entity.UserEntity;
 import com.example.backend.service.GraduateProfileService;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
+import com.example.backend.dto.GraduateProfileStatsResponse;
 
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +49,21 @@ public class GraduateProfileController {
                                 true,
                                 "졸업생 프로필 조회 성공",
                                 data);
+        }
+
+        // 프로필 통계 조회
+        @GetMapping("/stats")
+        public ApiResponse<GraduateProfileStatsResponse> getStats(
+                        Authentication authentication) {
+
+                UserEntity user = graduateProfileService.getUser(authentication.getName());
+
+                GraduateProfileStatsResponse stats = graduateProfileService.getStats(user.getId());
+
+                return new ApiResponse<>(
+                                true,
+                                "프로필 통계 조회 성공",
+                                stats);
         }
 
         // 특정 졸업생 스펙 조회

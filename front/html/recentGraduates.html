@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CareeUP | 최근 본 졸업생</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+    <link rel="stylesheet" href="../css/recentGraduates.css">
+</head>
+
+<body>
+
+    <header>
+
+        <div class="logo">
+
+            <img src="../images/careeup_logo.png" alt="로고" onclick="window.location.href='main.html'">
+
+            <span onclick="window.location.href='main.html'">
+                CareeUP
+            </span>
+
+        </div>
+
+        <nav>
+
+            <ul>
+
+                <li>
+                    <a href="main.html">
+                        MAIN
+                    </a>
+                </li>
+
+                <li>
+                    <a href="profileList.html">
+                        SEARCH
+                    </a>
+                </li>
+
+                <li>
+                    <a href="qa.html">
+                        Q&A
+                    </a>
+                </li>
+
+                <li>
+                    <a onclick="goProfile()">
+                        PROFILE
+                    </a>
+                </li>
+
+                <li>
+                    <a onclick="goMyPage()" class="active">
+                        MY
+                    </a>
+                </li>
+
+                <li>
+                    <a href="login.html" id="login-menu">
+                        LOGIN
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+    <main class="container">
+
+        <div class="page-header">
+
+            <div>
+
+                <h1>
+                    최근 본 졸업생
+                </h1>
+
+                <p>
+                    최근 확인한 졸업생 프로필을 다시 확인해보세요.
+                </p>
+
+            </div>
+
+            <div class="recent-count">
+
+                총
+
+                <strong id="recent-count">
+                    0
+                </strong>
+
+                명
+
+            </div>
+
+        </div>
+
+        <div id="recent-graduate-list" class="graduate-list">
+        </div>
+
+        <div id="recent-empty" class="recent-empty" style="display: none;">
+
+            <i class="ti ti-history"></i>
+
+            <h3>
+                최근 본 졸업생이 없습니다.
+            </h3>
+
+            <p>
+                졸업생 프로필을 탐색해보세요.
+            </p>
+
+            <button type="button" onclick="location.href='profileList.html'">
+                졸업생 탐색하기
+            </button>
+
+        </div>
+
+    </main>
+
+    <template id="graduate-card-template">
+
+        <div class="graduate-card">
+
+            <div class="graduate-left">
+
+                <div class="graduate-avatar">
+                </div>
+
+                <div class="graduate-info">
+
+                    <h3 class="graduate-name">
+                    </h3>
+
+                    <p class="graduate-job">
+                    </p>
+
+                    <div class="graduate-tags">
+
+                        <span class="graduate-school">
+                        </span>
+
+                        <span class="graduate-department">
+                        </span>
+
+                        <span class="graduate-year">
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="graduate-actions">
+
+                <button type="button" class="detail-button">
+                    자세히 보기
+                </button>
+
+                <button type="button" class="remove-button" title="최근 본 목록에서 삭제">
+
+                    <i class="ti ti-x"></i>
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </template>
+
+    <script src="../javascript/common.js"></script>
+    <script src="../javascript/recentGraduates.js"></script>
+
+</body>
+
+</html>

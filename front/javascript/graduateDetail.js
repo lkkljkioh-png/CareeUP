@@ -1,6 +1,8 @@
 const API = "http://localhost:8080/api/users";
 const GRADUATE_PROFILE_API = "http://localhost:8080/api/graduate-profile";
 const BOOKMARK_API = "http://localhost:8080/api/bookmarks/graduates";
+const RECENT_GRADUATES_KEY = "recentGraduates";
+const RECENT_GRADUATES_MAX = 5;
 
 let isFavoriteGraduate = false;
 
@@ -55,6 +57,8 @@ async function loadGraduateDetail() {
         }
 
         renderGraduate(result.data);
+
+        saveRecentGraduate(result.data);
 
     } catch (error) {
 
@@ -543,4 +547,52 @@ function renderFavoriteButton() {
         isFavoriteGraduate
             ? "관심 등록됨"
             : "관심 등록";
+}
+
+function saveRecentGraduate(graduate) {
+
+    if (!graduate || !graduate.id) {
+        return;
+    }
+
+    const recentGraduate = {
+        id: graduate.id,
+        name: graduate.name ?? "",
+        company: graduate.company ?? "",
+        position: graduate.position ?? "",
+        school: graduate.school ?? "",
+        department: graduate.department ?? "",
+        graduationYear: graduate.graduationYear ?? ""
+    };
+
+    let recentGraduates = [];
+
+    try {
+        const saved = localStorage.getItem(RECENT_GRADUATES_KEY);
+
+        if (saved) {
+            recentGraduates = JSON.parse(saved);
+        }
+    } catch (error) {
+        console.error("최근 본 졸업생 데이터 읽기 실패:", error);
+        recentGraduates = [];
+    }
+
+    // 같은 졸업생이 이미 있으면 제거
+    recentGraduates = recentGraduates.filter(
+        graduateItem => Number(graduateItem.id) !== Number(recentGraduate.id)
+    );
+
+    // 방금 본 졸업생을 맨 앞에 추가
+    recentGraduates.unshift(recentGraduate);
+
+    // 최대 5명까지만 유지
+    recentGraduates = recentGraduates.slice(0, RECENT_GRADUATES_MAX);
+
+    localStorage.setItem(
+        RECENT_GRADUATES_KEY,
+        JSON.stringify(recentGraduates)
+    );
+
+    console.log("최근 본 졸업생 저장:", recentGraduates);
 }

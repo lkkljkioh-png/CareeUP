@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>CareeUP | MY</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <link rel="stylesheet" href="../css/studentMy.css">
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+
+    <link rel="stylesheet" href="../css/studentMy.css">
 </head>
 
 <body>
@@ -19,25 +21,49 @@
 
         <div class="logo">
             <img src="../images/careeup_logo.png" alt="로고" onclick="window.location.href='main.html'">
-            <span onclick="window.location.href='main.html'">CareeUP</span>
+
+            <span onclick="window.location.href='main.html'">
+                CareeUP
+            </span>
         </div>
 
         <nav>
             <ul>
-                <li><a href="main.html">MAIN</a></li>
-                <li><a href="profileList.html">SEARCH</a></li>
-                <li><a href="qa.html">Q&A</a></li>
-                <li><a onclick="goProfile()">PROFILE</a></li>
-                <li><a onclick="goMyPage()" class="active">MY</a></li>
-                <li><a href="login.html" id="login-menu">LOGIN</a></li>
+                <li>
+                    <a href="main.html">MAIN</a>
+                </li>
+
+                <li>
+                    <a href="profileList.html">SEARCH</a>
+                </li>
+
+                <li>
+                    <a href="qa.html">Q&A</a>
+                </li>
+
+                <li>
+                    <a onclick="goProfile()">PROFILE</a>
+                </li>
+
+                <li>
+                    <a onclick="goMyPage()" class="active">MY</a>
+                </li>
+
+                <li>
+                    <a href="login.html" id="login-menu">
+                        LOGIN
+                    </a>
+                </li>
             </ul>
         </nav>
 
     </header>
 
+
     <div class="container">
 
         <div class="right-section">
+
 
             <!-- 프로필 -->
             <div class="profile-card">
@@ -49,84 +75,184 @@
                     </div>
 
                     <div class="profile-info">
+
                         <h3 id="student-name"></h3>
-                        <p id="student-school">학교 정보 없음</p>
-                        <span id="student-department">학과 정보 없음</span>
+
+                        <p id="student-school">
+                            학교 정보 없음
+                        </p>
+
+                        <span id="student-department">
+                            학과 정보 없음
+                        </span>
+
                     </div>
 
                 </div>
 
             </div>
 
-            <!-- 즐겨찾기 -->
+
+            <!-- 즐겨찾기 및 탐색 -->
             <div class="menu-card">
 
                 <h4>즐겨찾기</h4>
 
+
+                <!-- 관심 졸업생 -->
                 <div class="menu">
+
                     <div class="menu-left">
+
                         <i class="ti ti-heart"></i>
-                        <span>관심 졸업생</span>
+
+                        <span>
+                            관심 졸업생
+                        </span>
+
                     </div>
 
                     <div class="count" id="favorite-graduate-count">
                         0
                     </div>
+
                 </div>
 
+
+                <!-- 관심 졸업생 목록 -->
                 <div id="favorite-graduate-list" class="favorite-graduate-list">
+
                     <p class="favorite-empty">
                         관심 등록한 졸업생이 없습니다.
                     </p>
+
                 </div>
 
+
+                <!-- 최근 본 졸업생 -->
                 <div class="menu">
+
                     <div class="menu-left">
-                        <i class="ti ti-message"></i>
-                        <span>내 질문</span>
+
+                        <i class="ti ti-history"></i>
+
+                        <span>
+                            최근 본 졸업생
+                        </span>
+
                     </div>
-                    <button class="menu-btn" onclick="location.href='myQuestions.html'">
+
+                    <div class="menu-right">
+
+                        <div class="count" id="recent-graduate-count">
+                            0
+                        </div>
+
+                        <button type="button" class="menu-btn" onclick="location.href='recentGraduates.html'">
+                            목록 보기
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- 내 질문 -->
+                <div class="menu">
+
+                    <div class="menu-left">
+
+                        <i class="ti ti-message"></i>
+
+                        <span>
+                            내 질문
+                        </span>
+
+                    </div>
+
+                    <button type="button" class="menu-btn" onclick="location.href='myQuestions.html'">
                         목록 보기
                     </button>
+
                 </div>
 
-                <button class="btn" onclick="window.location.href='profileList.html'">
+
+                <!-- 졸업생 탐색 -->
+                <button type="button" class="btn" onclick="window.location.href='profileList.html'">
                     졸업생 프로필 탐색
                 </button>
 
             </div>
+
 
             <!-- 나의 활동 -->
             <div class="menu-card">
 
                 <h4>나의 활동</h4>
 
+
+                <!-- 프로젝트 -->
                 <div class="menu">
+
                     <div class="menu-left">
+
                         <i class="ti ti-folder"></i>
-                        <span>프로젝트</span>
+
+                        <span>
+                            프로젝트
+                        </span>
+
                     </div>
-                    <div class="count" id="project-count">0</div>
+
+                    <div class="count" id="project-count">
+                        0
+                    </div>
+
                 </div>
 
+
+                <!-- 자격증 -->
                 <div class="menu">
+
                     <div class="menu-left">
+
                         <i class="ti ti-certificate"></i>
-                        <span>보유 자격증</span>
+
+                        <span>
+                            보유 자격증
+                        </span>
+
                     </div>
-                    <div class="count" id="certificate-count">0</div>
+
+                    <div class="count" id="certificate-count">
+                        0
+                    </div>
+
                 </div>
 
+
+                <!-- 대외 활동 -->
                 <div class="menu">
+
                     <div class="menu-left">
+
                         <i class="ti ti-world"></i>
-                        <span>대외 활동</span>
+
+                        <span>
+                            대외 활동
+                        </span>
+
                     </div>
-                    <div class="count" id="external-activities-count">0</div>
+
+                    <div class="count" id="external-activities-count">
+                        0
+                    </div>
+
                 </div>
 
 
-                <button class="btn" onclick="window.location.href='studentProfile.html'">
+                <!-- 프로필 관리 -->
+                <button type="button" class="btn" onclick="window.location.href='studentProfile.html'">
                     프로필 완성하러 가기
                 </button>
 
@@ -135,6 +261,7 @@
         </div>
 
     </div>
+
 
     <!-- JavaScript -->
     <script src="../javascript/common.js"></script>

@@ -6,10 +6,12 @@ const PROFILE_API = "http://localhost:8080/api/graduate-profile";
 window.addEventListener("DOMContentLoaded", () => {
     loadProfile();
     loadActivityCounts();
+    loadProfileStats();
 });
 
 // 이름, 회사, 직무 조회
 async function loadProfile() {
+
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -19,6 +21,7 @@ async function loadProfile() {
     }
 
     try {
+
         const response = await fetch(API + "/me", {
             method: "GET",
             headers: {
@@ -47,13 +50,16 @@ async function loadProfile() {
             user.position || "직무 정보 없음";
 
     } catch (error) {
+
         console.error("졸업생 MY 페이지 오류:", error);
         alert("서버와 연결할 수 없습니다.");
+
     }
 }
 
-// 자격증, 대외활동, 경력 개수 조회
+// 경력, 자격증, 대외활동 개수 조회
 async function loadActivityCounts() {
+
     const token = localStorage.getItem("token");
 
     if (!token) {
@@ -61,6 +67,7 @@ async function loadActivityCounts() {
     }
 
     try {
+
         const response = await fetch(PROFILE_API, {
             method: "GET",
             headers: {
@@ -95,6 +102,55 @@ async function loadActivityCounts() {
             experiences.length;
 
     } catch (error) {
+
         console.error("졸업생 활동 개수 조회 오류:", error);
+
+    }
+}
+
+// 프로필 관심 통계 조회
+async function loadProfileStats() {
+
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+        return;
+    }
+
+    try {
+
+        const response = await fetch(PROFILE_API + "/stats", {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        });
+
+        const result = await response.json();
+
+        console.log("프로필 통계 응답:", result);
+
+        if (!response.ok || !result.success) {
+            console.error(
+                result.message || "프로필 통계를 불러오지 못했습니다."
+            );
+            return;
+        }
+
+        const stats = result.data || {};
+
+        document.getElementById("profile-view-count").textContent =
+            stats.viewCount ?? 0;
+
+        document.getElementById("bookmark-count").textContent =
+            stats.bookmarkCount ?? 0;
+
+        document.getElementById("weekly-view-count").textContent =
+            stats.weeklyViewCount ?? 0;
+
+    } catch (error) {
+
+        console.error("프로필 통계 조회 오류:", error);
+
     }
 }
