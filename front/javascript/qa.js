@@ -1,170 +1,250 @@
-// 더미데이터
-const questions = [
-    {
-        id: 1,
-        category: "진로/취업",
-        title: "백엔드 개발자가 되려면 어떤 프로젝트를 하면 좋을까요?",
-        writer: "김유민",
-        date: "2026-06-28",
-        content: "현재 Java와 SQL을 공부하고 있습니다. 어떤 프로젝트를 하면 취업에 도움이 될까요?",
-        answers: 3
-    },
-    {
-        id: 2,
-        category: "자격증",
-        title: "SQLD와 정보처리기사 중 무엇을 먼저 준비해야 하나요?",
-        writer: "홍길동",
-        date: "2026-06-26",
-        content: "둘 다 준비하려고 하는데 어떤 순서가 좋을까요?",
-        answers: 5
-    }
-];
+console.log("qa.js 실행됨");
 
-// 질문 목록 불러오기
-let questions = JSON.parse(localStorage.getItem("questions")) || [];
+const QUESTION_API = "http://localhost:8080/api/questions";
 
-document.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", () => {
 
-    drawQuestions(questions);
+    loadQuestions();
 
-    // 카테고리 필터
-    document.getElementById("category-select").addEventListener("change", (e) => {
-        filterCategory(e.target.value);
+    const categoryFilter =
+        document.getElementById("category-filter");
+
+    const searchButton =
+        document.getElementById("search-btn");
+
+    const searchInput =
+        document.getElementById("question-search");
+
+
+    // 카테고리 변경
+    categoryFilter?.addEventListener("change", () => {
+        loadQuestions();
     });
+
 
     // 검색 버튼
-    document.getElementById("search-btn").addEventListener("click", searchQuestion);
+    searchButton?.addEventListener("click", () => {
+        loadQuestions();
+    });
+
 
     // Enter 검색
-    document.getElementById("question-search").addEventListener("keyup", (e) => {
+    searchInput?.addEventListener("keydown", event => {
 
-        if (e.key === "Enter") {
-            searchQuestion();
+        if (event.key === "Enter") {
+            loadQuestions();
         }
-
     });
-
-    // 질문 작성
-    document.getElementById("question-upload-btn").addEventListener("click", () => {
-
-        location.href = "../html/question.html";
-
-    });
-
 });
 
-// 질문 목록 출력
-function drawQuestions(list) {
 
-    const questionList = document.getElementById("question-list");
+// ==========================
+// 질문 목록 조회
+// ==========================
+async function loadQuestions() {
+
+    try {
+
+        const category =
+            document.getElementById("category-filter")?.value || "";
+
+        const keyword =
+            document.getElementById("question-search")?.value.trim() || "";
+
+        const params = new URLSearchParams();
+
+        if (category) {
+            params.append("category", category);
+        }
+
+        if (keyword) {
+            params.append("keyword", keyword);
+        }
+
+        let url = QUESTION_API;
+
+        if (params.toString()) {
+            url += "?" + params.toString();
+        }
+
+        console.log("질문 조회 URL:", url);
+
+        const response = await fetch(url);
+
+        const result = await response.json();
+
+        console.log("질문 목록:", result);
+
+        if (!response.ok || !result.success) {
+            alert(result.message || "질문 목록을 불러오지 못했습니다.");
+            return;
+        }
+
+        renderQuestions(result.data);
+
+    } catch (error) {
+
+        console.error("질문 목록 조회 오류:", error);
+    }
+}
+
+
+// ==========================
+// 질문 출력
+// ==========================
+function renderQuestions(questions) {
+
+    const questionList =
+        document.getElementById("question-list");
 
     questionList.innerHTML = "";
 
-    if (list.length === 0) {
+    if (!questions || questions.length === 0) {
 
-        questionList.innerHTML =
-            `<div class="no-question">등록된 질문이 없습니다.</div>`;
+        questionList.innerHTML = `
+            <div class="empty-question">
+                등록된 질문이 없습니다.
+            </div>
+        `;
 
         return;
-
     }
 
-    list.forEach(question => {
 
-        questionList.innerHTML += `
+    questions.forEach(question => {
 
-        <div class="question-card" onclick="goQuestion(${question.id})">
+        const item = document.createElement("div");
+
+        // 기존 CSS와 맞춤
+        item.className = "question-card";
+
+
+        // 답변 완료 질문
+        if (question.status === "ANSWERED") {
+            item.classList.add("answered");
+        }
+
+
+        item.innerHTML = `
 
             <div class="question-top">
 
-                <span class="category">
-                    ${question.category}
+                <span class="question-category">
+                    ${getCategoryName(question.category)}
                 </span>
 
-                <span class="date">
-                    ${question.date}
+                <span class="question-status ${question.status.toLowerCase()}">
+                    ${getStatusName(question.status)}
                 </span>
 
             </div>
 
-            <h3>
-                ${question.title}
+
+            <h3 class="question-title">
+                ${escapeHtml(question.title)}
             </h3>
 
-            <p>
-                ${question.content}
-            </p>
 
-            <div class="question-bottom">
+            <div class="question-info">
+
+                <span class="writer">
+                    ${escapeHtml(question.writerName)}
+                </span>
+
+                <span class="divider">|</span>
+
+                <span class="date">
+                    ${formatDate(question.createdAt)}
+                </span>
+
+                <span class="divider">|</span>
 
                 <span>
-                    ${question.writer}
+                    조회 ${question.viewCount}
                 </span>
 
             </div>
-
-        </div>
-
         `;
 
+
+        item.addEventListener("click", () => {
+
+            location.href =
+                `questionDetail.html?id=${question.id}`;
+        });
+
+
+        questionList.appendChild(item);
     });
-
 }
 
-// 질문 상세
-function goQuestion(id) {
 
-    const question = questions.find(q => q.id === id);
+// ==========================
+// 카테고리
+// ==========================
+function getCategoryName(category) {
 
-    localStorage.setItem(
-        "selectedQuestion",
-        JSON.stringify(question)
-    );
+    const categories = {
+        CAREER: "진로/취업",
+        MAJOR: "전공 선택",
+        STUDY: "학업/공부법",
+        CERTIFICATE: "자격증",
+        ACTIVITY: "인턴/대외활동",
+        INTERVIEW: "면접/자소서",
+        JOB_INFO: "직무 정보",
+        CAMPUS: "대학 생활",
+        ETC: "기타"
+    };
 
-    location.href = "../html/questionDetail.html";
-
+    return categories[category] || category;
 }
 
-// 검색
-function searchQuestion() {
 
-    const keyword =
-        document.getElementById("question-search")
-        .value
-        .trim()
-        .toLowerCase();
+// ==========================
+// 답변 상태
+// ==========================
+function getStatusName(status) {
 
-    const result = questions.filter(question =>
-
-        question.title.toLowerCase().includes(keyword) ||
-
-        question.content.toLowerCase().includes(keyword) ||
-
-        question.writer.toLowerCase().includes(keyword)
-
-    );
-
-    drawQuestions(result);
-
-}
-
-// 카테고리 필터
-function filterCategory(category) {
-
-    if (category === "전체") {
-
-        drawQuestions(questions);
-
-        return;
-
+    if (status === "ANSWERED") {
+        return "답변 완료";
     }
 
-    const result = questions.filter(question =>
+    return "답변 대기";
+}
 
-        question.category === category
 
-    );
+// ==========================
+// 날짜
+// ==========================
+function formatDate(dateString) {
 
-    drawQuestions(result);
+    if (!dateString) {
+        return "";
+    }
 
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString("ko-KR", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit"
+    });
+}
+
+
+// ==========================
+// HTML 안전 처리
+// ==========================
+function escapeHtml(value) {
+
+    if (value == null) {
+        return "";
+    }
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 }

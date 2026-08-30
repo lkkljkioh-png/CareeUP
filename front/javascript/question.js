@@ -1,64 +1,108 @@
+console.log("question.js 실행됨");
+
+const QUESTION_API = "http://localhost:8080/api/questions";
+
+
+// ==========================
 // 질문 등록
-function addQuestion() {
+// ==========================
+async function addQuestion() {
 
-    const category = document.getElementById("question-category").value;
-    const title = document.getElementById("question-title").value.trim();
-    const content = document.getElementById("question-content").value.trim();
+    const token = localStorage.getItem("token");
+    const membershipType = localStorage.getItem("membershipType");
 
-    if (category === "전체") {
+    console.log("token:", token);
+    console.log("membershipType:", membershipType);
+
+    // 로그인 확인
+    if (!token) {
+        alert("로그인이 필요합니다.");
+        location.href = "login.html";
+        return;
+    }
+
+    // 재학생 확인
+    if (membershipType !== "student") {
+        alert("재학생만 질문을 작성할 수 있습니다.");
+        return;
+    }
+
+
+    const category =
+        document.getElementById("question-category").value;
+
+    const title =
+        document.getElementById("question-title").value.trim();
+
+    const content =
+        document.getElementById("question-content").value.trim();
+
+
+    if (!category) {
         alert("카테고리를 선택해주세요.");
         return;
     }
 
-    if (title === "") {
+    if (!title) {
         alert("제목을 입력해주세요.");
         return;
     }
 
-    if (content === "") {
-        alert("질문 내용을 입력해주세요.");
+    if (!content) {
+        alert("내용을 입력해주세요.");
         return;
     }
 
-    // 로그인한 사용자
-    const loginUser = JSON.parse(localStorage.getItem("loginUser"));
 
-    if (!loginUser) {
-        alert("로그인 후 이용해주세요.");
-        location.href = "../html/login.html";
-        return;
+    try {
+
+        console.log("질문 등록 요청 시작");
+
+        const response = await fetch(
+            QUESTION_API,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+
+                body: JSON.stringify({
+                    title: title,
+                    content: content,
+                    category: category
+                })
+            }
+        );
+
+        console.log("HTTP status:", response.status);
+
+        const result = await response.json();
+
+        console.log("질문 등록 응답:", result);
+
+
+        if (!response.ok || !result.success) {
+
+            alert(
+                result.message ||
+                "질문 등록에 실패했습니다."
+            );
+
+            return;
+        }
+
+
+        alert("질문이 등록되었습니다.");
+
+        location.href = "qa.html";
+
+
+    } catch (error) {
+
+        console.error("질문 등록 오류:", error);
+
+        alert("서버에 연결할 수 없습니다.");
     }
-
-    // 질문 목록
-    const questions =
-        JSON.parse(localStorage.getItem("questions")) || [];
-
-    // 질문 생성
-    const question = {
-
-        id: Date.now(),
-
-        category: category,
-
-        title: title,
-
-        writer: loginUser.name,
-
-        date: new Date().toLocaleDateString("ko-KR"),
-
-        content: content
-
-    };
-
-    questions.push(question);
-
-    localStorage.setItem(
-        "questions",
-        JSON.stringify(questions)
-    );
-
-    alert("질문이 등록되었습니다.");
-
-    location.href = "qa.html";
-
 }

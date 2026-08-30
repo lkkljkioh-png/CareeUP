@@ -39,6 +39,8 @@ public class SecurityConfig {
 
                                 .authorizeHttpRequests(auth -> auth
 
+                                                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                                                 .requestMatchers(
                                                                 "/api/users/login",
                                                                 "/api/users/signup",
@@ -61,6 +63,10 @@ public class SecurityConfig {
                                                 .requestMatchers("/api/bookmarks/**")
                                                 .authenticated()
 
+                                                // Q&A 조회는 누구나 가능
+                                                .requestMatchers(HttpMethod.GET, "/api/questions/**").permitAll()
+
+                                                // 나머지는 로그인 필요
                                                 .anyRequest().authenticated())
 
                                 .addFilterBefore(

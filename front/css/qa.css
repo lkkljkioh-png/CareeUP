@@ -151,6 +151,10 @@ header {
     cursor:pointer;
 }
 
+.question-card.answered {
+    border: 2px solid #185FA5;
+}
+
 .question-card:hover{
     transform:translateY(-3px);
     box-shadow:0 6px 15px rgba(0,0,0,.08);
