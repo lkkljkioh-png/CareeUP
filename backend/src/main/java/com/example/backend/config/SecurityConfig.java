@@ -60,6 +60,11 @@ public class SecurityConfig {
                                                                 "/api/users/profile")
                                                 .authenticated()
 
+                                                .requestMatchers(
+                                                                HttpMethod.GET,
+                                                                "/api/profile-comparisons/**")
+                                                .authenticated()
+
                                                 .requestMatchers("/api/bookmarks/**")
                                                 .authenticated()
 

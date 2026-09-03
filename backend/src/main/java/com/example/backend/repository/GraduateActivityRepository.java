@@ -7,11 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GraduateActivityRepository
-        extends JpaRepository<GraduateActivityEntity, Long> {
+                extends JpaRepository<GraduateActivityEntity, Long> {
 
-    List<GraduateActivityEntity> findByUserId(Long userId);
+        List<GraduateActivityEntity> findByUserId(Long userId);
 
-    Optional<GraduateActivityEntity> findByIdAndUserId(
-            Long id,
-            Long userId);
+        long countByUserId(Long userId);
+
+        Optional<GraduateActivityEntity> findByIdAndUserId(
+                        Long id,
+                        Long userId);
 }

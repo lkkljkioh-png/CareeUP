@@ -11,6 +11,8 @@ public interface StudentActivityRepository
 
     List<StudentActivityEntity> findByUserId(Long userId);
 
+    long countByUserId(Long userId);
+
     Optional<StudentActivityEntity> findByIdAndUserId(
             Long id,
             Long userId);

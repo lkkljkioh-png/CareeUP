@@ -7,12 +7,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface StudentProjectRepository
-        extends JpaRepository<StudentProjectEntity, Long> {
+                extends JpaRepository<StudentProjectEntity, Long> {
 
-    List<StudentProjectEntity> findByUserId(Long userId);
+        List<StudentProjectEntity> findByUserId(Long userId);
 
-    Optional<StudentProjectEntity> findByIdAndUserId(
-            Long id,
-            Long userId
-    );
+        long countByUserId(Long userId);
+
+        Optional<StudentProjectEntity> findByIdAndUserId(
+                        Long id,
+                        Long userId);
 }

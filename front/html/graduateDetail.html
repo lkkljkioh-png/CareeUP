@@ -62,10 +62,25 @@
 
                 </div>
 
-                <button id="favorite-button" class="favorite-button" type="button" aria-pressed="false">
-                    <span class="favorite-icon" aria-hidden="true">♡</span>
-                    <span class="favorite-text">관심 등록</span>
-                </button>
+                <div class="profile-actions">
+
+                    <button id="compare-button" class="compare-button" type="button" hidden>
+                        내 프로필과 비교
+                    </button>
+
+                    <button id="favorite-button" class="favorite-button" type="button" aria-pressed="false">
+
+                        <span class="favorite-icon" aria-hidden="true">
+                            ♡
+                        </span>
+
+                        <span class="favorite-text">
+                            관심 등록
+                        </span>
+
+                    </button>
+
+                </div>
 
             </div>
 
@@ -158,6 +173,185 @@
 
                 <div id="graduate-activities" class="spec-list">
                 </div>
+
+            </div>
+
+        </section>
+
+        <section id="comparison-section" class="comparison-card" hidden>
+
+            <div class="comparison-header">
+
+                <div>
+                    <span class="comparison-label">
+                        PROFILE COMPARISON
+                    </span>
+
+                    <h2>
+                        <span id="comparison-graduate-name">
+                            졸업생
+                        </span>
+                        기준 비교 결과
+                    </h2>
+
+                    <p>
+                        선택한 졸업생의 프로필과 비교한 참고 결과입니다.
+                    </p>
+                </div>
+
+                <div class="comparison-score">
+                    <strong id="comparison-completed-count">
+                        0
+                    </strong>
+
+                    <span id="comparison-score-label">
+                        비교 정보 없음
+                    </span>
+                </div>
+
+            </div>
+
+            <div class="comparison-progress" aria-hidden="true">
+
+                <div id="comparison-progress-bar" class="comparison-progress-bar">
+                </div>
+
+            </div>
+
+            <p id="comparison-status" class="comparison-status" role="status">
+            </p>
+
+            <div class="comparison-grid">
+
+                <article class="comparison-item">
+
+                    <div class="comparison-item-header">
+                        <h3>기술 스택</h3>
+
+                        <span id="tech-status" class="comparison-badge">
+                        </span>
+                    </div>
+
+                    <div class="comparison-detail">
+                        <span class="comparison-detail-title">
+                            공통
+                        </span>
+
+                        <div id="common-tech-list" class="comparison-tag-list">
+                        </div>
+                    </div>
+
+                    <div class="comparison-detail">
+                        <span class="comparison-detail-title">
+                            부족
+                        </span>
+
+                        <div id="missing-tech-list" class="comparison-tag-list">
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="comparison-item">
+
+                    <div class="comparison-item-header">
+                        <h3>자격증</h3>
+
+                        <span id="certificate-status" class="comparison-badge">
+                        </span>
+                    </div>
+
+                    <div class="comparison-detail">
+                        <span class="comparison-detail-title">
+                            공통
+                        </span>
+
+                        <div id="common-certificate-list" class="comparison-tag-list">
+                        </div>
+                    </div>
+
+                    <div class="comparison-detail">
+                        <span class="comparison-detail-title">
+                            부족
+                        </span>
+
+                        <div id="missing-certificate-list" class="comparison-tag-list">
+                        </div>
+                    </div>
+
+                </article>
+
+                <article class="comparison-item">
+
+                    <div class="comparison-item-header">
+                        <h3>프로젝트 · 경험</h3>
+
+                        <span id="project-status" class="comparison-badge">
+                        </span>
+                    </div>
+
+                    <div class="comparison-counts">
+
+                        <div>
+                            <span>내 프로젝트</span>
+                            <strong id="student-project-count">
+                                0
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>졸업생 경력</span>
+                            <strong id="graduate-experience-count">
+                                0
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <p id="project-gap-message" class="comparison-gap-message">
+                    </p>
+
+                    <p class="comparison-count-note">
+                        등록된 항목의 개수만 비교한 참고 정보입니다.
+                    </p>
+
+                </article>
+
+                <article class="comparison-item">
+
+                    <div class="comparison-item-header">
+                        <h3>대외활동</h3>
+
+                        <span id="activity-status" class="comparison-badge">
+                        </span>
+                    </div>
+
+                    <div class="comparison-counts">
+
+                        <div>
+                            <span>내 활동</span>
+                            <strong id="student-activity-count">
+                                0
+                            </strong>
+                        </div>
+
+                        <div>
+                            <span>졸업생 활동</span>
+                            <strong id="graduate-activity-count">
+                                0
+                            </strong>
+                        </div>
+
+                    </div>
+
+                    <p id="activity-gap-message" class="comparison-gap-message">
+                    </p>
+
+                    <p class="comparison-count-note">
+                        활동 내용과 난이도는 비교에 포함되지 않습니다.
+                    </p>
+
+                </article>
 
             </div>
 

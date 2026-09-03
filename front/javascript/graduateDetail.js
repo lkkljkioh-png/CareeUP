@@ -1,6 +1,8 @@
 const API = "http://localhost:8080/api/users";
 const GRADUATE_PROFILE_API = "http://localhost:8080/api/graduate-profile";
 const BOOKMARK_API = "http://localhost:8080/api/bookmarks/graduates";
+const PROFILE_COMPARISON_API =
+    "http://localhost:8080/api/profile-comparisons/graduates";
 const RECENT_GRADUATES_KEY = "recentGraduates";
 const RECENT_GRADUATES_MAX = 5;
 
@@ -10,6 +12,7 @@ window.addEventListener("DOMContentLoaded", () => {
     loadGraduateDetail();
     loadGraduateSpecs();
     initializeFavoriteButton();
+    initializeComparisonButton();
 });
 
 // 졸업생 기본 정보 조회
@@ -595,4 +598,382 @@ function saveRecentGraduate(graduate) {
     );
 
     console.log("최근 본 졸업생 저장:", recentGraduates);
+}
+
+// 프로필 비교 버튼 초기화
+function initializeComparisonButton() {
+
+    const button =
+        document.getElementById("compare-button");
+
+    const token =
+        localStorage.getItem("token");
+
+    const membershipType =
+        localStorage.getItem("membershipType");
+
+    if (!button) {
+        return;
+    }
+
+    if (!token || membershipType !== "student") {
+        button.hidden = true;
+        return;
+    }
+
+    button.hidden = false;
+
+    button.addEventListener(
+        "click",
+        loadProfileComparison
+    );
+}
+
+// 프로필 비교 조회
+async function loadProfileComparison() {
+
+    const button =
+        document.getElementById("compare-button");
+
+    const section =
+        document.getElementById(
+            "comparison-section"
+        );
+
+    const status =
+        document.getElementById(
+            "comparison-status"
+        );
+
+    const graduateId =
+        getFavoriteGraduateId();
+
+    const token =
+        localStorage.getItem("token");
+
+    if (!button
+        || !section
+        || !status
+        || !graduateId) {
+
+        return;
+    }
+
+    section.hidden = false;
+
+    status.textContent =
+        "프로필을 비교하고 있습니다.";
+
+    status.classList.remove("error");
+
+    button.disabled = true;
+
+    try {
+
+        const response = await fetch(
+            `${PROFILE_COMPARISON_API}/${graduateId}`,
+            {
+                method: "GET",
+                headers: {
+                    "Authorization":
+                        "Bearer " + token
+                }
+            }
+        );
+
+        const result =
+            await response.json();
+
+        if (!response.ok || !result.success) {
+
+            throw new Error(
+                result.message
+                || "프로필 비교에 실패했습니다."
+            );
+        }
+
+        renderProfileComparison(result.data);
+
+        status.textContent = "";
+
+        button.textContent =
+            "비교 결과 다시 보기";
+
+        section.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    } catch (error) {
+
+        console.error(
+            "프로필 비교 오류:",
+            error
+        );
+
+        status.textContent =
+            error.message;
+
+        status.classList.add("error");
+
+    } finally {
+
+        button.disabled = false;
+    }
+}
+
+// 프로필 비교 결과 출력
+function renderProfileComparison(comparison) {
+
+    const completedCount =
+        document.getElementById(
+            "comparison-completed-count"
+        );
+
+    const scoreLabel =
+        document.getElementById(
+            "comparison-score-label"
+        );
+
+    document.getElementById(
+        "comparison-graduate-name"
+    ).textContent =
+        comparison.graduateName
+        || "졸업생";
+
+    completedCount.textContent =
+        comparison.comparableCategoryCount === 0
+            ? "-"
+            : comparison.completedCategoryCount;
+
+    scoreLabel.textContent =
+        comparison.comparableCategoryCount === 0
+            ? "비교 정보 없음"
+            : `/ ${comparison.comparableCategoryCount}개 기준 충족`;
+
+    const progress =
+        comparison.comparableCategoryCount === 0
+            ? 0
+            : comparison.completedCategoryCount
+            / comparison.comparableCategoryCount
+            * 100;
+
+    document.getElementById(
+        "comparison-progress-bar"
+    ).style.width =
+        `${progress}%`;
+
+    const hasTechReference =
+        comparison.commonTechStacks.length
+        + comparison.missingTechStacks.length
+        > 0;
+
+    const hasCertificateReference =
+        comparison.commonCertificates.length
+        + comparison.missingCertificates.length
+        > 0;
+
+    renderComparisonTags(
+        "common-tech-list",
+        comparison.commonTechStacks,
+        hasTechReference
+            ? "공통 기술이 없습니다."
+            : "졸업생의 등록 정보가 없습니다.",
+        "common"
+    );
+
+    renderComparisonTags(
+        "missing-tech-list",
+        comparison.missingTechStacks,
+        hasTechReference
+            ? "부족한 기술이 없습니다."
+            : "비교할 정보가 없습니다.",
+        "missing"
+    );
+
+    renderComparisonTags(
+        "common-certificate-list",
+        comparison.commonCertificates,
+        hasCertificateReference
+            ? "공통 자격증이 없습니다."
+            : "졸업생의 등록 정보가 없습니다.",
+        "common"
+    );
+
+    renderComparisonTags(
+        "missing-certificate-list",
+        comparison.missingCertificates,
+        hasCertificateReference
+            ? "부족한 자격증이 없습니다."
+            : "비교할 정보가 없습니다.",
+        "missing"
+    );
+
+    renderComparisonStatus(
+        "tech-status",
+        hasTechReference,
+        comparison.missingTechStacks.length === 0,
+        comparison.missingTechStacks.length
+    );
+
+    renderComparisonStatus(
+        "certificate-status",
+        hasCertificateReference,
+        comparison.missingCertificates.length === 0,
+        comparison.missingCertificates.length
+    );
+
+    renderCountComparison(
+        comparison.projectExperience,
+        "student-project-count",
+        "graduate-experience-count",
+        "project-status",
+        "project-gap-message",
+        "프로젝트·경험"
+    );
+
+    renderCountComparison(
+        comparison.activity,
+        "student-activity-count",
+        "graduate-activity-count",
+        "activity-status",
+        "activity-gap-message",
+        "대외활동"
+    );
+}
+
+// 비교 태그 출력
+function renderComparisonTags(
+    containerId,
+    values,
+    emptyMessage,
+    type
+) {
+
+    const container =
+        document.getElementById(containerId);
+
+    if (!container) {
+        return;
+    }
+
+    container.replaceChildren();
+
+    if (!values || values.length === 0) {
+
+        const empty =
+            document.createElement("span");
+
+        empty.className =
+            "comparison-empty";
+
+        empty.textContent =
+            emptyMessage;
+
+        container.appendChild(empty);
+
+        return;
+    }
+
+    values.forEach(value => {
+
+        const tag =
+            document.createElement("span");
+
+        tag.className =
+            `comparison-tag ${type}`;
+
+        tag.textContent =
+            value;
+
+        container.appendChild(tag);
+    });
+}
+
+// 비교 상태 출력
+function renderComparisonStatus(
+    elementId,
+    comparable,
+    sufficient,
+    missingCount
+) {
+
+    const element =
+        document.getElementById(elementId);
+
+    if (!element) {
+        return;
+    }
+
+    element.classList.toggle(
+        "neutral",
+        !comparable
+    );
+
+    element.classList.toggle(
+        "complete",
+        comparable && sufficient
+    );
+
+    element.classList.toggle(
+        "needs",
+        comparable && !sufficient
+    );
+
+    if (!comparable) {
+
+        element.textContent =
+            "비교 정보 없음";
+
+        return;
+    }
+
+    element.textContent =
+        sufficient
+            ? "충족"
+            : `${missingCount}개 부족`;
+}
+
+// 개수 비교 출력
+function renderCountComparison(
+    comparison,
+    studentCountId,
+    graduateCountId,
+    statusId,
+    messageId,
+    label
+) {
+
+    document.getElementById(
+        studentCountId
+    ).textContent =
+        comparison.studentCount;
+
+    document.getElementById(
+        graduateCountId
+    ).textContent =
+        comparison.graduateCount;
+
+    renderComparisonStatus(
+        statusId,
+        comparison.comparable,
+        comparison.sufficient,
+        comparison.gap
+    );
+
+    const message =
+        document.getElementById(messageId);
+
+    if (!comparison.comparable) {
+
+        message.textContent =
+            `졸업생의 ${label} 정보가 없어 비교할 수 없습니다.`;
+
+        return;
+    }
+
+    message.textContent =
+        comparison.sufficient
+            ? `${label} 수가 졸업생 기준 이상입니다.`
+            : `${label}이 ${comparison.gap}개 더 필요합니다.`;
 }
