@@ -55,47 +55,70 @@ async function loadQuestion() {
 
     try {
 
-        const url = `${QUESTION_API}/${questionId}`;
+        const response = await fetch(
+            `${QUESTION_API}/${questionId}`
+        );
 
-        console.log("질문 조회 URL:", url);
+        const result = await response.json();
 
-        const response = await fetch(url);
-
-        console.log("질문 조회 status:", response.status);
-
-        const text = await response.text();
-
-        console.log("서버 원본 응답:", text);
-
-        if (!response.ok) {
-            alert("질문 조회 실패: " + response.status);
+        if (!response.ok || !result.success) {
+            alert(result.message || "질문 정보를 불러오지 못했습니다.");
+            location.href = "qa.html";
             return;
         }
 
-        const result = JSON.parse(text);
+        const question = result.data;
 
-        console.log("질문 조회 결과:", result);
+        const canAnswer =
+            await checkQuestionPermission(question);
 
-        if (!result.success) {
-
-            alert(
-                result.message ||
-                "질문 정보를 불러오지 못했습니다."
-            );
-
+        if (!canAnswer) {
             return;
         }
 
-        renderQuestion(result.data);
+        renderQuestion(question);
 
     } catch (error) {
 
-        console.error("질문 조회 실제 오류:", error);
+        console.error("질문 조회 오류:", error);
 
-        alert("서버에 연결할 수 없습니다.");
+        alert("질문 정보를 불러오는 중 오류가 발생했습니다.");
     }
 }
 
+async function checkQuestionPermission(question) {
+
+    const token =
+        localStorage.getItem("token");
+
+    const response = await fetch(
+        "http://localhost:8080/api/users/me",
+        {
+            method: "GET",
+            headers: {
+                "Authorization": "Bearer " + token
+            }
+        }
+    );
+
+    const result = await response.json();
+
+    if (!response.ok || !result.success) {
+        return false;
+    }
+
+    if (result.data.id === question.userId) {
+
+        alert("본인이 작성한 질문에는 답변할 수 없습니다.");
+
+        location.href =
+            `questionDetail.html?id=${questionId}`;
+
+        return false;
+    }
+
+    return true;
+}
 
 // ==========================
 // 질문 출력
