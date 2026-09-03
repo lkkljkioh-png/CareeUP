@@ -39,11 +39,6 @@ public class QuestionService {
                 UserEntity user = userRepository.findByEmail(email)
                                 .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
 
-                // 재학생만 질문 작성 가능
-                if (!"student".equals(user.getMembershipType())) {
-                        throw new IllegalArgumentException("재학생만 질문을 작성할 수 있습니다.");
-                }
-
                 if (request.getTitle() == null ||
                                 request.getTitle().trim().isEmpty()) {
 
@@ -96,6 +91,19 @@ public class QuestionService {
                                                 category,
                                                 status,
                                                 keyword)
+                                .stream()
+                                .map(this::toResponse)
+                                .toList();
+        }
+
+        @Transactional(readOnly = true)
+        public List<QuestionResponse> getMyQuestions(String email) {
+
+                UserEntity user = userRepository.findByEmail(email)
+                                .orElseThrow(() -> new IllegalArgumentException("사용자를 찾을 수 없습니다."));
+
+                return questionRepository
+                                .findByUserIdOrderByCreatedAtDesc(user.getId())
                                 .stream()
                                 .map(this::toResponse)
                                 .toList();

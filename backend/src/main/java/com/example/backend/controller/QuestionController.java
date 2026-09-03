@@ -73,17 +73,31 @@ public class QuestionController {
         // 질문 상세 조회
         // GET /api/questions/{id}
         // =========================
-        @GetMapping("/{id}")
+        @GetMapping("/my")
+        public ApiResponse<List<QuestionResponse>> getMyQuestions(
+                        Authentication authentication) {
+
+                String email = authentication.getName();
+
+                List<QuestionResponse> questions = questionService.getMyQuestions(email);
+
+                return new ApiResponse<>(
+                                true,
+                                "내 질문 조회 성공",
+                                questions);
+        }
+
+        @GetMapping("/{id:[0-9]+}")
         public ApiResponse<QuestionResponse> getQuestion(
                         @PathVariable Long id) {
 
-                QuestionResponse question = questionService.getQuestion(id);
+                QuestionResponse question = questionService.getQuestion(id);                
 
                 return new ApiResponse<>(
                                 true,
                                 "질문 조회 성공",
                                 question);
-        }
+        }                        
 
         @PutMapping("/{id}")
         public ApiResponse<QuestionResponse> updateQuestion(
@@ -91,18 +105,18 @@ public class QuestionController {
                         Authentication authentication,
                         @RequestBody QuestionUpdateRequest request) {
 
-                String email = authentication.getName();
+                String email = authentication.getName();                
 
                 QuestionResponse response = questionService.updateQuestion(
                                 id,
                                 email,
                                 request);
 
-                return new ApiResponse<>(
+                return new ApiResponse<>(        
                                 true,
                                 "질문이 수정되었습니다.",
                                 response);
-        }
+        }                        
 
         @DeleteMapping("/{id}")
         public ApiResponse<Void> deleteQuestion(

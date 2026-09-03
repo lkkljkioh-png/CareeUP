@@ -56,6 +56,7 @@ async function loadQuestion() {
         }
 
         renderQuestion(result.data);
+        checkAnswerButton(result.data);
 
     } catch (error) {
 
@@ -232,7 +233,7 @@ function renderAnswers(answers) {
 // ==========================
 // 답변하기 버튼 권한
 // ==========================
-function checkAnswerButton() {
+async function checkAnswerButton(question) {
 
     const answerButton =
         document.getElementById("answer-btn");
@@ -243,20 +244,48 @@ function checkAnswerButton() {
     const membershipType =
         localStorage.getItem("membershipType");
 
-
     if (!answerButton) {
         return;
     }
 
+    answerButton.style.display = "none";
 
-    // 졸업생만 답변 가능
-    if (!token || membershipType !== "graduate") {
+    if (!token) {
+        return;
+    }
 
-        answerButton.style.display = "none";
+    if (membershipType !== "graduate") {
+        return;
+    }
 
-    } else {
+    try {
+
+        const response = await fetch(
+            "http://localhost:8080/api/users/me",
+            {
+                method: "GET",
+                headers: {
+                    "Authorization": "Bearer " + token
+                }
+            }
+        );
+
+        const result = await response.json();
+
+        if (!response.ok || !result.success) {
+            return;
+        }
+
+        const loginUserId = result.data.id;
+
+        if (loginUserId === question.userId) {
+            return;
+        }
 
         answerButton.style.display = "inline-flex";
+
+    } catch (error) {
+        console.error("답변 권한 확인 오류:", error);
     }
 }
 
